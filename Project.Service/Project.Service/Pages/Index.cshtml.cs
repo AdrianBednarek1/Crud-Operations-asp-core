@@ -1,13 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Data.Entity;
-using Microsoft.EntityFrameworkCore;
 using ZaPrav.NetCore.VehicleDB;
-using Microsoft.Extensions.Configuration;
+using Project.Service.Interfaces.IPages.IIndex;
 
 namespace ZaPrav.NetCore.Pages
 {
-    public class IndexModel : PageModel
+    public class IndexModel :  PageModel, IIndexModel
     {
         private readonly IConfiguration Configuration;
 
@@ -39,7 +37,7 @@ namespace ZaPrav.NetCore.Pages
             await VehicleMadeSortingFilteringPaging(sortOrderMades, SearchStringMade, currentFilterMade, pageIndexMade);
             await VehicleModelSortingFilteringPaging(sortOrderModel, SearchStringModel, currentFilterModel, pageIndexModel);
         }
-        private async Task VehicleMadeSortingFilteringPaging(string sortOrderMades, string SearchStringMade, string currentFilterMade, int? pageIndexMade)
+        public async Task VehicleMadeSortingFilteringPaging(string sortOrderMades, string SearchStringMade, string currentFilterMade, int? pageIndexMade)
         {
             CurrentSortMade = sortOrderMades;
             SortingMadeHelper.NameSort = String.IsNullOrEmpty(sortOrderMades) ? "NameDesc" : "";
@@ -84,10 +82,11 @@ namespace ZaPrav.NetCore.Pages
                     break;
             }
             var pageSize = Configuration.GetValue("PageSize", 4);
+
             PaginatedVehicleMades = await PaginatedList<VehicleMade>.CreateAsync(
                 vehicleMadesSorting, pageIndexMade ?? 1, pageSize);
         }
-        private async Task VehicleModelSortingFilteringPaging(string sortOrderModel, string SearchStringModel, string currentFilterModel, int? pageIndexModel)
+        public async Task VehicleModelSortingFilteringPaging(string sortOrderModel, string SearchStringModel, string currentFilterModel, int? pageIndexModel)
         {
             SortingModelHelper.NameSort = String.IsNullOrEmpty(sortOrderModel) ? "NameDesc" : "";
             SortingModelHelper.AbrvSort = sortOrderModel == "Abrv" ? "AbrvDesc" : "Abrv";
@@ -139,6 +138,7 @@ namespace ZaPrav.NetCore.Pages
                     break;
             }
             var pageSize = Configuration.GetValue("PageSize", 4);
+
             PaginatedVehicleModel = await PaginatedList<VehicleModel>.CreateAsync(
                 vehicleModelSorting, pageIndexModel ?? 1, pageSize);
         }

@@ -1,11 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Project.Service.Interfaces.IUpdateVehicleModels;
 using ZaPrav.NetCore.VehicleDB;
 
 namespace ZaPrav.NetCore.Pages
 {
-    public class UpdateVehicleModelsModel : PageModel
+    public class UpdateVehicleModelsModel : PageModel, IUpdateVehicleModels
     {
         private VehicleMade vehicleMade;
         [BindProperty]

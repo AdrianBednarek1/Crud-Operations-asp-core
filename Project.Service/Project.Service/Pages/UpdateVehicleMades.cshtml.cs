@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Data.Entity;
+using Project.Service.Interfaces.IUpdateVehicleMades;
 
 namespace ZaPrav.NetCore.Pages
 {
-    public class UpdateVehicleMadesModel : PageModel
+    public class UpdateVehicleMadesModel : PageModel, IUpdateVehicleMades
     {
         [BindProperty]
         public VehicleDB.VehicleMade made { get; set; }     

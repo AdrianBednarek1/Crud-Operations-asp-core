@@ -1,19 +1,25 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Project.Service.Interfaces.IPages.IMadeCreator;
+using ZaPrav.NetCore.VehicleDB;
 
 namespace ZaPrav.NetCore.Pages
 {
-    public class MadeCreator : PageModel
+    public class MadeCreator : PageModel, IMadeCreator
     {
         [BindProperty]
-        public VehicleDB.VehicleMade vehicleMade { get; set; }      
+        public VehicleMade vehicleMade { get; set; }
+        public MadeCreator()
+        {
+            vehicleMade = new VehicleMade();
+        }
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             { 
                 return Page();
             }
-            await VehicleDB.VehicleService.Create(vehicleMade);
+            await VehicleService.Create(vehicleMade);
             return RedirectToPage("/Index");
         }
     }

@@ -1,14 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Project.Service.Interfaces;
 using ZaPrav.NetCore.VehicleDB;
 
 namespace ZaPrav.NetCore.Pages
 {
-    public class ModelCreatorModel : PageModel
+    public class ModelCreatorModel : PageModel, IModelCreator
     {
         
-        private VehicleMade vehicleMade;
+        private VehicleMade? vehicleMade;
         [BindProperty]
         public List<SelectListItem> VehicleMadesInList { get; set; }
         [BindProperty]
@@ -17,7 +18,10 @@ namespace ZaPrav.NetCore.Pages
         public string name { get; set; }
         [BindProperty]
         public string abrv { get; set; }
-
+        public ModelCreatorModel()
+        {
+            VehicleMadesInList = new List<SelectListItem>();
+        }
         public async Task<IActionResult> OnPostAsync()
         {
             await RefreshDropDownlist();
