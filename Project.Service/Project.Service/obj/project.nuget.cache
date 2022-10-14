@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7TyahQ1NDqH+Pe/yAikj3CbK1S+Jv+TXJL56cEGD2v9DoquzwSv+GihFajawXtn65uzOxdBAfF57YClj4ne3BQ==",
+  "dgSpecHash": "EFL8jCzdyG9b8iOfGiaJ47YhXYNe36yOAWlMT9n3mmwghhnbp/TYsHHCC4bbg9ENTIRO3ucFO30i7eoIWtZEdg==",
   "success": true,
-  "projectFilePath": "F:\\VisualStudioProjekti\\Almostdone\\Project.Service\\Project.Service\\Project.Service.csproj",
+  "projectFilePath": "F:\\VisualStudioProjekti\\L2 Back-end-zadatak\\L2-Back-end-zadatak\\Project.Service\\Project.Service\\Project.Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Adrian\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\Adrian\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",

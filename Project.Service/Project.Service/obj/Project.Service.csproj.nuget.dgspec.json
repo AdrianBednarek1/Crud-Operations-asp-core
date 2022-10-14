@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\VisualStudioProjekti\\Almostdone\\Project.Service\\Project.Service\\Project.Service.csproj": {}
+    "F:\\VisualStudioProjekti\\L2 Back-end-zadatak\\L2-Back-end-zadatak\\Project.Service\\Project.Service\\Project.Service.csproj": {}
   },
   "projects": {
-    "F:\\VisualStudioProjekti\\Almostdone\\Project.Service\\Project.Service\\Project.Service.csproj": {
+    "F:\\VisualStudioProjekti\\L2 Back-end-zadatak\\L2-Back-end-zadatak\\Project.Service\\Project.Service\\Project.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\VisualStudioProjekti\\Almostdone\\Project.Service\\Project.Service\\Project.Service.csproj",
+        "projectUniqueName": "F:\\VisualStudioProjekti\\L2 Back-end-zadatak\\L2-Back-end-zadatak\\Project.Service\\Project.Service\\Project.Service.csproj",
         "projectName": "Project.Service",
-        "projectPath": "F:\\VisualStudioProjekti\\Almostdone\\Project.Service\\Project.Service\\Project.Service.csproj",
+        "projectPath": "F:\\VisualStudioProjekti\\L2 Back-end-zadatak\\L2-Back-end-zadatak\\Project.Service\\Project.Service\\Project.Service.csproj",
         "packagesPath": "C:\\Users\\Adrian\\.nuget\\packages\\",
-        "outputPath": "F:\\VisualStudioProjekti\\Almostdone\\Project.Service\\Project.Service\\obj\\",
+        "outputPath": "F:\\VisualStudioProjekti\\L2 Back-end-zadatak\\L2-Back-end-zadatak\\Project.Service\\Project.Service\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

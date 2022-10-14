@@ -1,12 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using ZaPrav.NetCore.VehicleDB;
 
 namespace ZaPrav.NetCore.Pages
 {
     public class UpdateVehicleModelsModel : PageModel
     {
-        private VehicleDB.VehicleMade vehicleMade;
+        private VehicleMade vehicleMade;
         [BindProperty]
         public string name { get; set; }
         [BindProperty]
@@ -17,8 +18,6 @@ namespace ZaPrav.NetCore.Pages
         public int VehicleMadeID { get; set; }
         [BindProperty]
         public List<SelectListItem> VehicleMadesInList { get; set; }
-        //[BindProperty]
-        //public VehicleDB.VehicleModel model { get; set; }
         public async Task<IActionResult> OnPostAsync()
         {
             await RefreshDropDownlist();
@@ -34,9 +33,9 @@ namespace ZaPrav.NetCore.Pages
 
         private async Task UpdateVehicleModel()
         {
-            vehicleMade = await VehicleDB.VehicleRepository.SearchVehicleMade(VehicleMadeID);
+            vehicleMade = await VehicleService.SearchVehicleMade(VehicleMadeID);
 
-            VehicleDB.VehicleModel model = new VehicleDB.VehicleModel()
+            VehicleModel model = new VehicleModel()
             {
                 Id = id,
                 Name = name,
@@ -44,13 +43,13 @@ namespace ZaPrav.NetCore.Pages
                 IdMade = vehicleMade
             };
 
-            await VehicleDB.VehicleService.Update(model);
+            await VehicleService.Update(model);
         }
 
         private async Task RefreshDropDownlist()
         {
-            var db = await VehicleDB.VehicleRepository.GetVehicleMades();
-            var ListOfVehicleMades = await VehicleDB.VehicleRepository.GetVehicleMades();
+            var db = await VehicleService.GetVehicleMades();
+            var ListOfVehicleMades = await VehicleService.GetVehicleMades();
 
             VehicleMadesInList = db.ConvertAll(a =>
             {

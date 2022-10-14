@@ -1,6 +1,8 @@
-﻿namespace ZaPrav.NetCore.VehicleDB
+﻿using Project.Service.Interfaces;
+
+namespace ZaPrav.NetCore.VehicleDB
 {
-    public class VehicleMade
+    public class VehicleMade : IVehicleMade
     {
         public int Id { get; set; }
         public string Name { get; set; }

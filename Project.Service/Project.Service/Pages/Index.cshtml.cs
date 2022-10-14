@@ -56,7 +56,7 @@ namespace ZaPrav.NetCore.Pages
             }
             CurrentFilterMade = SearchStringMade;
 
-            IQueryable<VehicleMade> vehicleMadesSorting = from b in VehicleRepository.GetDBQuery().vehicleMades select b;
+            IQueryable<VehicleMade> vehicleMadesSorting = from b in VehicleService.GetQueryDB().vehicleMades select b;
 
             if (!String.IsNullOrEmpty(SearchStringMade))
             {
@@ -104,7 +104,7 @@ namespace ZaPrav.NetCore.Pages
             }
             CurrentFilterMade = SearchStringModel;
 
-            IQueryable<VehicleModel> vehicleModelSorting = from b in VehicleRepository.GetDBQuery().vehicleModels select b;
+            IQueryable<VehicleModel> vehicleModelSorting = from b in VehicleService.GetQueryDB().vehicleModels select b;
 
             if (!String.IsNullOrEmpty(SearchStringModel))
             {
@@ -141,7 +141,6 @@ namespace ZaPrav.NetCore.Pages
             var pageSize = Configuration.GetValue("PageSize", 4);
             PaginatedVehicleModel = await PaginatedList<VehicleModel>.CreateAsync(
                 vehicleModelSorting, pageIndexModel ?? 1, pageSize);
-            //vehicleModels = await vehicleModelSorting.ToListAsync();
         }
         public async Task<IActionResult> OnPostDeleteAsync(int Id, bool TrueIfModel)
         {          
@@ -177,8 +176,8 @@ namespace ZaPrav.NetCore.Pages
         }
         private async Task RefreshDB()
         {
-            vehicleMades = await VehicleRepository.GetVehicleMades();
-            vehicleModels = await VehicleRepository.GetVehicleModels();
+            vehicleMades = await VehicleService.GetVehicleMades();
+            vehicleModels = await VehicleService.GetVehicleModels();
         }
     }
 }
