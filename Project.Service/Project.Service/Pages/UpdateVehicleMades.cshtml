@@ -1,0 +1,26 @@
+﻿@page 
+@model ZaPrav.NetCore.Pages.UpdateVehicleMadesModel
+@{
+	ViewData["Title"] = "Update page";
+}
+<h2>Update made - Id = @Model.made.Id</h2>
+
+<form method = "post">
+	<input asp-for = "made.Id" type = "hidden" />
+	<div> Unesite podatke:
+		<div> Name:
+			<input asp-for ="made.Name" />
+			<span asp-validation-for = "made.Name"></span>
+		</div>
+	</div>
+	<div>
+		<div> Abrv:
+			<input asp-for ="made.Abrv" />
+			<span asp-validation-for = "made.Abrv"></span>
+		</div>
+	</div>
+	<div>
+		<button type="submit">Save</button>
+		<a asp-page="./Index">Back to Index</a>
+	</div>
+</form>

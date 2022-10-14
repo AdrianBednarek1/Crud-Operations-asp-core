@@ -1,0 +1,180 @@
+﻿    @page 
+@model IndexModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3>Vehicle Made table</h3>
+
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name or abrv:
+            <input type="text" name="SearchStringMade" value="@Model.CurrentFilterMade" />
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-page="./Index">Back to full List</a>
+        </p>
+    </div>
+</form>
+
+<form method = "post">
+    <table class = "table">              
+        <thead>
+            <tr>
+                <th>
+                    <a asp-page="./Index" asp-route-sortOrderMades="@Model.SortingMadeHelper.IdSort"
+                    asp-route-currentFilterMade="@Model.CurrentFilterMade">
+                    @Html.DisplayNameFor(model => model.vehicleMades[0].Id)
+                    </a>
+                </th>
+                <th>
+                    <a asp-page="./Index" asp-route-sortOrderMades="@Model.SortingMadeHelper.NameSort"
+                    asp-route-currentFilterMade="@Model.CurrentFilterMade">
+                    @Html.DisplayNameFor(model => model.PaginatedVehicleMades[0].Name)
+                </a>
+                </th>
+                <th>
+                    <a asp-page="./Index" asp-route-sortOrderMades="@Model.SortingMadeHelper.AbrvSort"
+                    asp-route-currentFilterMade="@Model.CurrentFilterMade">
+                    @Html.DisplayNameFor(model => model.PaginatedVehicleMades[0].Abrv)
+                    </a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.vehicleMades != null)
+            {
+               @foreach (var made in Model.PaginatedVehicleMades)
+                {
+                <tr>
+                    <td>@made.Id</td>
+                    <td>@made.Name</td>
+                    <td>@made.Abrv</td>
+                    <td>
+                        <button type ="submit" asp-page = "./UpdateVehicleMades"
+                            asp-route-Id = "@made.Id">Update</button>                   
+                   
+                        <button type ="submit" asp-page-handler = "Delete"
+                            asp-route-Id = "@made.Id" 
+                            asp-route-TrueIfModel = "@false">Delete</button>
+                    </td>
+                </tr>
+                }  
+            }                                                       
+        </tbody>
+    </table> 
+    @{
+    var prevDisabled = !Model.PaginatedVehicleMades.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.PaginatedVehicleMades.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-sortOrderMades="@Model.CurrentSortMade"
+   asp-route-pageIndexMade="@(Model.PaginatedVehicleMades.PageIndex - 1)"
+   asp-route-currentFilterMade="@Model.CurrentFilterMade"
+   class="btn btn-primary @prevDisabled">
+    Previous
+</a>
+<a asp-page="./Index"
+   asp-route-sortOrderMades="@Model.CurrentSortMade"
+   asp-route-pageIndexMade="@(Model.PaginatedVehicleMades.PageIndex + 1)"
+   asp-route-currentFilterMade="@Model.CurrentFilterMade"
+   class="btn btn-primary @nextDisabled">
+    Next
+</a>
+</form>
+
+
+<h3>Vehicle Model table</h3>
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name or abrv:
+            <input type="text" name="SearchStringModel" value="@Model.CurrentFilterModel" />
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-page="./Index">Back to full List</a>
+        </p>
+    </div>
+</form>
+<form method = "post">
+    <table class = "table">
+        
+        <thead>
+            <tr>
+                <th>
+                    <a asp-page="./Index" asp-route-SortOrderModel="@Model.SortingModelHelper.IdSort"
+                    asp-route-currentFilterModel="@Model.CurrentFilterModel">
+                    @Html.DisplayNameFor(model => model.PaginatedVehicleModel[0].Id)
+                    </a>
+                </th>
+                <th>
+                    <a asp-page="./Index" asp-route-SortOrderModel="@Model.SortingModelHelper.NameSort"
+                    asp-route-currentFilterModel="@Model.CurrentFilterModel">
+                    @Html.DisplayNameFor(model => model.PaginatedVehicleModel[0].Name)
+                    </a>
+                </th>
+                <th>
+                    <a asp-page="./Index" asp-route-SortOrderModel="@Model.SortingModelHelper.AbrvSort"
+                    asp-route-currentFilterModel="@Model.CurrentFilterModel">
+                    @Html.DisplayNameFor(model => model.PaginatedVehicleModel[0].Abrv)
+                    </a>
+                </th>
+                <th>
+                    <a asp-page="./Index" asp-route-SortOrderModel="@Model.SortingModelHelper.ForeignIdSort"
+                    asp-route-currentFilterModel="@Model.CurrentFilterModel">
+                    VehicleMadeID
+                    </a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.vehicleModels!=null)
+            {
+                @foreach (var vehicleModel in Model.PaginatedVehicleModel)
+            {
+                <tr>
+                    <td>@vehicleModel.Id</td>
+                    <td>@vehicleModel.Name</td>
+                    <td>@vehicleModel.Abrv</td>
+                    <td>@vehicleModel.IdMade.Id</td>
+                    <td>
+                        <button type ="submit" asp-page = "./UpdateVehicleModels"
+                            asp-route-Id = "@vehicleModel.Id">Update</button>                   
+                   
+                        <button type ="submit" asp-page-handler = "Delete"
+                            asp-route-Id = "@vehicleModel.Id" 
+                            asp-route-TrueIfModel = "@true">Delete</button>
+                    </td>
+                </tr>
+            }  
+            }       
+        </tbody>
+    </table>
+        @{
+    var prevDisabledModel = !Model.PaginatedVehicleModel.HasPreviousPage ? "disabled" : "";
+    var nextDisabledModel = !Model.PaginatedVehicleModel.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-sortOrderModel="@Model.CurrentSortModel"
+   asp-route-pageIndexModel="@(Model.PaginatedVehicleModel.PageIndex - 1)"
+   asp-route-currentFilterModel="@Model.CurrentFilterMade"
+   class="btn btn-primary @prevDisabledModel">
+    Previous
+</a>
+<a asp-page="./Index"
+   asp-route-sortOrderModel="@Model.CurrentSortMade"
+   asp-route-pageIndexModel="@(Model.PaginatedVehicleModel.PageIndex + 1)"
+   asp-route-currentFilterModel="@Model.CurrentFilterModel"
+   class="btn btn-primary @nextDisabledModel">
+    Next
+</a>
+</form>
+<form>
+    <h4>Options</h4>
+    <button asp-page = "./MadeCreator">Create Vehicle Made</button>
+    @if (Model.vehicleMades!=null && Model.vehicleMades.Any())
+    {
+        <button asp-page = "./ModelCreator">Create Vehicle Model</button>
+    }
+</form>

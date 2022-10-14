@@ -1,0 +1,17 @@
+﻿@page
+@model ZaPrav.NetCore.Pages.MadeCreator
+@{
+	ViewData["Title"] = "Create Vehicle Made";
+}
+
+<h2>Create Vehicle Made</h2>
+
+<p>Enter Vehicle Made's data</p>
+<form method = "post">
+	<div asp-validation-summary="All"></div>
+	<div>Name: <input asp-for = "vehicleMade.Name"/></div>
+	<div>Abrv: <input asp-for = "vehicleMade.Abrv"/></div>
+	<input type="submit"/>
+	<a asp-page="./Index">Back to Index</a>
+</form>
+
