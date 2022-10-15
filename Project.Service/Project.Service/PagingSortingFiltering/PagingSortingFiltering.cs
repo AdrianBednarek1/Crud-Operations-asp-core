@@ -1,9 +1,10 @@
-﻿using ZaPrav.NetCore;
+﻿using Project.Service.Interfaces.ISortingFilteringPaging;
+using ZaPrav.NetCore;
 using ZaPrav.NetCore.VehicleDB;
 
 namespace Project.Service
 {
-    public class PagingSortingFiltering
+    public class PagingSortingFiltering : IPagingSortingFiltering
     {
         private readonly IConfiguration Configuration;
         public PagingSortingFiltering(IConfiguration configuration)
