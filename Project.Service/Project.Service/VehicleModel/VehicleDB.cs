@@ -1,5 +1,5 @@
-﻿using Project.Service.Interfaces.IVehicleDB;
-using System.Data.Entity;
+﻿using System.Data.Entity;
+using ZaPrav.NetCore.Interfaces.IVehicleDB;
 
 namespace ZaPrav.NetCore.VehicleDB
 {

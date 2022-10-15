@@ -10,7 +10,7 @@
     <div class="form-actions no-color">
         <p>
             Find by name or abrv:
-            <input type="text" name="SearchStringMade" value="@Model.CurrentFilterMade" />
+            <input type="text" name="SearchStringMade" value="@Model.SortingMadeHelper.CurrentFilter" />
             <input type="submit" value="Search" class="btn btn-primary" /> |
             <a asp-page="./Index">Back to full List</a>
         </p>
@@ -23,19 +23,19 @@
             <tr>
                 <th>
                     <a asp-page="./Index" asp-route-sortOrderMades="@Model.SortingMadeHelper.IdSort"
-                    asp-route-currentFilterMade="@Model.CurrentFilterMade">
+                    asp-route-currentFilterMade="@Model.SortingMadeHelper.CurrentFilter">
                     @Html.DisplayNameFor(model => model.vehicleMades[0].Id)
                     </a>
                 </th>
                 <th>
                     <a asp-page="./Index" asp-route-sortOrderMades="@Model.SortingMadeHelper.NameSort"
-                    asp-route-currentFilterMade="@Model.CurrentFilterMade">
+                    asp-route-currentFilterMade="@Model.SortingMadeHelper.CurrentFilter">
                     @Html.DisplayNameFor(model => model.PaginatedVehicleMades[0].Name)
                 </a>
                 </th>
                 <th>
                     <a asp-page="./Index" asp-route-sortOrderMades="@Model.SortingMadeHelper.AbrvSort"
-                    asp-route-currentFilterMade="@Model.CurrentFilterMade">
+                    asp-route-currentFilterMade="@Model.SortingMadeHelper.CurrentFilter">
                     @Html.DisplayNameFor(model => model.PaginatedVehicleMades[0].Abrv)
                     </a>
                 </th>
@@ -69,16 +69,16 @@
 }
 
 <a asp-page="./Index"
-   asp-route-sortOrderMades="@Model.CurrentSortMade"
+   asp-route-sortOrderMades="@Model.SortingMadeHelper.CurrentSort"
    asp-route-pageIndexMade="@(Model.PaginatedVehicleMades.PageIndex - 1)"
-   asp-route-currentFilterMade="@Model.CurrentFilterMade"
+   asp-route-currentFilterMade="@Model.SortingMadeHelper.CurrentFilter"
    class="btn btn-primary @prevDisabled">
     Previous
 </a>
 <a asp-page="./Index"
-   asp-route-sortOrderMades="@Model.CurrentSortMade"
+   asp-route-sortOrderMades="@Model.SortingMadeHelper.CurrentSort"
    asp-route-pageIndexMade="@(Model.PaginatedVehicleMades.PageIndex + 1)"
-   asp-route-currentFilterMade="@Model.CurrentFilterMade"
+   asp-route-currentFilterMade="@Model.SortingMadeHelper.CurrentFilter"
    class="btn btn-primary @nextDisabled">
     Next
 </a>
@@ -90,7 +90,7 @@
     <div class="form-actions no-color">
         <p>
             Find by name or abrv:
-            <input type="text" name="SearchStringModel" value="@Model.CurrentFilterModel" />
+            <input type="text" name="SearchStringModel" value="@Model.SortingModelHelper.CurrentFilter" />
             <input type="submit" value="Search" class="btn btn-primary" /> |
             <a asp-page="./Index">Back to full List</a>
         </p>
@@ -103,25 +103,25 @@
             <tr>
                 <th>
                     <a asp-page="./Index" asp-route-SortOrderModel="@Model.SortingModelHelper.IdSort"
-                    asp-route-currentFilterModel="@Model.CurrentFilterModel">
+                    asp-route-currentFilterModel="@Model.SortingModelHelper.CurrentFilter">
                     @Html.DisplayNameFor(model => model.PaginatedVehicleModel[0].Id)
                     </a>
                 </th>
                 <th>
                     <a asp-page="./Index" asp-route-SortOrderModel="@Model.SortingModelHelper.NameSort"
-                    asp-route-currentFilterModel="@Model.CurrentFilterModel">
+                    asp-route-currentFilterModel="@Model.SortingModelHelper.CurrentFilter">
                     @Html.DisplayNameFor(model => model.PaginatedVehicleModel[0].Name)
                     </a>
                 </th>
                 <th>
                     <a asp-page="./Index" asp-route-SortOrderModel="@Model.SortingModelHelper.AbrvSort"
-                    asp-route-currentFilterModel="@Model.CurrentFilterModel">
+                    asp-route-currentFilterModel="@Model.SortingModelHelper.CurrentFilter">
                     @Html.DisplayNameFor(model => model.PaginatedVehicleModel[0].Abrv)
                     </a>
                 </th>
                 <th>
                     <a asp-page="./Index" asp-route-SortOrderModel="@Model.SortingModelHelper.ForeignIdSort"
-                    asp-route-currentFilterModel="@Model.CurrentFilterModel">
+                    asp-route-currentFilterModel="@Model.SortingModelHelper.CurrentFilter">
                     VehicleMadeID
                     </a>
                 </th>
@@ -156,16 +156,16 @@
 }
 
 <a asp-page="./Index"
-   asp-route-sortOrderModel="@Model.CurrentSortModel"
+   asp-route-sortOrderModel="@Model.SortingModelHelper.CurrentSort"
    asp-route-pageIndexModel="@(Model.PaginatedVehicleModel.PageIndex - 1)"
-   asp-route-currentFilterModel="@Model.CurrentFilterMade"
+   asp-route-currentFilterModel="@Model.SortingMadeHelper.CurrentFilter"
    class="btn btn-primary @prevDisabledModel">
     Previous
 </a>
 <a asp-page="./Index"
-   asp-route-sortOrderModel="@Model.CurrentSortMade"
+   asp-route-sortOrderModel="@Model.SortingMadeHelper.CurrentSort"
    asp-route-pageIndexModel="@(Model.PaginatedVehicleModel.PageIndex + 1)"
-   asp-route-currentFilterModel="@Model.CurrentFilterModel"
+   asp-route-currentFilterModel="@Model.SortingModelHelper.CurrentFilter"
    class="btn btn-primary @nextDisabledModel">
     Next
 </a>

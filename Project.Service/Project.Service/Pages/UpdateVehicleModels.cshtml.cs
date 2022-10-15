@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Project.Service.Interfaces.IUpdateVehicleModels;
+using ZaPrav.NetCore.Interfaces.IUpdateVehicleModels;
 using ZaPrav.NetCore.VehicleDB;
 
 namespace ZaPrav.NetCore.Pages
@@ -19,6 +19,11 @@ namespace ZaPrav.NetCore.Pages
         public int VehicleMadeID { get; set; }
         [BindProperty]
         public List<SelectListItem> VehicleMadesInList { get; set; }
+        public UpdateVehicleModelsModel()
+        {
+            VehicleMadesInList = new List<SelectListItem>();
+            vehicleMade = new VehicleMade();
+        }
         public async Task<IActionResult> OnPostAsync()
         {
             await RefreshDropDownlist();
@@ -31,7 +36,6 @@ namespace ZaPrav.NetCore.Pages
 
             return RedirectToPage("./Index");
         }
-
         private async Task UpdateVehicleModel()
         {
             vehicleMade = await VehicleService.SearchVehicleMade(VehicleMadeID);
@@ -50,7 +54,6 @@ namespace ZaPrav.NetCore.Pages
         private async Task RefreshDropDownlist()
         {
             var db = await VehicleService.GetVehicleMades();
-            var ListOfVehicleMades = await VehicleService.GetVehicleMades();
 
             VehicleMadesInList = db.ConvertAll(a =>
             {

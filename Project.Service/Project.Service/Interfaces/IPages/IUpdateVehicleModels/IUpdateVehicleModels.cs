@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using ZaPrav.NetCore.VehicleDB;
 
-namespace Project.Service.Interfaces.IUpdateVehicleModels
+namespace ZaPrav.NetCore.Interfaces.IUpdateVehicleModels
 {
     public interface IUpdateVehicleModels
     {

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Project.Service.Interfaces.IUpdateVehicleMades;
+using ZaPrav.NetCore.Interfaces.IUpdateVehicleMades;
 
 namespace ZaPrav.NetCore.Pages
 {

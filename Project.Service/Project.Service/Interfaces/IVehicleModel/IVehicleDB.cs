@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
 using ZaPrav.NetCore.VehicleDB;
 
-namespace Project.Service.Interfaces.IVehicleDB
+namespace ZaPrav.NetCore.Interfaces.IVehicleDB
 {
     public interface IVehicleDB
     {

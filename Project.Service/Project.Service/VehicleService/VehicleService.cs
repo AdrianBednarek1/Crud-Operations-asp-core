@@ -1,4 +1,6 @@
-﻿namespace ZaPrav.NetCore.VehicleDB
+﻿using Project.Service;
+
+namespace ZaPrav.NetCore.VehicleDB
 {
     public static class VehicleService
     {

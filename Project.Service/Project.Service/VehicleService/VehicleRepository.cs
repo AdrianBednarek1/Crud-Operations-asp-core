@@ -21,47 +21,64 @@ namespace ZaPrav.NetCore.VehicleDB
         {
             return await vehicleDB.vehicleModels.ToListAsync();
         }
-        public async Task CreateVehicleModel(VehicleModel model)
+        public async Task CreateVehicleModel(VehicleModel? model)
         {
-            vehicleDB.vehicleModels.Add(model);
-            await vehicleDB.SaveChangesAsync();
+            if (model!=null)
+            {
+                vehicleDB.vehicleModels.Add(model);
+                await vehicleDB.SaveChangesAsync();
+            }         
         }
-        public async Task CreateVehicleMade(VehicleMade made)
+        public async Task CreateVehicleMade(VehicleMade? made)
         {
-            vehicleDB.vehicleMades.Add(made);
+            if (made!=null)
+            {
+                vehicleDB.vehicleMades.Add(made);
+            }
             await vehicleDB.SaveChangesAsync();
         }
-        public async Task DeleteVehicleModel(VehicleModel model)
+        public async Task DeleteVehicleModel(VehicleModel? model)
         {
-            vehicleDB.vehicleModels.Remove(model);
+            if (model != null)
+            {
+                vehicleDB.vehicleModels.Remove(model);
+            }
             await vehicleDB.SaveChangesAsync();
         }
-        public async Task DeleteVehicleMade(VehicleMade made)
-        {                       
-            vehicleDB.vehicleMades.Remove(made);
-            await vehicleDB.SaveChangesAsync();
-        }
-        public async Task UpdateVehicleMade(VehicleMade made)
-        {                   
-            vehicleDB.vehicleMades.Single(d => d.Id == made.Id).Id = made.Id;
-            vehicleDB.vehicleMades.Single(d => d.Id == made.Id).Abrv = made.Abrv;
-            vehicleDB.vehicleMades.Single(d => d.Id == made.Id).Name = made.Name;
-           
-            await vehicleDB.SaveChangesAsync();
-        }
-        public async Task UpdateVehicleModel(VehicleModel model)
+        public async Task DeleteVehicleMade(VehicleMade? made)
         {
-            vehicleDB.vehicleModels.Single(d => d.Id == model.Id).Id = model.Id;
-            vehicleDB.vehicleModels.Single(d => d.Id == model.Id).IdMade = model.IdMade;
-            vehicleDB.vehicleModels.Single(d => d.Id == model.Id).Abrv = model.Abrv;
-            vehicleDB.vehicleModels.Single(d => d.Id == model.Id).Name = model.Name;
-
+            if (made !=null)
+            {
+                vehicleDB.vehicleMades.Remove(made);
+            }           
+            await vehicleDB.SaveChangesAsync();
+        }
+        public async Task UpdateVehicleMade(VehicleMade? made)
+        {
+            if (made != null)
+            {
+                vehicleDB.vehicleMades.Single(d => d.Id == made.Id).Id = made.Id;
+                vehicleDB.vehicleMades.Single(d => d.Id == made.Id).Abrv = made.Abrv;
+                vehicleDB.vehicleMades.Single(d => d.Id == made.Id).Name = made.Name;
+            }                   
+            await vehicleDB.SaveChangesAsync();
+        }
+        public async Task UpdateVehicleModel(VehicleModel? model)
+        {
+            if (model!=null)
+            {
+                vehicleDB.vehicleModels.Single(d => d.Id == model.Id).Id = model.Id;
+                vehicleDB.vehicleModels.Single(d => d.Id == model.Id).IdMade = model.IdMade;
+                vehicleDB.vehicleModels.Single(d => d.Id == model.Id).Abrv = model.Abrv;
+                vehicleDB.vehicleModels.Single(d => d.Id == model.Id).Name = model.Name;
+            }
+            
             await vehicleDB.SaveChangesAsync();
         }
         public async Task<VehicleMade> SearchVehicleMade(int id)
         {
             var vehicleMade = await vehicleDB.vehicleMades.SingleAsync(d => d.Id == id);
             return vehicleMade;
-        }      
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-namespace Project.Service.Interfaces
+namespace ZaPrav.NetCore.Interfaces
 {
     public interface IModelCreator
     {       

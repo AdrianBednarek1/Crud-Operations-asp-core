@@ -68,6 +68,12 @@ F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\
 F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
 F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
 F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\bin\Debug\net6.0\Ninject.dll
+F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\bin\Debug\net6.0\NPOI.OOXML.dll
+F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\bin\Debug\net6.0\NPOI.OpenXml4Net.dll
+F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\bin\Debug\net6.0\NPOI.OpenXmlFormats.dll
+F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\bin\Debug\net6.0\NPOI.dll
+F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\bin\Debug\net6.0\ICSharpCode.SharpZipLib.dll
 F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\bin\Debug\net6.0\System.CodeDom.dll
 F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
 F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\bin\Debug\net6.0\System.Data.SqlClient.dll

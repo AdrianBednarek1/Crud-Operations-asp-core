@@ -1,6 +1,6 @@
 ﻿using ZaPrav.NetCore.VehicleDB;
 
-namespace Project.Service.Interfaces
+namespace ZaPrav.NetCore.Interfaces
 {
     public interface IVehicleMade
     {

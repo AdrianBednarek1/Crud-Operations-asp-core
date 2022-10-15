@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using ZaPrav.NetCore.VehicleDB;
 
-namespace Project.Service.Interfaces
+namespace ZaPrav.NetCore.Interfaces
 {
     public interface IVehicleModel
     {

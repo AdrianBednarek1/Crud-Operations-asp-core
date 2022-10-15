@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ZaPrav.NetCore.VehicleDB;
 
-namespace Project.Service.Interfaces.IUpdateVehicleMades
+namespace ZaPrav.NetCore.Interfaces.IUpdateVehicleMades
 {
     public interface IUpdateVehicleMades
     {

@@ -1,5 +1,5 @@
-﻿using Project.Service.Interfaces;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using ZaPrav.NetCore.Interfaces;
 
 namespace ZaPrav.NetCore.VehicleDB
 {

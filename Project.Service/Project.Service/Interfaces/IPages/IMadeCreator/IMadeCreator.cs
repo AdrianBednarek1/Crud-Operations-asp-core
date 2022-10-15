@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ZaPrav.NetCore.VehicleDB;
 
-namespace Project.Service.Interfaces.IPages.IMadeCreator
+namespace ZaPrav.NetCore.Interfaces.IPages.IMadeCreator
 {
     public interface IMadeCreator
     {

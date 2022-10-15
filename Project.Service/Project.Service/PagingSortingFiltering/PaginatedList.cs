@@ -1,8 +1,9 @@
 ﻿using System.Data.Entity;
+using ZaPrav.NetCore.Interfaces;
 
 namespace ZaPrav.NetCore
 {
-    public class PaginatedList <T> : List<T>
+    public class PaginatedList <T> : List<T>, IPaginatedList<T>
     {
         public int PageIndex { get; private set; }
         public int TotalPages { get; private set; }

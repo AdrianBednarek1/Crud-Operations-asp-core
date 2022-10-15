@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Project.Service.Interfaces;
+using ZaPrav.NetCore.Interfaces;
 using ZaPrav.NetCore.VehicleDB;
 
 namespace ZaPrav.NetCore.Pages

@@ -1,4 +1,5 @@
 ﻿using Project.Service.Interfaces;
+using ZaPrav.NetCore.Interfaces;
 
 namespace ZaPrav.NetCore.VehicleDB
 {
