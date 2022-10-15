@@ -5,7 +5,7 @@ namespace ZaPrav.NetCore.Interfaces.IUpdateVehicleMades
 {
     public interface IUpdateVehicleMades
     {
-        VehicleMade made { get; }
+        VehicleMake made { get; }
         Task<IActionResult> OnPostAsync();
     }
 }

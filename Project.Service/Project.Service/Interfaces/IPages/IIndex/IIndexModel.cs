@@ -5,9 +5,9 @@ namespace ZaPrav.NetCore.Interfaces.IPages.IIndex
 {
     public interface IIndexModel
     {
-        PaginatedList<VehicleMade> PaginatedVehicleMades { get; }
+        PaginatedList<VehicleMake> PaginatedVehicleMades { get; }
         PaginatedList<VehicleModel> PaginatedVehicleModel { get; }
-        List<VehicleMade> vehicleMades { get; }
+        List<VehicleMake> vehicleMades { get; }
         List<VehicleModel> vehicleModels { get; }
         SortingHelp SortingMadeHelper { get; }
         SortingHelp SortingModelHelper { get; }

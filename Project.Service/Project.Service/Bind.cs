@@ -18,7 +18,7 @@ namespace Project.Service
         public override void Load()
         {
             //Bind < IList<IVehicleMade>().To<List<VehicleMVeade>>().InSingleScope();
-            Bind<IVehicleMade>().To<VehicleMade>();
+            Bind<IVehicleMake>().To<VehicleMake>();
             Bind<IVehicleModel>().To<VehicleModel>();
             Bind<IVehicleDB>().To<VehicleDB>();
             Bind<ISortingHelp>().To<SortingHelp>();

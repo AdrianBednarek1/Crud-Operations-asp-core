@@ -7,7 +7,7 @@ namespace ZaPrav.NetCore.Pages
     public class UpdateVehicleMadesModel : PageModel, IUpdateVehicleMades
     {
         [BindProperty]
-        public VehicleDB.VehicleMade made { get; set; }     
+        public VehicleDB.VehicleMake made { get; set; }     
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)

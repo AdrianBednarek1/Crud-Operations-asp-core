@@ -5,7 +5,7 @@ namespace ZaPrav.NetCore.Interfaces.IVehicleDB
 {
     public interface IVehicleDB
     {
-        DbSet<VehicleMade> vehicleMades { get; }
+        DbSet<VehicleMake> vehicleMades { get; }
         DbSet<VehicleModel> vehicleModels { get; }
     }
 }

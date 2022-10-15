@@ -10,6 +10,6 @@ namespace ZaPrav.NetCore.Interfaces
          string Abrv { get; }
 
          [Required]
-         VehicleMade IdMade { get; }
+         VehicleMake Make { get; }
     }
 }

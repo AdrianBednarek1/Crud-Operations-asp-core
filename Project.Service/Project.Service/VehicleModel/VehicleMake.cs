@@ -3,7 +3,7 @@ using ZaPrav.NetCore.Interfaces;
 
 namespace ZaPrav.NetCore.VehicleDB
 {
-    public class VehicleMade : IVehicleMade
+    public class VehicleMake : IVehicleMake
     {
         public int Id { get; set; }
         public string Name { get; set; }

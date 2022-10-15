@@ -11,9 +11,9 @@ namespace ZaPrav.NetCore.Pages
     {
         private readonly IConfiguration Configuration;
         public PagingSortingFiltering SFP { get; private set; }     
-        public PaginatedList<VehicleMade>? PaginatedVehicleMades { get; set; }
+        public PaginatedList<VehicleMake>? PaginatedVehicleMades { get; set; }
         public PaginatedList<VehicleModel>? PaginatedVehicleModel { get; set; }
-        public  List<VehicleMade> vehicleMades { get; set; }
+        public  List<VehicleMake> vehicleMades { get; set; }
         public List<VehicleModel> vehicleModels { get; set; }
         public SortingHelp SortingMadeHelper { get; set; } 
         public SortingHelp SortingModelHelper { get; set; } 
@@ -22,7 +22,7 @@ namespace ZaPrav.NetCore.Pages
             Configuration = configuration;
             SFP = new PagingSortingFiltering(Configuration);
 
-            vehicleMades = new List<VehicleMade>();
+            vehicleMades = new List<VehicleMake>();
             vehicleModels = new List<VehicleModel>();
             SortingMadeHelper = new SortingHelp();
             SortingModelHelper = new SortingHelp();
@@ -88,7 +88,7 @@ namespace ZaPrav.NetCore.Pages
         }
         private async Task VehicleMadeDelete(int Id)
         {          
-            VehicleMade? vehicleMade = vehicleMades.SingleOrDefault(d => d.Id == Id);
+            VehicleMake? vehicleMade = vehicleMades.SingleOrDefault(d => d.Id == Id);
 
             if (vehicleMade != null)
             {

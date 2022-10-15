@@ -8,7 +8,7 @@ namespace ZaPrav.NetCore.Pages
 {
     public class UpdateVehicleModelsModel : PageModel, IUpdateVehicleModels
     {
-        private VehicleMade vehicleMade;
+        private VehicleMake vehicleMade;
         [BindProperty]
         public string name { get; set; }
         [BindProperty]
@@ -22,7 +22,7 @@ namespace ZaPrav.NetCore.Pages
         public UpdateVehicleModelsModel()
         {
             VehicleMadesInList = new List<SelectListItem>();
-            vehicleMade = new VehicleMade();
+            vehicleMade = new VehicleMake();
         }
         public async Task<IActionResult> OnPostAsync()
         {
@@ -45,7 +45,7 @@ namespace ZaPrav.NetCore.Pages
                 Id = id,
                 Name = name,
                 Abrv = abrv,
-                IdMade = vehicleMade
+                MakeId = vehicleMade.Id
             };
 
             await VehicleService.Update(model);

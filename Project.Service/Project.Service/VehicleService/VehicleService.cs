@@ -9,11 +9,11 @@ namespace ZaPrav.NetCore.VehicleDB
         {
             return VehicleRepository.GetDBQuery();
         }
-        public static async Task<List<VehicleMade>> GetVehicleMades()
+        public static async Task<List<VehicleMake>> GetVehicleMades()
         {
             return await VehicleRepository.GetVehicleMades();
         }
-        public static async Task<VehicleMade> SearchVehicleMade(int id)
+        public static async Task<VehicleMake> SearchVehicleMade(int id)
         {          
             return await VehicleRepository.SearchVehicleMade(id);
         }
@@ -30,7 +30,7 @@ namespace ZaPrav.NetCore.VehicleDB
             }
             else
             {
-                VehicleMade? made = data as VehicleMade;
+                VehicleMake? made = data as VehicleMake;
                 await VehicleRepository.CreateVehicleMade(made);
             }
         }
@@ -43,7 +43,7 @@ namespace ZaPrav.NetCore.VehicleDB
             }
             else
             {
-                VehicleMade? made = data as VehicleMade;
+                VehicleMake? made = data as VehicleMake;
                 await VehicleRepository.UpdateVehicleMade(made);
             }
         }
@@ -56,7 +56,7 @@ namespace ZaPrav.NetCore.VehicleDB
             }
             else
             {
-                VehicleMade? made = data as VehicleMade;
+                VehicleMake? made = data as VehicleMake;
                 await VehicleRepository.DeleteVehicleMade(made);
             }
         }

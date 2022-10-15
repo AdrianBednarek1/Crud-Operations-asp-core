@@ -1,4 +1,4 @@
-﻿    @page 
+﻿@page 
 @model IndexModel
 @{
     ViewData["Title"] = "Index";
@@ -136,7 +136,7 @@
                     <td>@vehicleModel.Id</td>
                     <td>@vehicleModel.Name</td>
                     <td>@vehicleModel.Abrv</td>
-                    <td>@vehicleModel.IdMade.Id</td>
+                    <td>@vehicleModel.MakeId</td>
                     <td>
                         <button type ="submit" asp-page = "./UpdateVehicleModels"
                             asp-route-Id = "@vehicleModel.Id">Update</button>                   

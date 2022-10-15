@@ -9,7 +9,6 @@ namespace ZaPrav.NetCore.Pages
     public class ModelCreatorModel : PageModel, IModelCreator
     {
         
-        private VehicleMade? vehicleMade;
         [BindProperty]
         public List<SelectListItem> VehicleMadesInList { get; set; }
         [BindProperty]
@@ -38,13 +37,11 @@ namespace ZaPrav.NetCore.Pages
 
         private async Task CreateVehicleModel()
         {
-            vehicleMade = await VehicleService.SearchVehicleMade(Id);
-            
             VehicleModel vehicleModel = new VehicleModel()
             {
                 Name = name,
                 Abrv = abrv,
-                IdMade = vehicleMade
+                MakeId = Id
             };
             await VehicleService.Create(vehicleModel);
         }

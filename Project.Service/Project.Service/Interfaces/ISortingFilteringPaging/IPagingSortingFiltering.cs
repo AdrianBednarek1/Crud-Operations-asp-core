@@ -7,9 +7,9 @@ namespace Project.Service.Interfaces.ISortingFilteringPaging
     {
         SortingHelp SortingMadeHelper { get; }
         SortingHelp SortingModelHelper { get; }
-        PaginatedList<VehicleMade>? PaginatedVehicleMades { get; }
+        PaginatedList<VehicleMake>? PaginatedVehicleMades { get; }
         PaginatedList<VehicleModel>? PaginatedVehicleModel { get; }
-        Task<PaginatedList<VehicleMade>> VehicleMadeSFP
+        Task<PaginatedList<VehicleMake>> VehicleMadeSFP
             (string sortOrderMades, string SearchStringMade, string currentFilterMade, int? pageIndexMade);
         Task<PaginatedList<VehicleModel>> VehicleModelSFP
             (string sortOrderModel, string SearchStringModel, string currentFilterModel, int? pageIndexModel);

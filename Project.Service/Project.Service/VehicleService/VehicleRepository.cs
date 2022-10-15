@@ -13,7 +13,7 @@ namespace ZaPrav.NetCore.VehicleDB
         {
             return vehicleDB;
         }
-        public async Task<List<VehicleMade>> GetVehicleMades()
+        public async Task<List<VehicleMake>> GetVehicleMades()
         {
             return await vehicleDB.vehicleMades.ToListAsync();
         }
@@ -29,7 +29,7 @@ namespace ZaPrav.NetCore.VehicleDB
                 await vehicleDB.SaveChangesAsync();
             }         
         }
-        public async Task CreateVehicleMade(VehicleMade? made)
+        public async Task CreateVehicleMade(VehicleMake? made)
         {
             if (made!=null)
             {
@@ -45,7 +45,7 @@ namespace ZaPrav.NetCore.VehicleDB
             }
             await vehicleDB.SaveChangesAsync();
         }
-        public async Task DeleteVehicleMade(VehicleMade? made)
+        public async Task DeleteVehicleMade(VehicleMake? made)
         {
             if (made !=null)
             {
@@ -53,7 +53,7 @@ namespace ZaPrav.NetCore.VehicleDB
             }           
             await vehicleDB.SaveChangesAsync();
         }
-        public async Task UpdateVehicleMade(VehicleMade? made)
+        public async Task UpdateVehicleMade(VehicleMake? made)
         {
             if (made != null)
             {
@@ -68,14 +68,14 @@ namespace ZaPrav.NetCore.VehicleDB
             if (model!=null)
             {
                 vehicleDB.vehicleModels.Single(d => d.Id == model.Id).Id = model.Id;
-                vehicleDB.vehicleModels.Single(d => d.Id == model.Id).IdMade = model.IdMade;
+                vehicleDB.vehicleModels.Single(d => d.Id == model.Id).MakeId = model.MakeId;
                 vehicleDB.vehicleModels.Single(d => d.Id == model.Id).Abrv = model.Abrv;
                 vehicleDB.vehicleModels.Single(d => d.Id == model.Id).Name = model.Name;
             }
             
             await vehicleDB.SaveChangesAsync();
         }
-        public async Task<VehicleMade> SearchVehicleMade(int id)
+        public async Task<VehicleMake> SearchVehicleMade(int id)
         {
             var vehicleMade = await vehicleDB.vehicleMades.SingleAsync(d => d.Id == id);
             return vehicleMade;

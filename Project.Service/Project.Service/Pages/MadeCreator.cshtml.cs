@@ -8,10 +8,10 @@ namespace ZaPrav.NetCore.Pages
     public class MadeCreator : PageModel, IMadeCreator
     {
         [BindProperty]
-        public VehicleMade vehicleMade { get; set; }
+        public VehicleMake vehicleMade { get; set; }
         public MadeCreator()
         {
-            vehicleMade = new VehicleMade();
+            vehicleMade = new VehicleMake();
         }
         public async Task<IActionResult> OnPostAsync()
         {

@@ -15,9 +15,9 @@ namespace Project.Service
         }
         public SortingHelp SortingMadeHelper { get; set; } 
         public SortingHelp SortingModelHelper { get; set; }
-        public PaginatedList<VehicleMade>? PaginatedVehicleMades { get; set; }
+        public PaginatedList<VehicleMake>? PaginatedVehicleMades { get; set; }
         public PaginatedList<VehicleModel>? PaginatedVehicleModel { get; set; }
-        public async Task<PaginatedList<VehicleMade>> VehicleMadeSFP
+        public async Task<PaginatedList<VehicleMake>> VehicleMadeSFP
             (string sortOrderMades, string SearchStringMade, string currentFilterMade, int? pageIndexMade)
         {
             SortingMadeHelper.CurrentSort = sortOrderMades;
@@ -35,7 +35,7 @@ namespace Project.Service
             }
             SortingMadeHelper.CurrentFilter = SearchStringMade;
 
-            IQueryable<VehicleMade> vehicleMadesSorting = from b in VehicleService.GetQueryDB().vehicleMades select b;
+            IQueryable<VehicleMake> vehicleMadesSorting = from b in VehicleService.GetQueryDB().vehicleMades select b;
 
             if (!String.IsNullOrEmpty(SearchStringMade))
             {
@@ -64,7 +64,7 @@ namespace Project.Service
             }
             var pageSize = Configuration.GetValue("PageSize", 4);
 
-            return PaginatedVehicleMades = await PaginatedList<VehicleMade>.CreateAsync(
+            return PaginatedVehicleMades = await PaginatedList<VehicleMake>.CreateAsync(
                 vehicleMadesSorting, pageIndexMade ?? 1, pageSize);
         }
         public async Task<PaginatedList<VehicleModel>> VehicleModelSFP
@@ -110,10 +110,10 @@ namespace Project.Service
                     vehicleModelSorting = vehicleModelSorting.OrderByDescending(s => s.Abrv);
                     break;
                 case "MadeId":
-                    vehicleModelSorting = vehicleModelSorting.OrderBy(s => s.IdMade.Id);
+                    vehicleModelSorting = vehicleModelSorting.OrderBy(s => s.MakeId);
                     break;
                 case "MadeIdDesc":
-                    vehicleModelSorting = vehicleModelSorting.OrderByDescending(s => s.IdMade.Id);
+                    vehicleModelSorting = vehicleModelSorting.OrderByDescending(s => s.MakeId);
                     break;
                 default:
                     vehicleModelSorting = vehicleModelSorting.OrderBy(s => s.Name);
