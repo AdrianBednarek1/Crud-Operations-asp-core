@@ -22,7 +22,9 @@ VehicleDB
 PagingSortingFiltering klase
 
 PaginetedList- definira trenutnu stranicu, broj stranica i sl.
+
 PagingSortingFiltering - glavni upravitelj definiranja stranica
+
 SortingHelp - pomoc oko atributa
 
 
