@@ -5,7 +5,7 @@ Zadatak je rješen u Asp.Net Core projektu.
 
 Korišteni su razor pages modeli radi eksperimentiranja i testiranja ispravnosti klasa.
 
-Stoga ne predstavljaju konačno rješenje niti povezanost zadatka. 
+Stoga ne predstavljaju konačno rješenje. 
 
 Osim VehicleService klase korištene su sljedeće klase:
 
