@@ -14,8 +14,8 @@ VehicleRepository - glavni CRUD upravitelj
 
 DB klase:
 
-VehicleMake (na nekim klasama pise Made, zbog zabune)
-VehicleModel
+VehicleMake (na nekim klasama pise Made, zbog zabune), 
+VehicleModel, 
 VehicleDB
 
 
