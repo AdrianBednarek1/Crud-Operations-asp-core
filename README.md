@@ -33,8 +33,8 @@ Pages klase su uglavnom radi testiranja
 
 Ostale klase po mapama:
 
-Ninject
-Automapper
+Ninject,
+Automapper,
 Interfaces- svi interfaci
 
 
