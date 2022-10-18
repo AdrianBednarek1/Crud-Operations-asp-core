@@ -4,16 +4,18 @@ namespace Project.Service.Interfaces.IVehicleService
 {
     public interface IVehicleRepository
     {
-        public VehicleDB GetDBQuery();
-        public Task<List<VehicleMake>> GetVehicleMades();
-        public Task<List<VehicleModel>> GetVehicleModels();
-
-        public Task CreateVehicleModel(VehicleModel model);
-        public Task CreateVehicleMade(VehicleMake made);
-        public Task DeleteVehicleModel(VehicleModel model);
-        public Task DeleteVehicleMade(VehicleMake made);
-        public Task UpdateVehicleMade(VehicleMake made);
-        public Task UpdateVehicleModel(VehicleModel model);
-        public Task<VehicleMake> SearchVehicleMade(int id);
+        VehicleDB GetDBQuery();
+        Task<List<VehicleMake>> GetVehicleMades();
+        Task<List<VehicleModel>> GetVehicleModels();
+        Task CreateVehicleModel(VehicleModel model);
+        Task CreateVehicleMade(VehicleMake made);
+        Task DeleteVehicleModel(VehicleModel model);
+        Task DeleteVehicleMake(VehicleMake made);
+        Task UpdateVehicleMake(VehicleMake made);
+        Task UpdateVehicleModel(VehicleModel model);
+        Task<VehicleMake> SearchVehicleMake(int id);
+        Task<VehicleModel> SearchVehicleModel(int id);
+        Task<bool> VehicleMakesIsNull();
+        Task<bool> VehicleModelsIsNull();
     }
 }

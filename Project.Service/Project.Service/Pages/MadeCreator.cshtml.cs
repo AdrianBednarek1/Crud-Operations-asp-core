@@ -1,5 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Ninject;
+using Project.Service;
+using System.Reflection;
+using ZaPrav.NetCore.Interfaces;
 using ZaPrav.NetCore.Interfaces.IPages.IMadeCreator;
 using ZaPrav.NetCore.VehicleDB;
 
@@ -8,19 +12,19 @@ namespace ZaPrav.NetCore.Pages
     public class MadeCreator : PageModel, IMadeCreator
     {
         [BindProperty]
-        public VehicleMake vehicleMade { get; set; }
+        public VehicleMake vehicleMake { get; set; }
+       
         public MadeCreator()
         {
-            vehicleMade = new VehicleMake();
+            vehicleMake = new VehicleMake();
         }
-        public async Task<IActionResult> OnPostAsync()
-        {
+        public IActionResult OnPostAsync()
+        {         
             if (!ModelState.IsValid)
             { 
                 return Page();
             }
-            await VehicleService.Create(vehicleMade);
-            return RedirectToPage("/Index");
+            return RedirectToPage("./Index","CreateVehicleMake", vehicleMake);
         }
     }
 }

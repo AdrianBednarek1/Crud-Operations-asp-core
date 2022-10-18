@@ -1,10 +1,17 @@
-﻿using Project.Service.Interfaces.IVehicleService;
+﻿using AutoMapper;
+using Project.Service.Interfaces.IVehicleService;
 using System.Data.Entity;
+using ZaPrav.NetCore.Interfaces;
+using ZaPrav.NetCore.Interfaces.IVehicleDB;
+using ZaPrav.NetCore.Pages;
+
 namespace ZaPrav.NetCore.VehicleDB
 {
     public class VehicleRepository : IVehicleRepository
     {
         private VehicleDB vehicleDB;
+        private IMapper mapper;
+
         public VehicleRepository()
         {
             vehicleDB = new VehicleDB();
@@ -45,15 +52,22 @@ namespace ZaPrav.NetCore.VehicleDB
             }
             await vehicleDB.SaveChangesAsync();
         }
-        public async Task DeleteVehicleMade(VehicleMake? made)
+        public async Task DeleteVehicleMake(VehicleMake? made)
         {
             if (made !=null)
             {
+                foreach (var item in vehicleDB.vehicleModels)
+                {
+                    if(item.MakeId == made.Id)
+                    {
+                        DeleteVehicleModel(item);
+                    }
+                }
                 vehicleDB.vehicleMades.Remove(made);
             }           
             await vehicleDB.SaveChangesAsync();
         }
-        public async Task UpdateVehicleMade(VehicleMake? made)
+        public async Task UpdateVehicleMake(VehicleMake? made)
         {
             if (made != null)
             {
@@ -71,14 +85,34 @@ namespace ZaPrav.NetCore.VehicleDB
                 vehicleDB.vehicleModels.Single(d => d.Id == model.Id).MakeId = model.MakeId;
                 vehicleDB.vehicleModels.Single(d => d.Id == model.Id).Abrv = model.Abrv;
                 vehicleDB.vehicleModels.Single(d => d.Id == model.Id).Name = model.Name;
-            }
-            
+            }           
             await vehicleDB.SaveChangesAsync();
         }
-        public async Task<VehicleMake> SearchVehicleMade(int id)
+        public async Task<VehicleMake> SearchVehicleMake(int id)
         {
             var vehicleMade = await vehicleDB.vehicleMades.SingleAsync(d => d.Id == id);
             return vehicleMade;
+        }
+        public async Task<VehicleModel> SearchVehicleModel(int id)
+        {
+            var vehicleModel = await vehicleDB.vehicleModels.SingleAsync(d => d.Id == id);
+            return vehicleModel;
+        }
+        public async Task<bool> VehicleMakesIsNull()
+        {
+            if (!await vehicleDB.vehicleMades.AnyAsync() || vehicleDB.vehicleMades==null)
+            {
+                return true;
+            }
+            return false;
+        }
+        public async Task<bool> VehicleModelsIsNull()
+        {
+            if (!await vehicleDB.vehicleModels.AnyAsync() || vehicleDB.vehicleModels == null)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

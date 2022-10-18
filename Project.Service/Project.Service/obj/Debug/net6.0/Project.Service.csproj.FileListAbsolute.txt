@@ -67,7 +67,6 @@ F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\
 F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
 F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
 F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
-F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\bin\Debug\net6.0\Ninject.dll
 F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\bin\Debug\net6.0\NPOI.OOXML.dll
 F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\bin\Debug\net6.0\NPOI.OpenXml4Net.dll
 F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\bin\Debug\net6.0\NPOI.OpenXmlFormats.dll
@@ -112,3 +111,8 @@ F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\
 F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\obj\Debug\net6.0\ref\Project.Service.dll
 F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\obj\Debug\net6.0\Project.Service.Migrations.SQLEXPRESS.resources
 F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\obj\Debug\net6.0\Project.Service.csproj.GenerateResource.cache
+F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\bin\Debug\net6.0\Ninject.dll
+F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\bin\Debug\net6.0\AutoMapper.Collection.dll
+F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\bin\Debug\net6.0\AutoMapper.Collection.EntityFrameworkCore.dll
+F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\bin\Debug\net6.0\AutoMapper.Extensions.ExpressionMapping.dll

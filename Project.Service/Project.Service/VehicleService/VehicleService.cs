@@ -1,72 +1,90 @@
 ﻿using Project.Service;
+using Project.Service.Interfaces.IVehicleRepository;
+using Project.Service.Interfaces.IVehicleService;
 
 namespace ZaPrav.NetCore.VehicleDB
 {
-    public static class VehicleService
+    public class VehicleService : IVehicleService
     {
-        private static VehicleRepository VehicleRepository = new VehicleRepository();
-        public static VehicleDB GetQueryDB()
+        private IVehicleRepository vehicleRepository;
+        public VehicleService(IVehicleRepository _vehicleRepository)
         {
-            return VehicleRepository.GetDBQuery();
+            vehicleRepository = _vehicleRepository;
         }
-        public static async Task<List<VehicleMake>> GetVehicleMades()
+        public VehicleDB GetQueryDB()
         {
-            return await VehicleRepository.GetVehicleMades();
+            return vehicleRepository.GetDBQuery();
         }
-        public static async Task<VehicleMake> SearchVehicleMade(int id)
-        {          
-            return await VehicleRepository.SearchVehicleMade(id);
-        }
-        public static async Task<List<VehicleModel>> GetVehicleModels()
+        public async Task<List<VehicleMake>> GetVehicleMakes()
         {
-            return await VehicleRepository.GetVehicleModels();
+            return await vehicleRepository.GetVehicleMades();
         }
-        public static async Task Create(object data)
+        public async Task<VehicleMake> SearchVehicleMake(int id)
         {
-            if(TrueIfModel(data))
-            {
-                VehicleModel? model = data as VehicleModel;
-                await VehicleRepository.CreateVehicleModel(model);
-            }
-            else
-            {
-                VehicleMake? made = data as VehicleMake;
-                await VehicleRepository.CreateVehicleMade(made);
-            }
+            return await vehicleRepository.SearchVehicleMake(id);
         }
-        public static async Task Update(object data)
+        public async Task<VehicleModel> SearchVehicleModel(int id)
+        {
+            return await vehicleRepository.SearchVehicleModel(id);
+        }
+        public async Task<List<VehicleModel>> GetVehicleModels()
+        {
+            return await vehicleRepository.GetVehicleModels();
+        }
+        public async Task Create(object data)
         {
             if (TrueIfModel(data))
             {
                 VehicleModel? model = data as VehicleModel;
-                await VehicleRepository.UpdateVehicleModel(model);
+                await vehicleRepository.CreateVehicleModel(model);
             }
             else
             {
                 VehicleMake? made = data as VehicleMake;
-                await VehicleRepository.UpdateVehicleMade(made);
+                await vehicleRepository.CreateVehicleMade(made);
             }
         }
-        public static async Task Delete(object data)
+        public async Task Update(object data)
         {
             if (TrueIfModel(data))
             {
                 VehicleModel? model = data as VehicleModel;
-                await VehicleRepository.DeleteVehicleModel(model);
+                await vehicleRepository.UpdateVehicleModel(model);
             }
             else
             {
                 VehicleMake? made = data as VehicleMake;
-                await VehicleRepository.DeleteVehicleMade(made);
+                await vehicleRepository.UpdateVehicleMake(made);
             }
         }
-        private static bool TrueIfModel(object data)
+        public async Task Delete(object data)
         {
-            if(data.GetType() == typeof(VehicleModel))
+            if (TrueIfModel(data))
+            {
+                VehicleModel? model = data as VehicleModel;
+                await vehicleRepository.DeleteVehicleModel(model);
+            }
+            else
+            {
+                VehicleMake? made = data as VehicleMake;
+                await vehicleRepository.DeleteVehicleMake(made);
+            }
+        }
+        private bool TrueIfModel(object data)
+        {
+            if (data.GetType() == typeof(VehicleModel))
             {
                 return true;
             }
             return false;
+        }
+        public async Task<bool> VehicleMakeIsNull()
+        {
+            return await vehicleRepository.VehicleMakesIsNull();
+        }
+        public async Task<bool> VehicleModelIsNull()
+        {
+            return await vehicleRepository.VehicleModelsIsNull();
         }
     }
 }

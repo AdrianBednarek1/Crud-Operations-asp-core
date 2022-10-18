@@ -24,27 +24,27 @@
                 <th>
                     <a asp-page="./Index" asp-route-sortOrderMades="@Model.SortingMadeHelper.IdSort"
                     asp-route-currentFilterMade="@Model.SortingMadeHelper.CurrentFilter">
-                    @Html.DisplayNameFor(model => model.vehicleMades[0].Id)
+                    @Html.DisplayNameFor(model => model.PaginatedVehicleMakes[0].Id)
                     </a>
                 </th>
                 <th>
                     <a asp-page="./Index" asp-route-sortOrderMades="@Model.SortingMadeHelper.NameSort"
                     asp-route-currentFilterMade="@Model.SortingMadeHelper.CurrentFilter">
-                    @Html.DisplayNameFor(model => model.PaginatedVehicleMades[0].Name)
+                    @Html.DisplayNameFor(model => model.PaginatedVehicleMakes[0].Name)
                 </a>
                 </th>
                 <th>
                     <a asp-page="./Index" asp-route-sortOrderMades="@Model.SortingMadeHelper.AbrvSort"
                     asp-route-currentFilterMade="@Model.SortingMadeHelper.CurrentFilter">
-                    @Html.DisplayNameFor(model => model.PaginatedVehicleMades[0].Abrv)
+                    @Html.DisplayNameFor(model => model.PaginatedVehicleMakes[0].Abrv)
                     </a>
                 </th>
             </tr>
         </thead>
         <tbody>
-            @if (Model.vehicleMades != null)
+            @if (!await Model.vehicleService.VehicleMakeIsNull())
             {
-               @foreach (var made in Model.PaginatedVehicleMades)
+               @foreach (var made in Model.PaginatedVehicleMakes)
                 {
                 <tr>
                     <td>@made.Id</td>
@@ -64,20 +64,20 @@
         </tbody>
     </table> 
     @{
-    var prevDisabled = !Model.PaginatedVehicleMades.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.PaginatedVehicleMades.HasNextPage ? "disabled" : "";
+    var prevDisabled = !Model.PaginatedVehicleMakes.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.PaginatedVehicleMakes.HasNextPage ? "disabled" : "";
 }
 
 <a asp-page="./Index"
    asp-route-sortOrderMades="@Model.SortingMadeHelper.CurrentSort"
-   asp-route-pageIndexMade="@(Model.PaginatedVehicleMades.PageIndex - 1)"
+   asp-route-pageIndexMade="@(Model.PaginatedVehicleMakes.PageIndex - 1)"
    asp-route-currentFilterMade="@Model.SortingMadeHelper.CurrentFilter"
    class="btn btn-primary @prevDisabled">
     Previous
 </a>
 <a asp-page="./Index"
    asp-route-sortOrderMades="@Model.SortingMadeHelper.CurrentSort"
-   asp-route-pageIndexMade="@(Model.PaginatedVehicleMades.PageIndex + 1)"
+   asp-route-pageIndexMade="@(Model.PaginatedVehicleMakes.PageIndex + 1)"
    asp-route-currentFilterMade="@Model.SortingMadeHelper.CurrentFilter"
    class="btn btn-primary @nextDisabled">
     Next
@@ -104,33 +104,32 @@
                 <th>
                     <a asp-page="./Index" asp-route-SortOrderModel="@Model.SortingModelHelper.IdSort"
                     asp-route-currentFilterModel="@Model.SortingModelHelper.CurrentFilter">
-                    @Html.DisplayNameFor(model => model.PaginatedVehicleModel[0].Id)
+                    @Html.DisplayNameFor(model => model.PaginatedVehicleModels[0].Id)
                     </a>
                 </th>
                 <th>
                     <a asp-page="./Index" asp-route-SortOrderModel="@Model.SortingModelHelper.NameSort"
                     asp-route-currentFilterModel="@Model.SortingModelHelper.CurrentFilter">
-                    @Html.DisplayNameFor(model => model.PaginatedVehicleModel[0].Name)
+                    @Html.DisplayNameFor(model => model.PaginatedVehicleModels[0].Name)
                     </a>
                 </th>
                 <th>
                     <a asp-page="./Index" asp-route-SortOrderModel="@Model.SortingModelHelper.AbrvSort"
                     asp-route-currentFilterModel="@Model.SortingModelHelper.CurrentFilter">
-                    @Html.DisplayNameFor(model => model.PaginatedVehicleModel[0].Abrv)
+                    @Html.DisplayNameFor(model => model.PaginatedVehicleModels[0].Abrv)
                     </a>
                 </th>
                 <th>
                     <a asp-page="./Index" asp-route-SortOrderModel="@Model.SortingModelHelper.ForeignIdSort"
                     asp-route-currentFilterModel="@Model.SortingModelHelper.CurrentFilter">
-                    VehicleMadeID
+                    VehicleMakeID
                     </a>
                 </th>
             </tr>
         </thead>
         <tbody>
-            @if (Model.vehicleModels!=null)
-            {
-                @foreach (var vehicleModel in Model.PaginatedVehicleModel)
+            
+                @foreach (var vehicleModel in Model.PaginatedVehicleModels)
             {
                 <tr>
                     <td>@vehicleModel.Id</td>
@@ -147,34 +146,41 @@
                     </td>
                 </tr>
             }  
-            }       
+                   
         </tbody>
     </table>
         @{
-    var prevDisabledModel = !Model.PaginatedVehicleModel.HasPreviousPage ? "disabled" : "";
-    var nextDisabledModel = !Model.PaginatedVehicleModel.HasNextPage ? "disabled" : "";
+    var prevDisabledModel = !Model.PaginatedVehicleModels.HasPreviousPage ? "disabled" : "";
+    var nextDisabledModel = !Model.PaginatedVehicleModels.HasNextPage ? "disabled" : "";
 }
 
 <a asp-page="./Index"
    asp-route-sortOrderModel="@Model.SortingModelHelper.CurrentSort"
-   asp-route-pageIndexModel="@(Model.PaginatedVehicleModel.PageIndex - 1)"
+   asp-route-pageIndexModel="@(Model.PaginatedVehicleModels.PageIndex - 1)"
    asp-route-currentFilterModel="@Model.SortingMadeHelper.CurrentFilter"
    class="btn btn-primary @prevDisabledModel">
     Previous
 </a>
 <a asp-page="./Index"
    asp-route-sortOrderModel="@Model.SortingMadeHelper.CurrentSort"
-   asp-route-pageIndexModel="@(Model.PaginatedVehicleModel.PageIndex + 1)"
+   asp-route-pageIndexModel="@(Model.PaginatedVehicleModels.PageIndex + 1)"
    asp-route-currentFilterModel="@Model.SortingModelHelper.CurrentFilter"
    class="btn btn-primary @nextDisabledModel">
     Next
 </a>
 </form>
-<form>
+<form method ="post" >
     <h4>Options</h4>
-    <button asp-page = "./MadeCreator">Create Vehicle Made</button>
-    @if (Model.vehicleMades!=null && Model.vehicleMades.Any())
+    <button class="btn btn-primary" asp-page = "./MadeCreator">Create Vehicle Made</button>
+    
+     @if (!await Model.vehicleService.VehicleMakeIsNull())
     {
-        <button asp-page = "./ModelCreator">Create Vehicle Model</button>
+        <button class="btn btn-primary" asp-page-handler="Id" type="submit">Create Vehicle Model</button>     
+		<select  asp-for = "SelectedId" asp-items="Model.VehicleMadesInList"></select>       
     }
 </form>
+   
+   
+    
+    
+

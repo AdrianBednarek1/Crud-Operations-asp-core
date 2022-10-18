@@ -5,18 +5,15 @@
 <h2>Create Vehicle Model</h2>
 
 <p>Enter Vehicle Model data</p>
-<form method = "post">
+<form AutoCompleteType="Disabled" method = "post">
 	<div>
-		Name: <input asp-for = "name"/>
+		Name: <input value = "" asp-for = "name"/>
 		<span asp-validation-for = "name"></span>
 	</div>
 	<div>
-		Abrv: <input asp-for = "abrv"/>
+		Abrv: <input value = "" asp-for = "abrv"/>
 		<span asp-validation-for = "abrv"></span>
 
-	</div>
-	<div>
-		Made: <select asp-for = "Id" asp-items="Model.VehicleMadesInList"></select>
 	</div>
 	<input type="submit"/>
 	<a asp-page="./Index">Back to Index</a>

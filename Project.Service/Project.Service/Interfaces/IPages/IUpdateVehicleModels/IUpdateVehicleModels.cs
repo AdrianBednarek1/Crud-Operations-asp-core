@@ -8,7 +8,7 @@ namespace ZaPrav.NetCore.Interfaces.IUpdateVehicleModels
         string name { get; }
         string abrv { get; }
         int id { get; set; }
-        int VehicleMadeID { get; set; }
+        int VehicleMakeID { get; set; }
         List<SelectListItem> VehicleMadesInList { get; set; }
         Task<IActionResult> OnPostAsync();
     }

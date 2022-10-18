@@ -1,0 +1,344 @@
+﻿++Solution 'Project.Service' ‎(1 of 1 project)
+i:{00000000-0000-0000-0000-000000000000}:Project.Service.sln
+++Project.Service
+i:{00000000-0000-0000-0000-000000000000}:Project.Service
+++Connected Services 
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:>557
+++SQL Server Database
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:>717
+++Dependencies
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:>556
+++Analyzers
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:analyzers
+++Frameworks
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:frameworks
+++Packages
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:packages
+++AutoMapper (12.0.0)
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:>956
+++EntityFramework (6.4.4)
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:>575
+++Microsoft.EntityFrameworkCore (6.0.10)
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:>569
+++Ninject (3.3.6)
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:>571
+++NPOI (2.5.6)
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:>572
+++System.Data.SqlClient (4.8.3)
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:>573
+++System.Linq (4.3.0)
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:>570
+++Properties
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\properties\
+++launchSettings.json
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\properties\launchsettings.json
+++wwwroot
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\
+++css
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\css\
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\
+++js
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\js\
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\js\
+++lib
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\
+++favicon.ico
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\favicon.ico
+++AutoMapper
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\automapper\
+++AutoMapperProfiles.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\automapper\automapperprofiles.cs
+++Interfaces
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\interfaces\
+++IPages
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\interfaces\ipages\
+++IIndex
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\interfaces\ipages\iindex\
+++IMadeCreator
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\interfaces\ipages\imadecreator\
+++IModelCreator
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\interfaces\ipages\imodelcreator\
+++IUpdateVehicleMades
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\interfaces\ipages\iupdatevehiclemades\
+++IUpdateVehicleMades.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\interfaces\ipages\iupdatevehiclemades\iupdatevehiclemades.cs
+++IUpdateVehicleModels
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\interfaces\ipages\iupdatevehiclemodels\
+++ISortingFilteringPaging
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\interfaces\isortingfilteringpaging\
+++IPaginatedList.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\interfaces\isortingfilteringpaging\ipaginatedlist.cs
+++IPagingSortingFiltering.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\interfaces\isortingfilteringpaging\ipagingsortingfiltering.cs
+++ISortingHelp.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\interfaces\isortingfilteringpaging\isortinghelp.cs
+++IVehicleModel
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\interfaces\ivehiclemodel\
+++IVehicleRepository
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\interfaces\ivehiclerepository\
+++IVehicleRepository.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\interfaces\ivehiclerepository\ivehiclerepository.cs
+++Migrations
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\migrations\
+++Pages
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\pages\
+++Shared
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\pages\shared\
+++_Layout.cshtml
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\pages\shared\_layout.cshtml
+++_Layout.cshtml.css
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\pages\shared\_layout.cshtml.css
+++_ValidationScriptsPartial.cshtml
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\pages\shared\_validationscriptspartial.cshtml
+++_ViewImports.cshtml
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\pages\_viewimports.cshtml
+++_ViewStart.cshtml
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\pages\_viewstart.cshtml
+++Error.cshtml
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\pages\error.cshtml
+++Index.cshtml
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\pages\index.cshtml
+++Index.cshtml.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\pages\index.cshtml.cs
+++MadeCreator.cshtml
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\pages\madecreator.cshtml
+++MadeCreator.cshtml.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\pages\madecreator.cshtml.cs
+++ModelCreator.cshtml
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\pages\modelcreator.cshtml
+++ModelCreator.cshtml.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\pages\modelcreator.cshtml.cs
+++Privacy.cshtml
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\pages\privacy.cshtml
+++Privacy.cshtml.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\pages\privacy.cshtml.cs
+++UpdateVehicleMades.cshtml
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\pages\updatevehiclemades.cshtml
+++UpdateVehicleMades.cshtml.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\pages\updatevehiclemades.cshtml.cs
+++UpdateVehicleModels.cshtml
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\pages\updatevehiclemodels.cshtml
+++UpdateVehicleModels.cshtml.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\pages\updatevehiclemodels.cshtml.cs
+++PagingSortingFiltering
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\pagingsortingfiltering\
+++PaginatedList.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\pagingsortingfiltering\paginatedlist.cs
+++PagingSortingFiltering.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\pagingsortingfiltering\pagingsortingfiltering.cs
+++SortingHelp.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\pagingsortingfiltering\sortinghelp.cs
+++VehicleModel
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\vehiclemodel\
+++VehicleDB.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\vehiclemodel\vehicledb.cs
+++VehicleMake.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\vehiclemodel\vehiclemake.cs
+++VehicleModel.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\vehiclemodel\vehiclemodel.cs
+++VehicleService
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\vehicleservice\
+++VehicleRepository.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\vehicleservice\vehiclerepository.cs
+++VehicleService.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\vehicleservice\vehicleservice.cs
+++appsettings.json
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\appsettings.json
+++appsettings.Development.json
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\appsettings.development.json
+++Bind.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\bind.cs
+++Kernel.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\kernel.cs
+++Program.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\program.cs
+++SQL Server Database dependency is detected
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:>718
+++Microsoft.AspNetCore.Analyzers
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:c:\program files\dotnet\sdk\6.0.401\sdks\microsoft.net.sdk.web\analyzers\cs\microsoft.aspnetcore.analyzers.dll
+++Microsoft.AspNetCore.App.Analyzers
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.9\analyzers\dotnet\cs\microsoft.aspnetcore.app.analyzers.dll
+++Microsoft.AspNetCore.App.CodeFixes
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.9\analyzers\dotnet\cs\microsoft.aspnetcore.app.codefixes.dll
+++Microsoft.AspNetCore.Components.Analyzers
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:c:\program files\dotnet\sdk\6.0.401\sdks\microsoft.net.sdk.web\analyzers\cs\microsoft.aspnetcore.components.analyzers.dll
+++Microsoft.AspNetCore.Mvc.Analyzers
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:c:\program files\dotnet\sdk\6.0.401\sdks\microsoft.net.sdk.web\analyzers\cs\microsoft.aspnetcore.mvc.analyzers.dll
+++Microsoft.AspNetCore.Razor.SourceGenerator.Tooling.Internal
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:c:\program files\dotnet\sdk\6.0.401\sdks\microsoft.net.sdk.razor\source-generators\microsoft.aspnetcore.razor.sourcegenerator.tooling.internal.dll
+++Microsoft.CodeAnalysis.CSharp.NetAnalyzers
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:c:\program files\dotnet\sdk\6.0.401\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.csharp.netanalyzers.dll
+++Microsoft.CodeAnalysis.NetAnalyzers
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:c:\program files\dotnet\sdk\6.0.401\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.netanalyzers.dll
+++Microsoft.EntityFrameworkCore.Analyzers
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:c:\users\adrian\.nuget\packages\microsoft.entityframeworkcore.analyzers\6.0.10\analyzers\dotnet\cs\microsoft.entityframeworkcore.analyzers.dll
+++Microsoft.Extensions.Logging.Generators
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.9\analyzers\dotnet\roslyn4.0\cs\microsoft.extensions.logging.generators.dll
+++Microsoft.NET.Sdk.Razor.SourceGenerators
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:c:\program files\dotnet\sdk\6.0.401\sdks\microsoft.net.sdk.razor\source-generators\microsoft.net.sdk.razor.sourcegenerators.dll
+++System.Text.Json.SourceGeneration
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:c:\program files\dotnet\packs\microsoft.netcore.app.ref\6.0.9\analyzers\dotnet\cs\system.text.json.sourcegeneration.dll
+++Microsoft.AspNetCore.App
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\microsoft.aspnetcore.app
+++Microsoft.NETCore.App
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\microsoft.netcore.app
+++site.css
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\css\site.css
+++site.js
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\js\site.js
+++bootstrap
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\
+++jquery
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\jquery\
+++jquery-validation
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\jquery-validation\
+++jquery-validation-unobtrusive
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\jquery-validation-unobtrusive\
+++IIndexModel.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\interfaces\ipages\iindex\iindexmodel.cs
+++IMadeCreator.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\interfaces\ipages\imadecreator\imadecreator.cs
+++IModelCreator.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\interfaces\ipages\imodelcreator\imodelcreator.cs
+++IUpdateVehicleModels.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\interfaces\ipages\iupdatevehiclemodels\iupdatevehiclemodels.cs
+++IVehicleDB.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\interfaces\ivehiclemodel\ivehicledb.cs
+++IVehicleMake.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\interfaces\ivehiclemodel\ivehiclemake.cs
+++IVehicleModel.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\interfaces\ivehiclemodel\ivehiclemodel.cs
+++202210151944248_
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\migrations\202210151944248_\
+++Configuration.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\migrations\configuration.cs
+++Error.cshtml.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\pages\error.cshtml.cs
+++dist
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\jquery\dist\
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\jquery-validation\dist\
+++LICENSE
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\license
+++LICENSE.txt
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\jquery\license.txt
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\jquery-validation-unobtrusive\license.txt
+++LICENSE.md
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\jquery-validation\license.md
+++jquery.validate.unobtrusive.js
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js
+++SQLEXPRESS.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\migrations\202210151944248_\sqlexpress.cs
+++jquery.js
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\jquery\dist\jquery.js
+++additional-methods.js
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\jquery-validation\dist\additional-methods.js
+++jquery.validate.js
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\jquery-validation\dist\jquery.validate.js
+++jquery.validate.unobtrusive.min.js
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js
+++SQLEXPRESS.Designer.cs
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\migrations\202210151944248_\sqlexpress.designer.cs
+++SQLEXPRESS.resx
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\migrations\202210151944248_\sqlexpress.resx
+++bootstrap.css
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap.css
+++bootstrap-grid.css
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
+++bootstrap-reboot.css
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css
+++bootstrap-utilities.css
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css
+++bootstrap.js
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\js\bootstrap.js
+++jquery.min.js
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\jquery\dist\jquery.min.js
+++additional-methods.min.js
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\jquery-validation\dist\additional-methods.min.js
+++jquery.validate.min.js
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\jquery-validation\dist\jquery.validate.min.js
+++bootstrap.css.map
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap.css.map
+++bootstrap.min.css
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css
+++bootstrap.rtl.css
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css
+++bootstrap-grid.css.map
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
+++bootstrap-grid.min.css
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css
+++bootstrap-grid.rtl.css
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css
+++bootstrap-reboot.css.map
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map
+++bootstrap-reboot.min.css
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css
+++bootstrap-reboot.rtl.css
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css
+++bootstrap-utilities.css.map
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css.map
+++bootstrap-utilities.min.css
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css
+++bootstrap-utilities.rtl.css
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css
+++bootstrap.bundle.js
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js
+++bootstrap.esm.js
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js
+++bootstrap.js.map
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\js\bootstrap.js.map
+++bootstrap.min.js
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js
+++jquery.min.map
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\jquery\dist\jquery.min.map
+++bootstrap.min.css.map
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map
+++bootstrap.rtl.css.map
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css.map
+++bootstrap.rtl.min.css
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css
+++bootstrap-grid.min.css.map
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map
+++bootstrap-grid.rtl.css.map
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css.map
+++bootstrap-grid.rtl.min.css
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css
+++bootstrap-reboot.min.css.map
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map
+++bootstrap-reboot.rtl.css.map
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css.map
+++bootstrap-reboot.rtl.min.css
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css
+++bootstrap-utilities.min.css.map
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css.map
+++bootstrap-utilities.rtl.css.map
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css.map
+++bootstrap-utilities.rtl.min.css
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css
+++bootstrap.bundle.js.map
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map
+++bootstrap.bundle.min.js
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js
+++bootstrap.esm.js.map
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js.map
+++bootstrap.esm.min.js
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js
+++bootstrap.min.js.map
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
+++bootstrap.rtl.min.css.map
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css.map
+++bootstrap-grid.rtl.min.css.map
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css.map
+++bootstrap-reboot.rtl.min.css.map
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map
+++bootstrap-utilities.rtl.min.css.map
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css.map
+++bootstrap.bundle.min.js.map
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map
+++bootstrap.esm.min.js.map
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:f:\visualstudioprojekti\l2 back-end-zadatak\l2-back-end-zadatak\project.service\project.service\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js.map
+++Startup.cs
+++Microsoft.Extensions.Options.ConfigurationExtensions (6.0.0)
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:>977
+++AutoMapper.Extensions.Microsoft.DependencyInjection (12.0.0)
+i:{d25b44a9-332f-4110-88f7-a0d8cc199afa}:>978

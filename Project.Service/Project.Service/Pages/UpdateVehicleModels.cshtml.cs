@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Project.Service.Interfaces.IVehicleRepository;
 using ZaPrav.NetCore.Interfaces.IUpdateVehicleModels;
 using ZaPrav.NetCore.VehicleDB;
 
@@ -16,13 +17,15 @@ namespace ZaPrav.NetCore.Pages
         [BindProperty]
         public int id { get; set; }
         [BindProperty]
-        public int VehicleMadeID { get; set; }
+        public int VehicleMakeID { get; set; }
         [BindProperty]
         public List<SelectListItem> VehicleMadesInList { get; set; }
-        public UpdateVehicleModelsModel()
+        private IVehicleService vehicleService;
+        public UpdateVehicleModelsModel(IVehicleService _vehicleService)
         {
             VehicleMadesInList = new List<SelectListItem>();
             vehicleMade = new VehicleMake();
+            vehicleService = _vehicleService;
         }
         public async Task<IActionResult> OnPostAsync()
         {
@@ -31,14 +34,13 @@ namespace ZaPrav.NetCore.Pages
             {
                 return Page();
             }
-
-            await UpdateVehicleModel();
-
-            return RedirectToPage("./Index");
+           
+            VehicleModel model = await UpdateVehicleModel();
+            return RedirectToPage("./Index", "UpdateVehicleModel", model);
         }
-        private async Task UpdateVehicleModel()
+        private async Task<VehicleModel> UpdateVehicleModel()
         {
-            vehicleMade = await VehicleService.SearchVehicleMade(VehicleMadeID);
+            vehicleMade = await vehicleService.SearchVehicleMake(VehicleMakeID);
 
             VehicleModel model = new VehicleModel()
             {
@@ -48,12 +50,11 @@ namespace ZaPrav.NetCore.Pages
                 MakeId = vehicleMade.Id
             };
 
-            await VehicleService.Update(model);
+            return model;
         }
-
         private async Task RefreshDropDownlist()
         {
-            var db = await VehicleService.GetVehicleMades();
+            var db = await vehicleService.GetVehicleMakes();
 
             VehicleMadesInList = db.ConvertAll(a =>
             {

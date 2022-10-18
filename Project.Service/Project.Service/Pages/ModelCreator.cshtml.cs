@@ -1,6 +1,9 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Ninject;
+using Project.Service;
 using ZaPrav.NetCore.Interfaces;
 using ZaPrav.NetCore.VehicleDB;
 
@@ -8,60 +11,47 @@ namespace ZaPrav.NetCore.Pages
 {
     public class ModelCreatorModel : PageModel, IModelCreator
     {
-        
-        [BindProperty]
-        public List<SelectListItem> VehicleMadesInList { get; set; }
         [BindProperty]
         public int Id { get; set; }
         [BindProperty]
         public string name { get; set; }
         [BindProperty]
         public string abrv { get; set; }
-        public ModelCreatorModel()
+        [BindProperty]
+        public List<VehicleMake> db { get; set; }
+        public IMapper mapper;
+        public ModelCreatorModel(IMapper _mapper)
         {
-            VehicleMadesInList = new List<SelectListItem>();
+            db = new List<VehicleMake>();
+            mapper = _mapper;
         }
         public async Task<IActionResult> OnPostAsync()
         {
-            await RefreshDropDownlist();
-
             if (!ModelState.IsValid)
             {
                 ModelState.Clear();
                 return Page();
             }
 
-            await CreateVehicleModel();
-            return RedirectToPage("/Index");
+            VehicleModel model = CreateVehicleModel();
+            return RedirectToPage("./Index", "CreateVehicleModel", model);
         }
 
-        private async Task CreateVehicleModel()
+        private VehicleModel CreateVehicleModel()
         {
             VehicleModel vehicleModel = new VehicleModel()
             {
-                Name = name,
                 Abrv = abrv,
-                MakeId = Id
+                MakeId = Id,
+                Name = name
             };
-            await VehicleService.Create(vehicleModel);
-        }
-        public async Task OnGetAsync()
-        {
-            await RefreshDropDownlist();      
-        }
-        private async Task RefreshDropDownlist()
-        {
-            var db = await VehicleService.GetVehicleMades();
-            var ListOfVehicleMades = await VehicleService.GetVehicleMades();
 
-            VehicleMadesInList = db.ConvertAll(a =>
-            {
-                return new SelectListItem
-                {
-                    Text = a.Name,
-                    Value = a.Id.ToString()
-                };
-            });
+            return vehicleModel;
         }
+        public async Task OnGetId(VehicleMake vehicleMake)
+        {
+            Id = vehicleMake.Id;
+        }
+        
     }
 }

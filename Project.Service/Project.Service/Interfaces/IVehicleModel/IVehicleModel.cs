@@ -9,7 +9,7 @@ namespace ZaPrav.NetCore.Interfaces
          string Name { get;}
          string Abrv { get; }
 
-         [Required]
+         int MakeId { get; set; }
          VehicleMake Make { get; }
     }
 }

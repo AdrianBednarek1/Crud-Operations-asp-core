@@ -5,7 +5,7 @@ namespace ZaPrav.NetCore.Interfaces.IPages.IMadeCreator
 {
     public interface IMadeCreator
     {
-        VehicleMake vehicleMade { get; }
-        Task<IActionResult> OnPostAsync();
+        VehicleMake vehicleMake { get; }
+        IActionResult OnPostAsync();
     }
 }

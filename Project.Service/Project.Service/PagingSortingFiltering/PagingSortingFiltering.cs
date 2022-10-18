@@ -1,5 +1,8 @@
 ﻿using Project.Service.Interfaces.ISortingFilteringPaging;
+using Project.Service.Interfaces.IVehicleRepository;
 using ZaPrav.NetCore;
+using ZaPrav.NetCore.Interfaces;
+using ZaPrav.NetCore.Interfaces.ISortingHelp;
 using ZaPrav.NetCore.VehicleDB;
 
 namespace Project.Service
@@ -7,23 +10,25 @@ namespace Project.Service
     public class PagingSortingFiltering : IPagingSortingFiltering
     {
         private readonly IConfiguration Configuration;
-        public PagingSortingFiltering(IConfiguration configuration)
+        private IVehicleService vehicleService;
+        public PagingSortingFiltering(IConfiguration configuration, IVehicleService _vehicleService)
         {
+            vehicleService = _vehicleService;
             Configuration = configuration;
-            SortingMadeHelper = new SortingHelp();
+            SortingMakeHelper = new SortingHelp();
             SortingModelHelper = new SortingHelp();
-        }
-        public SortingHelp SortingMadeHelper { get; set; } 
+    }
+        public SortingHelp SortingMakeHelper { get; set; } 
         public SortingHelp SortingModelHelper { get; set; }
         public PaginatedList<VehicleMake>? PaginatedVehicleMades { get; set; }
         public PaginatedList<VehicleModel>? PaginatedVehicleModel { get; set; }
         public async Task<PaginatedList<VehicleMake>> VehicleMadeSFP
             (string sortOrderMades, string SearchStringMade, string currentFilterMade, int? pageIndexMade)
         {
-            SortingMadeHelper.CurrentSort = sortOrderMades;
-            SortingMadeHelper.NameSort = String.IsNullOrEmpty(sortOrderMades) ? "NameDesc" : "";
-            SortingMadeHelper.AbrvSort = sortOrderMades == "Abrv" ? "AbrvDesc" : "Abrv";
-            SortingMadeHelper.IdSort = sortOrderMades == "Id" ? "IdDesc" : "Id";
+            SortingMakeHelper.CurrentSort = sortOrderMades;
+            SortingMakeHelper.NameSort = String.IsNullOrEmpty(sortOrderMades) ? "NameDesc" : "";
+            SortingMakeHelper.AbrvSort = sortOrderMades == "Abrv" ? "AbrvDesc" : "Abrv";
+            SortingMakeHelper.IdSort = sortOrderMades == "Id" ? "IdDesc" : "Id";
 
             if (SearchStringMade != null)
             {
@@ -33,9 +38,9 @@ namespace Project.Service
             {
                 SearchStringMade = currentFilterMade;
             }
-            SortingMadeHelper.CurrentFilter = SearchStringMade;
+            SortingMakeHelper.CurrentFilter = SearchStringMade;
 
-            IQueryable<VehicleMake> vehicleMadesSorting = from b in VehicleService.GetQueryDB().vehicleMades select b;
+            IQueryable<VehicleMake> vehicleMadesSorting = from b in vehicleService.GetQueryDB().vehicleMades select b;
 
             if (!String.IsNullOrEmpty(SearchStringMade))
             {
@@ -83,9 +88,9 @@ namespace Project.Service
             {
                 SearchStringModel = currentFilterModel;
             }
-            SortingMadeHelper.CurrentFilter = SearchStringModel;
+            SortingMakeHelper.CurrentFilter = SearchStringModel;
 
-            IQueryable<VehicleModel> vehicleModelSorting = from b in VehicleService.GetQueryDB().vehicleModels select b;
+            IQueryable<VehicleModel> vehicleModelSorting = from b in vehicleService.GetQueryDB().vehicleModels select b;
 
             if (!String.IsNullOrEmpty(SearchStringModel))
             {

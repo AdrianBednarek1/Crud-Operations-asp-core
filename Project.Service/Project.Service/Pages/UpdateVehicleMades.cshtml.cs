@@ -13,10 +13,8 @@ namespace ZaPrav.NetCore.Pages
             if (!ModelState.IsValid)
             {
                 return Page();
-            }
-            await VehicleDB.VehicleService.Update(made);
-
-            return RedirectToPage("./Index");
+            }          
+            return RedirectToPage("./Index", "UpdateVehicleMake", made);
         }
     }
 }

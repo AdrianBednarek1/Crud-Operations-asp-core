@@ -5,7 +5,7 @@ namespace Project.Service.Interfaces.ISortingFilteringPaging
 {
     public interface IPagingSortingFiltering
     {
-        SortingHelp SortingMadeHelper { get; }
+        SortingHelp SortingMakeHelper { get; }
         SortingHelp SortingModelHelper { get; }
         PaginatedList<VehicleMake>? PaginatedVehicleMades { get; }
         PaginatedList<VehicleModel>? PaginatedVehicleModel { get; }
