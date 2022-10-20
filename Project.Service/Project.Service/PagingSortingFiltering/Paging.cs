@@ -3,12 +3,12 @@ using ZaPrav.NetCore.Interfaces;
 
 namespace ZaPrav.NetCore
 {
-    public class PaginatedList <T> : List<T>, IPaginatedList<T>
+    public class Paging <T> : List<T>, IPaginatedList<T>
     {
         public int PageIndex { get; private set; }
         public int TotalPages { get; private set; }
 
-        public PaginatedList(List<T> items, int count, int pageIndex, int pageSize)
+        public Paging(List<T> items, int count, int pageIndex, int pageSize)
         {
             PageIndex = pageIndex;
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
@@ -20,7 +20,7 @@ namespace ZaPrav.NetCore
 
         public bool HasNextPage => PageIndex < TotalPages;
       
-        public static async Task<PaginatedList<T>> CreateAsync(
+        public static async Task<Paging<T>> CreateAsync(
             IQueryable<T> source, int pageIndex, int pageSize)
         {
             var count = await source.CountAsync();
@@ -28,7 +28,7 @@ namespace ZaPrav.NetCore
             var items = await source.Skip((pageIndex - 1) * pageSize)
                 .Take(pageSize).ToListAsync();
 
-            return new PaginatedList<T>(items, count, pageIndex, pageSize);
+            return new Paging<T>(items, count, pageIndex, pageSize);
         }
     }
 }

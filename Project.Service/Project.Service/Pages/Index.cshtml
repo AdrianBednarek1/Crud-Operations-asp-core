@@ -157,12 +157,12 @@
 <a asp-page="./Index"
    asp-route-sortOrderModel="@Model.SortingModelHelper.CurrentSort"
    asp-route-pageIndexModel="@(Model.PaginatedVehicleModels.PageIndex - 1)"
-   asp-route-currentFilterModel="@Model.SortingMadeHelper.CurrentFilter"
+   asp-route-currentFilterModel="@Model.SortingModelHelper.CurrentFilter"
    class="btn btn-primary @prevDisabledModel">
     Previous
 </a>
 <a asp-page="./Index"
-   asp-route-sortOrderModel="@Model.SortingMadeHelper.CurrentSort"
+   asp-route-sortOrderModel="@Model.SortingModelHelper.CurrentSort"
    asp-route-pageIndexModel="@(Model.PaginatedVehicleModels.PageIndex + 1)"
    asp-route-currentFilterModel="@Model.SortingModelHelper.CurrentFilter"
    class="btn btn-primary @nextDisabledModel">

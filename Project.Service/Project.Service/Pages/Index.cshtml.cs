@@ -8,6 +8,8 @@ using Project.Service.Interfaces.ISortingFilteringPaging;
 using AutoMapper;
 using Project.Service.Interfaces.IVehicleRepository;
 using Ninject;
+using Project.Service.PagingSortingFiltering.PSFmodel;
+using Project.Service.PagingSortingFiltering.PSFmake;
 
 namespace ZaPrav.NetCore.Pages
 {  
@@ -17,17 +19,22 @@ namespace ZaPrav.NetCore.Pages
         public int SelectedId { get; set; }
         [BindProperty]
         public List<SelectListItem> VehicleMadesInList { get; set; }
+        public string? CurrentSearchModel { get; set; }
+        public string? CurrentSearchMake { get; set; }
+        public PSFmodel PSFmodels { get; set; }
+        public PSFmake PSFmakes { get; set; }
 
-        public PagingSortingFiltering SFP { get; set; }
-        public PaginatedList<VehicleMake>? PaginatedVehicleMakes { get; set; }
-        public PaginatedList<VehicleModel>? PaginatedVehicleModels { get; set; }       
+        public Paging<VehicleMake>? PaginatedVehicleMakes { get; set; }
+        public Paging<VehicleModel>? PaginatedVehicleModels { get; set; }       
         public SortingHelp SortingMadeHelper { get; set; }
         public SortingHelp SortingModelHelper { get; set; }
 
         public IVehicleService vehicleService;
         public IndexModel( IVehicleService _vehicleService)
         {
-            SFP = Kernel.Inject<PagingSortingFiltering>();
+            PSFmodels = Kernel.Inject<PSFmodel>();
+            PSFmakes = Kernel.Inject<PSFmake>();
+
             vehicleService = _vehicleService;
             SortingMadeHelper = new SortingHelp();
             SortingModelHelper = new SortingHelp();
@@ -59,14 +66,17 @@ namespace ZaPrav.NetCore.Pages
             string SearchStringModel, string currentFilterModel, int? pageIndexModel
             )
         {
-            PaginatedVehicleMakes = await SFP.VehicleMadeSFP
+            PaginatedVehicleMakes = await PSFmakes.VehicleMakeSFP
                 (sortOrderMades, SearchStringMade, currentFilterMade, pageIndexMade);
 
-            PaginatedVehicleModels = await SFP.VehicleModelSFP
+            PaginatedVehicleModels = await PSFmodels.VehicleModelSFP
                 (sortOrderModel, SearchStringModel, currentFilterModel, pageIndexModel);
 
-            SortingMadeHelper = SFP.SortingMakeHelper;
-            SortingModelHelper = SFP.SortingModelHelper;
+            SortingMadeHelper = PSFmakes.sortingMake.sortingHelpMake;
+            SortingModelHelper = PSFmodels.sortingModel.sortingHelpModel;
+
+            CurrentSearchModel = PSFmodels.filteringModel.CurrentSearchModel;
+            CurrentSearchMake = PSFmakes.filteringMake.CurrentSearchMake;
         }
         public async Task<IActionResult> OnPostDeleteAsync(int Id, bool TrueIfModel)
         {

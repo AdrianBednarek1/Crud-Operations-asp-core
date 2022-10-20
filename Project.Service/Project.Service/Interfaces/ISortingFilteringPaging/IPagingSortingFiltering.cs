@@ -7,11 +7,11 @@ namespace Project.Service.Interfaces.ISortingFilteringPaging
     {
         SortingHelp SortingMakeHelper { get; }
         SortingHelp SortingModelHelper { get; }
-        PaginatedList<VehicleMake>? PaginatedVehicleMades { get; }
-        PaginatedList<VehicleModel>? PaginatedVehicleModel { get; }
-        Task<PaginatedList<VehicleMake>> VehicleMadeSFP
+        Paging<VehicleMake>? PaginatedVehicleMades { get; }
+        Paging<VehicleModel>? PaginatedVehicleModel { get; }
+        Task<Paging<VehicleMake>> VehicleMadeSFP
             (string sortOrderMades, string SearchStringMade, string currentFilterMade, int? pageIndexMade);
-        Task<PaginatedList<VehicleModel>> VehicleModelSFP
+        Task<Paging<VehicleModel>> VehicleModelSFP
             (string sortOrderModel, string SearchStringModel, string currentFilterModel, int? pageIndexModel);
     }
 }

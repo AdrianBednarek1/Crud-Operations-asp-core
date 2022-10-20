@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
 using Project.Service.Interfaces.IVehicleService;
 using System.Data.Entity;
-using ZaPrav.NetCore.Interfaces;
-using ZaPrav.NetCore.Interfaces.IVehicleDB;
-using ZaPrav.NetCore.Pages;
 
 namespace ZaPrav.NetCore.VehicleDB
 {
@@ -60,7 +57,7 @@ namespace ZaPrav.NetCore.VehicleDB
                 {
                     if(item.MakeId == made.Id)
                     {
-                        DeleteVehicleModel(item);
+                        vehicleDB.vehicleModels.Remove(item);
                     }
                 }
                 vehicleDB.vehicleMades.Remove(made);

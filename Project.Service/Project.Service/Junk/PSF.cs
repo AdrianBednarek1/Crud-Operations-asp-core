@@ -1,28 +1,26 @@
 ﻿using Project.Service.Interfaces.ISortingFilteringPaging;
 using Project.Service.Interfaces.IVehicleRepository;
 using ZaPrav.NetCore;
-using ZaPrav.NetCore.Interfaces;
-using ZaPrav.NetCore.Interfaces.ISortingHelp;
 using ZaPrav.NetCore.VehicleDB;
 
 namespace Project.Service
 {
-    public class PagingSortingFiltering : IPagingSortingFiltering
+    public class PSF : IPagingSortingFiltering
     {
         private readonly IConfiguration Configuration;
         private IVehicleService vehicleService;
-        public PagingSortingFiltering(IConfiguration configuration, IVehicleService _vehicleService)
+        public PSF(IConfiguration configuration, IVehicleService _vehicleService)
         {
             vehicleService = _vehicleService;
             Configuration = configuration;
             SortingMakeHelper = new SortingHelp();
             SortingModelHelper = new SortingHelp();
-    }
+        }
         public SortingHelp SortingMakeHelper { get; set; } 
         public SortingHelp SortingModelHelper { get; set; }
-        public PaginatedList<VehicleMake>? PaginatedVehicleMades { get; set; }
-        public PaginatedList<VehicleModel>? PaginatedVehicleModel { get; set; }
-        public async Task<PaginatedList<VehicleMake>> VehicleMadeSFP
+        public Paging<VehicleMake>? PaginatedVehicleMades { get; set; }
+        public Paging<VehicleModel>? PaginatedVehicleModel { get; set; }
+        public async Task<Paging<VehicleMake>> VehicleMadeSFP
             (string sortOrderMades, string SearchStringMade, string currentFilterMade, int? pageIndexMade)
         {
             SortingMakeHelper.CurrentSort = sortOrderMades;
@@ -69,10 +67,10 @@ namespace Project.Service
             }
             var pageSize = Configuration.GetValue("PageSize", 4);
 
-            return PaginatedVehicleMades = await PaginatedList<VehicleMake>.CreateAsync(
+            return PaginatedVehicleMades = await Paging<VehicleMake>.CreateAsync(
                 vehicleMadesSorting, pageIndexMade ?? 1, pageSize);
         }
-        public async Task<PaginatedList<VehicleModel>> VehicleModelSFP
+        public async Task<Paging<VehicleModel>> VehicleModelSFP
             (string sortOrderModel, string SearchStringModel, string currentFilterModel, int? pageIndexModel)
         {
             SortingModelHelper.NameSort = String.IsNullOrEmpty(sortOrderModel) ? "NameDesc" : "";
@@ -88,7 +86,7 @@ namespace Project.Service
             {
                 SearchStringModel = currentFilterModel;
             }
-            SortingMakeHelper.CurrentFilter = SearchStringModel;
+            SortingModelHelper.CurrentFilter = SearchStringModel;
 
             IQueryable<VehicleModel> vehicleModelSorting = from b in vehicleService.GetQueryDB().vehicleModels select b;
 
@@ -126,7 +124,7 @@ namespace Project.Service
             }
             var pageSize = Configuration.GetValue("PageSize", 4);
 
-            return PaginatedVehicleModel = await PaginatedList<VehicleModel>.CreateAsync(
+            return PaginatedVehicleModel = await Paging<VehicleModel>.CreateAsync(
                 vehicleModelSorting, pageIndexModel ?? 1, pageSize);
         }
     }

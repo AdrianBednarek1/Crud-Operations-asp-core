@@ -5,8 +5,8 @@ namespace ZaPrav.NetCore.Interfaces.IPages.IIndex
 {
     public interface IIndexModel
     {
-        PaginatedList<VehicleMake> PaginatedVehicleMakes { get; }
-        PaginatedList<VehicleModel> PaginatedVehicleModels { get; }
+        Paging<VehicleMake> PaginatedVehicleMakes { get; }
+        Paging<VehicleModel> PaginatedVehicleModels { get; }
         SortingHelp SortingMadeHelper { get; }
         SortingHelp SortingModelHelper { get; }
         Task OnGetAsync
