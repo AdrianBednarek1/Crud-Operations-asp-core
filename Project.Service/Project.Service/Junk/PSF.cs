@@ -8,11 +8,14 @@ namespace Project.Service
     public class PSF : IPagingSortingFiltering
     {
         private readonly IConfiguration Configuration;
-        private IVehicleService vehicleService;
-        public PSF(IConfiguration configuration, IVehicleService _vehicleService)
+        
+        private IVehicleServiceMake vehicleServiceMake;
+        private IVehicleServiceModel vehicleServiceModel;
+        public PSF(IConfiguration configuration, IVehicleServiceMake _vehicleService, IVehicleServiceModel _vehicleServiceModel)
         {
-            vehicleService = _vehicleService;
+            vehicleServiceMake = _vehicleService;
             Configuration = configuration;
+            vehicleServiceModel = _vehicleServiceModel;
             SortingMakeHelper = new SortingHelp();
             SortingModelHelper = new SortingHelp();
         }
@@ -36,9 +39,9 @@ namespace Project.Service
             {
                 SearchStringMade = currentFilterMade;
             }
-            SortingMakeHelper.CurrentFilter = SearchStringMade;
+            //SortingMakeHelper.CurrentFilter = SearchStringMade;
 
-            IQueryable<VehicleMake> vehicleMadesSorting = from b in vehicleService.GetQueryDB().vehicleMades select b;
+            IQueryable<VehicleMake> vehicleMadesSorting = from b in vehicleServiceMake.GetQueryDBmake() select b;
 
             if (!String.IsNullOrEmpty(SearchStringMade))
             {
@@ -86,9 +89,9 @@ namespace Project.Service
             {
                 SearchStringModel = currentFilterModel;
             }
-            SortingModelHelper.CurrentFilter = SearchStringModel;
+            //SortingModelHelper.CurrentFilter = SearchStringModel;
 
-            IQueryable<VehicleModel> vehicleModelSorting = from b in vehicleService.GetQueryDB().vehicleModels select b;
+            IQueryable<VehicleModel> vehicleModelSorting = from b in vehicleServiceModel.GetQueryDBmodel() select b;
 
             if (!String.IsNullOrEmpty(SearchStringModel))
             {

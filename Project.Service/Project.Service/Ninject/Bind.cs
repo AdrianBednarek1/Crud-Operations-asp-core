@@ -2,6 +2,7 @@
 using Ninject.Modules;
 using Project.Service.Interfaces.IVehicleRepository;
 using Project.Service.Interfaces.IVehicleService;
+using Project.Service.VehicleService;
 using System.Collections.ObjectModel;
 using System.Linq;
 using ZaPrav.NetCore;
@@ -21,9 +22,11 @@ namespace Project.Service
         {
             Bind<IMapper>().To<IMapper>();
             Bind<IConfiguration>().To<ConfigurationManager>();
-            Bind<IVehicleRepository>().To<VehicleRepository>();
-            Bind<IVehicleService>().To<VehicleService>();
-        
+            Bind<IVehicleRepositoryMake>().To<VehicleRepositoryMake>();
+            Bind<IVehicleServiceMake>().To<VehicleServiceMake>();
+            Bind<IVehicleServiceModel>().To<VehicleServiceModel>();
+            Bind<IVehicleRepositoryModel>().To<VehicleRepositoryModel>();
+
 
         }
     }

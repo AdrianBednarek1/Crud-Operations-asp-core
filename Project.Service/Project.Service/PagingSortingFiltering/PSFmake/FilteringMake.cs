@@ -6,7 +6,7 @@ namespace Project.Service.PagingSortingFiltering
     {
         public string? CurrentSearchMake { get; private set; }
         public IQueryable<VehicleMake> SearchFilterMake
-            (string SearchString, string CurrentSearch, IQueryable<VehicleMake> vehicleMadesSorting, int? pageIndexMade)
+            (string SearchString, string CurrentSearch, IQueryable<VehicleMake> vehicleMakes, int? pageIndexMade)
         {
             if (SearchString != null)
             {
@@ -20,10 +20,10 @@ namespace Project.Service.PagingSortingFiltering
 
             if (!String.IsNullOrEmpty(SearchString))
             {
-                vehicleMadesSorting = vehicleMadesSorting.Where(s => s.Name.Contains(SearchString) || s.Abrv.Contains(SearchString));
+                vehicleMakes = vehicleMakes.Where(s => s.Name.Contains(SearchString) || s.Abrv.Contains(SearchString));
             }
 
-            return vehicleMadesSorting;
+            return vehicleMakes;
             
         }     
     }

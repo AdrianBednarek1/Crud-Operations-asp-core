@@ -7,10 +7,10 @@ namespace Project.Service.PagingSortingFiltering.PSFmodel
     public class PSFmodel
     {
         private readonly IConfiguration Configuration;
-        private IVehicleService vehicleService;
-        public PSFmodel(IConfiguration configuration, IVehicleService _vehicleService)
+        private IVehicleServiceModel vehicleServiceModel;
+        public PSFmodel(IConfiguration configuration, IVehicleServiceModel _vehicleServiceModel)
         {
-            vehicleService = _vehicleService;
+            vehicleServiceModel = _vehicleServiceModel;
             Configuration = configuration;
             filteringModel = new FilteringModel();
             sortingModel = new SortingModel();
@@ -20,8 +20,8 @@ namespace Project.Service.PagingSortingFiltering.PSFmodel
         public FilteringModel filteringModel { get; set; }
         public async Task<Paging<VehicleModel>> VehicleModelSFP
             (string sortOrderModel, string SearchStringModel, string currentSearchModel, int? pageIndexModel)
-        {          
-            IQueryable<VehicleModel> VehicleModelQuery = from b in vehicleService.GetQueryDB().vehicleModels select b;
+        {
+            IQueryable<VehicleModel> VehicleModelQuery = from b in vehicleServiceModel.GetQueryDBmodel() select b;
 
             VehicleModelQuery = filteringModel.SearchFilterModel
                 (SearchStringModel, currentSearchModel,VehicleModelQuery,pageIndexModel);

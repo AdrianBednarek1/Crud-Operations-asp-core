@@ -3,14 +3,17 @@ using AutoMapper.EquivalencyExpression;
 using Project.Service.AutoMapper;
 using Project.Service.Interfaces.IVehicleRepository;
 using Project.Service.Interfaces.IVehicleService;
+using Project.Service.VehicleService;
 using ZaPrav.NetCore.VehicleDB;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddTransient<IVehicleService, VehicleService>();
-builder.Services.AddTransient<IVehicleRepository, VehicleRepository>();
+builder.Services.AddTransient<IVehicleServiceMake, VehicleServiceMake>();
+builder.Services.AddTransient<IVehicleServiceModel, VehicleServiceModel>();
+builder.Services.AddTransient<IVehicleRepositoryMake, VehicleRepositoryMake>();
+builder.Services.AddTransient<IVehicleRepositoryModel, VehicleRepositoryModel>();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
 builder.Services.AddAutoMapper(cfg =>
 {

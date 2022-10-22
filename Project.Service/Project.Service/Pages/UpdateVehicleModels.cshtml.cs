@@ -20,12 +20,15 @@ namespace ZaPrav.NetCore.Pages
         public int VehicleMakeID { get; set; }
         [BindProperty]
         public List<SelectListItem> VehicleMadesInList { get; set; }
-        private IVehicleService vehicleService;
-        public UpdateVehicleModelsModel(IVehicleService _vehicleService)
+        private IVehicleServiceMake vehicleServiceMake;
+        public UpdateVehicleModelsModel
+            (
+            IVehicleServiceMake _vehicleServiceMake
+            )
         {
             VehicleMadesInList = new List<SelectListItem>();
             vehicleMade = new VehicleMake();
-            vehicleService = _vehicleService;
+            vehicleServiceMake = _vehicleServiceMake;
         }
         public async Task<IActionResult> OnPostAsync()
         {
@@ -40,7 +43,7 @@ namespace ZaPrav.NetCore.Pages
         }
         private async Task<VehicleModel> UpdateVehicleModel()
         {
-            vehicleMade = await vehicleService.SearchVehicleMake(VehicleMakeID);
+            vehicleMade = await vehicleServiceMake.SearchVehicleMake(VehicleMakeID);
 
             VehicleModel model = new VehicleModel()
             {
@@ -54,7 +57,7 @@ namespace ZaPrav.NetCore.Pages
         }
         private async Task RefreshDropDownlist()
         {
-            var db = await vehicleService.GetVehicleMakes();
+            var db = await vehicleServiceMake.GetVehicleMakes();
 
             VehicleMadesInList = db.ConvertAll(a =>
             {

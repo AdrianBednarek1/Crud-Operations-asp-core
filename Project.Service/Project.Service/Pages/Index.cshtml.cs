@@ -23,19 +23,24 @@ namespace ZaPrav.NetCore.Pages
         public string? CurrentSearchMake { get; set; }
         public PSFmodel PSFmodels { get; set; }
         public PSFmake PSFmakes { get; set; }
-
         public Paging<VehicleMake>? PaginatedVehicleMakes { get; set; }
         public Paging<VehicleModel>? PaginatedVehicleModels { get; set; }       
         public SortingHelp SortingMadeHelper { get; set; }
         public SortingHelp SortingModelHelper { get; set; }
 
-        public IVehicleService vehicleService;
-        public IndexModel( IVehicleService _vehicleService)
+        public IVehicleServiceMake vehicleServiceMake;
+        public IVehicleServiceModel vehicleServiceModel;
+        public IndexModel
+            ( 
+            IVehicleServiceMake _vehicleServiceMake,
+            IVehicleServiceModel _vehicleServiceModel
+            )
         {
             PSFmodels = Kernel.Inject<PSFmodel>();
             PSFmakes = Kernel.Inject<PSFmake>();
 
-            vehicleService = _vehicleService;
+            vehicleServiceMake = _vehicleServiceMake;
+            vehicleServiceModel = _vehicleServiceModel;
             SortingMadeHelper = new SortingHelp();
             SortingModelHelper = new SortingHelp();
         }
@@ -84,7 +89,7 @@ namespace ZaPrav.NetCore.Pages
 
             if (!TrueIfModel)
             {
-                await VehicleMadeDelete(Id);
+                await VehicleMakeDelete(Id);
             }
             else
             {
@@ -94,56 +99,56 @@ namespace ZaPrav.NetCore.Pages
         }
         public async Task<IActionResult> OnPostIDAsync()
         {
-            var vehicleMades = await vehicleService.GetVehicleMakes();
+            var vehicleMades = await vehicleServiceMake.GetVehicleMakes();
             return RedirectToPage("./ModelCreator","ID", vehicleMades.SingleOrDefault(d=>d.Id == SelectedId));
         }
         public async Task<IActionResult> OnGetUpdateVehicleMake(VehicleMake vehicle)
         {
-            await vehicleService.Update(vehicle);
+            await vehicleServiceMake.Update(vehicle);
 
             return RedirectToPage();
         }
         public async Task<IActionResult> OnGetCreateVehicleMake(VehicleMake vehicle)
         {
-            await vehicleService.Create(vehicle);
+            await vehicleServiceMake.Create(vehicle);
 
             return RedirectToPage();
         }
         public async Task<IActionResult> OnGetCreateVehicleModel(VehicleModel vehicle)
         {
-            await vehicleService.Create(vehicle);
+            await vehicleServiceModel.Create(vehicle);
 
             return RedirectToPage();
         }
         public async Task<IActionResult> OnGetUpdateVehicleModel(VehicleModel vehicle)
         {
-            await vehicleService.Update(vehicle);
+            await vehicleServiceModel.Update(vehicle);
 
             return RedirectToPage();
         }
 
         private async Task VehicleModelDelete(int Id)
         {
-            VehicleModel? vehicleModel = await vehicleService.SearchVehicleModel(Id);
+            VehicleModel? vehicleModel = await vehicleServiceModel.SearchVehicleModel(Id);
 
             if (vehicleModel != null)
             {
-                await vehicleService.Delete(vehicleModel);
+                await vehicleServiceModel.Delete(vehicleModel);
             }
         }
-        private async Task VehicleMadeDelete(int Id)
+        private async Task VehicleMakeDelete(int Id)
         {          
-            VehicleMake? vehicleMade = await vehicleService.SearchVehicleMake(Id);
+            VehicleMake? vehicleMade = await vehicleServiceMake.SearchVehicleMake(Id);
 
             if (vehicleMade != null)
             {
-                await vehicleService.Delete(vehicleMade);
+                await vehicleServiceMake.Delete(vehicleMade);
             }
         }
         private async Task RefreshDropDownlist()
         {
             List<VehicleMake> listMake = new List<VehicleMake>();
-            listMake  = await vehicleService.GetVehicleMakes(); 
+            listMake  = await vehicleServiceMake.GetVehicleMakes(); 
             VehicleMadesInList = listMake.ConvertAll(a =>
             {
                 return new SelectListItem

@@ -10,7 +10,7 @@ namespace Project.Service.PagingSortingFiltering
         {
             sortingHelpMake = new SortingHelp();
         }
-        public IQueryable<VehicleMake> SortMake(string sortOrderMake, IQueryable<VehicleMake> SortVehicleMake)
+        public IQueryable<VehicleMake> SortMake(string sortOrderMake, IQueryable<VehicleMake> VehicleMake)
         {
             sortingHelpMake.CurrentSort = sortOrderMake;
             sortingHelpMake.NameSort = String.IsNullOrEmpty(sortOrderMake) ? "NameDesc" : "";
@@ -20,25 +20,25 @@ namespace Project.Service.PagingSortingFiltering
             switch (sortOrderMake)
             {
                 case "IdDesc":
-                    SortVehicleMake = SortVehicleMake.OrderByDescending(s => s.Id);
+                    VehicleMake = VehicleMake.OrderByDescending(s => s.Id);
                     break;
                 case "Id":
-                    SortVehicleMake = SortVehicleMake.OrderBy(s => s.Id);
+                    VehicleMake = VehicleMake.OrderBy(s => s.Id);
                     break;
                 case "Abrv":
-                    SortVehicleMake = SortVehicleMake.OrderBy(s => s.Abrv);
+                    VehicleMake = VehicleMake.OrderBy(s => s.Abrv);
                     break;
                 case "NameDesc":
-                    SortVehicleMake = SortVehicleMake.OrderByDescending(s => s.Name);
+                    VehicleMake = VehicleMake.OrderByDescending(s => s.Name);
                     break;
                 case "AbrvDesc":
-                    SortVehicleMake = SortVehicleMake.OrderByDescending(s => s.Abrv);
+                    VehicleMake = VehicleMake.OrderByDescending(s => s.Abrv);
                     break;
                 default:
-                    SortVehicleMake = SortVehicleMake.OrderBy(s => s.Name);
+                    VehicleMake = VehicleMake.OrderBy(s => s.Name);
                     break;
             }
-            return SortVehicleMake;
+            return VehicleMake;
         }      
     }
 }

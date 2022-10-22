@@ -7,10 +7,10 @@ namespace Project.Service.PagingSortingFiltering.PSFmake
     public class PSFmake
     {
         private readonly IConfiguration Configuration;
-        private IVehicleService vehicleService;
-        public PSFmake(IConfiguration configuration, IVehicleService _vehicleService)
+        private IVehicleServiceMake vehicleServiceMake;
+        public PSFmake(IConfiguration configuration, IVehicleServiceMake _vehicleServiceMake)
         {
-            vehicleService = _vehicleService;
+            vehicleServiceMake = _vehicleServiceMake;
             Configuration = configuration;
             filteringMake = new FilteringMake();
             sortingMake = new SortingMake();
@@ -19,14 +19,14 @@ namespace Project.Service.PagingSortingFiltering.PSFmake
         public SortingMake sortingMake { get; set; }
         public FilteringMake filteringMake { get; set; }
         public async Task<Paging<VehicleMake>> VehicleMakeSFP
-            (string sortOrderModel, string SearchStringMake, string currentSearchMake, int? pageIndexMake)
+            (string sortOrderMake, string SearchStringMake, string currentSearchMake, int? pageIndexMake)
         {
-            IQueryable<VehicleMake> VehicleMakeQuery = from b in vehicleService.GetQueryDB().vehicleMades select b;
+            IQueryable<VehicleMake> VehicleMakeQuery = from b in vehicleServiceMake.GetQueryDBmake() select b;
 
             VehicleMakeQuery = filteringMake.SearchFilterMake
                 (SearchStringMake, currentSearchMake, VehicleMakeQuery, pageIndexMake);
 
-            VehicleMakeQuery = sortingMake.SortMake(sortOrderModel, VehicleMakeQuery);
+            VehicleMakeQuery = sortingMake.SortMake(sortOrderMake, VehicleMakeQuery);
 
             var pageSize = Configuration.GetValue("PageSize", 4);
 
