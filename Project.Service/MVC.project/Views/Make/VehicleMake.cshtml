@@ -1,0 +1,45 @@
+﻿@using MVC.project.ViewModels.MakeViewModels
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model MakeListViewModel;
+<h1>Vehicle Make table</h1>
+<form method = "post">
+    <table class = "table">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Abrv
+                </th>
+            </tr>
+        </thead>
+        <tbody>          
+        @foreach (var vehicleMake in Model.vehicleMakeList)
+        {
+            <tr>
+                <td>@vehicleMake.Id</td>
+                <td>@vehicleMake.Name</td>
+                <td>@vehicleMake.Abrv</td>
+                <td>
+                    <button type ="submit" formmethod="get" asp-action="UpdateMake" asp-route-id = "@vehicleMake.Id">Update</button>                   
+                    <button type ="submit" asp-action="Delete" asp-route-id = "@vehicleMake.Id" >Delete</button>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</form>
+
+<form method = "get">
+
+    <button  asp-action="CreateMake">Create</button>
+
+</form>

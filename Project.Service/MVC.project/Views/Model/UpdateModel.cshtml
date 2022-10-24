@@ -1,0 +1,19 @@
+﻿@using MVC.project.ViewModels.ModelViewModels
+@using ZaPrav.NetCore.VehicleDB
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model VehicleModel;
+
+<form method = "post" action = "UpdateModel">
+	<input value ="@Model.Id" asp-for="Id" type = "hidden" />
+	<div >Name: <input value="@Model.Name" class="form-control" asp-for = "Name"/>
+		<span asp-validation-for = "Name"></span></div>
+	<div >Abrv: <input value="@Model.Abrv" class="form-control" asp-for = "Abrv"/>
+		<span asp-validation-for = "Abrv"></span></div>
+	<div >Vehicle Make: <select asp-for="MakeId" asp-items="ViewBag.VehicleMakeInList"></select></div>       
+	<input type="submit"/>
+	<button type = "submit" asp-action="VehicleModel">Back</button>
+</form>

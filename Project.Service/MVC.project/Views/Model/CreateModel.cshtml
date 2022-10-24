@@ -1,0 +1,16 @@
+﻿@using MVC.project.ViewModels.ModelViewModels
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model ModelViewModel;
+
+<form method = "post" action = "CreateModel">
+    <div asp-validation-summary="All"></div>
+	<div>Name: <input class="form-control" asp-for = "Name"/></div>
+	<div>Abrv: <input class="form-control" asp-for = "Abrv"/></div>
+	<div>Vehicle Make: <select asp-for="MakeId" asp-items="ViewBag.VehicleMakeInList"></select></div>       
+	<input type="submit"/>
+	<button type = "submit" asp-action="VehicleModel">Back</button>
+</form>
