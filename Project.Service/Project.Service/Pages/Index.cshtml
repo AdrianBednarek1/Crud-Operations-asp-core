@@ -124,7 +124,7 @@
                 <th>
                     <a asp-page="./Index" asp-route-sortOrderModel="@Model.SortingModelHelper.ForeignIdSort"
                     asp-route-currentFilterModel="@Model.CurrentSearchModel">
-                    VehicleMakeID
+                    @Html.DisplayNameFor(model => model.PaginatedVehicleModels[0].MakeId)
                     </a>
                 </th>
             </tr>

@@ -4,6 +4,9 @@ using MVC.project.ViewModels.ModelViewModels;
 using Project.Service.Interfaces.IVehicleRepository;
 using ZaPrav.NetCore.VehicleDB;
 using Microsoft.EntityFrameworkCore;
+using ZaPrav.NetCore;
+using Project.Service.PagingSortingFiltering.PSFmodel;
+using Project.Service;
 
 namespace MVC.project.Controllers
 {
@@ -12,6 +15,12 @@ namespace MVC.project.Controllers
         private IVehicleServiceModel vehicleServiceModel;
         private IVehicleServiceMake vehicleServiceMake;
         private List<SelectListItem> VehicleMakeInList;
+
+        public string? CurrentSearchModel { get; set; }
+        public string? CurrentSearchMake { get; set; }
+        public PSFmodel PSFmodels { get; set; }
+        public Paging<VehicleModel>? PaginatedVehicleModels { get; set; }
+        public SortingHelp SortingModelHelper { get; set; }
         public ModelController
             (
             IVehicleServiceModel _vehicleServiceModel,
@@ -20,14 +29,36 @@ namespace MVC.project.Controllers
         {
             vehicleServiceModel = _vehicleServiceModel;
             vehicleServiceMake = _vehicleServiceMake;
+
+            PSFmodels = Kernel.Inject<PSFmodel>();
+            SortingModelHelper = new SortingHelp();
         }
-        public async Task<IActionResult> VehicleModel()
+        public async Task<IActionResult> VehicleModel
+            (
+            string sortOrderModel,
+            string SearchStringModel, string currentFilterModel, int? pageIndexModel
+            )
         {
-            ModelListViewModel modellistViewModel = new ModelListViewModel();
-            modellistViewModel.vehicleModelList = await vehicleServiceModel.GetVehicleModels();
+            await GetUpdateSFPdata
+                (
+                sortOrderModel, SearchStringModel, currentFilterModel, pageIndexModel
+                );
+            ViewBag.SortingModelHelper = SortingModelHelper;
+            ViewBag.CurrentSearchModel = CurrentSearchModel;
             ViewBag.VehicleMakeIsNull = vehicleServiceMake.VehicleMakeIsNull();                      
-            return View(modellistViewModel);
+            return View(PaginatedVehicleModels);
         }
+
+        private async Task GetUpdateSFPdata(string sortOrderModel, string searchStringModel, string currentFilterModel, int? pageIndexModel)
+        {
+            PaginatedVehicleModels = await PSFmodels.VehicleModelSFP
+                (sortOrderModel, searchStringModel, currentFilterModel, pageIndexModel);
+
+            SortingModelHelper = PSFmodels.sortingModel.sortingHelpModel;
+
+            CurrentSearchModel = PSFmodels.filteringModel.CurrentSearchModel;
+        }
+
         [HttpGet]
         public async Task<IActionResult> CreateModel()
         {

@@ -3,21 +3,57 @@ using MVC.project.ViewModels.MakeViewModels;
 using Project.Service.Interfaces.IVehicleRepository;
 using ZaPrav.NetCore.VehicleDB;
 using Microsoft.EntityFrameworkCore;
+using ZaPrav.NetCore;
+using Project.Service.PagingSortingFiltering.PSFmake;
+using Project.Service;
+
 namespace MVC.project.Controllers
 {
     public class MakeController : Controller
     {
         private IVehicleServiceMake vehicleServiceMake;
+        public string? CurrentSearchMake { get; set; }
+        public PSFmake PSFmakes { get; set; }
+        public Paging<VehicleMake>? PaginatedVehicleMakes { get; set; }
+        public SortingHelp SortingMadeHelper { get; set; }
         public MakeController(IVehicleServiceMake _vehicleServiceMake)
         {
+            PSFmakes = Kernel.Inject<PSFmake>();
             vehicleServiceMake = _vehicleServiceMake;
+
+            vehicleServiceMake = _vehicleServiceMake;
+            SortingMadeHelper = new SortingHelp();
         }
-        public async Task<IActionResult> VehicleMake()
+        public async Task<IActionResult> VehicleMake
+            (
+            string sortOrderMades,
+            string SearchStringMade, string currentFilterMade, int? pageIndexMade
+            )
         {
-            MakeListViewModel makeList = new MakeListViewModel();
-            makeList.vehicleMakeList = await vehicleServiceMake.GetVehicleMakes();
-            return View(makeList);
+
+            await UpdatePSF
+                (
+                sortOrderMades, SearchStringMade, currentFilterMade, pageIndexMade
+                );
+
+            ViewBag.SortingMadeHelper = SortingMadeHelper;
+            ViewBag.CurrentSearchMake = CurrentSearchMake;
+
+            return View(PaginatedVehicleMakes);
         }
+
+        private async Task UpdatePSF
+            (
+            string sortOrderMades, string searchStringMade, string currentFilterMade, int? pageIndexMade
+            )
+        {
+            PaginatedVehicleMakes = await PSFmakes.VehicleMakeSFP
+                (sortOrderMades, searchStringMade, currentFilterMade, pageIndexMade);
+
+            SortingMadeHelper = PSFmakes.sortingMake.sortingHelpMake;
+            CurrentSearchMake = PSFmakes.filterMake.CurrentSearchMake;
+        }
+
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
@@ -31,7 +67,7 @@ namespace MVC.project.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> CreateMake(MakeViewModel makeViewModel)
+        public async Task<IActionResult> CreateMake(CreateMakeViewModel makeViewModel)
         {
             if (!ModelState.IsValid)
             {

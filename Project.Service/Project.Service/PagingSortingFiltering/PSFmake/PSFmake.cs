@@ -12,18 +12,18 @@ namespace Project.Service.PagingSortingFiltering.PSFmake
         {
             vehicleServiceMake = _vehicleServiceMake;
             Configuration = configuration;
-            filteringMake = new FilteringMake();
+            filterMake = new FilterMake();
             sortingMake = new SortingMake();
         }
         public Paging<VehicleMake>? PaginatedVehicleModel { get; set; }
         public SortingMake sortingMake { get; set; }
-        public FilteringMake filteringMake { get; set; }
+        public FilterMake filterMake { get; set; }
         public async Task<Paging<VehicleMake>> VehicleMakeSFP
             (string sortOrderMake, string SearchStringMake, string currentSearchMake, int? pageIndexMake)
         {
-            IQueryable<VehicleMake> VehicleMakeQuery = from b in vehicleServiceMake.GetQueryDBmake() select b;
+            IQueryable<VehicleMake> VehicleMakeQuery = vehicleServiceMake.GetQueryDBmake();
 
-            VehicleMakeQuery = filteringMake.SearchFilterMake
+            VehicleMakeQuery = filterMake.SearchFilterMake
                 (SearchStringMake, currentSearchMake, VehicleMakeQuery, pageIndexMake);
 
             VehicleMakeQuery = sortingMake.SortMake(sortOrderMake, VehicleMakeQuery);

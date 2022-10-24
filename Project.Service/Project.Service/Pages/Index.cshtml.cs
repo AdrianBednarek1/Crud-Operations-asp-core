@@ -81,7 +81,7 @@ namespace ZaPrav.NetCore.Pages
             SortingModelHelper = PSFmodels.sortingModel.sortingHelpModel;
 
             CurrentSearchModel = PSFmodels.filteringModel.CurrentSearchModel;
-            CurrentSearchMake = PSFmakes.filteringMake.CurrentSearchMake;
+            CurrentSearchMake = PSFmakes.filterMake.CurrentSearchMake;
         }
         public async Task<IActionResult> OnPostDeleteAsync(int Id, bool TrueIfModel)
         {

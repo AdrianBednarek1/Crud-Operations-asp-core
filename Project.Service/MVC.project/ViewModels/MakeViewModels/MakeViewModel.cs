@@ -1,12 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace MVC.project.ViewModels.MakeViewModels
+﻿namespace MVC.project.ViewModels.MakeViewModels
 {
     public class MakeViewModel
     {
-        [Required]
+        public int Id { get; set; }
         public string Name { get; set; }
-        [Required]
         public string Abrv { get; set; }
     }
 }
