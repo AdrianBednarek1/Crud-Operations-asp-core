@@ -12,7 +12,7 @@ namespace ZaPrav.NetCore.VehicleDB
         {
             vehicleDB = VehicleStaticDatabase.vehicleDB;
         }
-        public DbSet<VehicleMake> GetDBQueryMake()
+        public async Task<DbSet<VehicleMake>> GetDBQueryMake()
         {
             return vehicleDB.vehicleMakes;
         }
@@ -55,7 +55,7 @@ namespace ZaPrav.NetCore.VehicleDB
         }
         public async Task<VehicleMake> SearchVehicleMake(int id)
         {
-            var vehicleMade = await vehicleDB.vehicleMakes.SingleAsync(d => d.Id == id);
+            var vehicleMade = await vehicleDB.vehicleMakes.SingleOrDefaultAsync(d => d.Id == id);
             return vehicleMade;
         }
         public async Task<bool> VehicleMakesIsNull()

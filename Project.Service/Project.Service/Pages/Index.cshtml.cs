@@ -21,8 +21,8 @@ namespace ZaPrav.NetCore.Pages
         public List<SelectListItem> VehicleMadesInList { get; set; }
         public string? CurrentSearchModel { get; set; }
         public string? CurrentSearchMake { get; set; }
-        public PSFmodel PSFmodels { get; set; }
-        public PSFmake PSFmakes { get; set; }
+        public PSFmodel<VehicleModel> PSFmodels { get; set; }
+        //public PSFmake PSFmakes { get; set; }
         public Paging<VehicleMake>? PaginatedVehicleMakes { get; set; }
         public Paging<VehicleModel>? PaginatedVehicleModels { get; set; }       
         public SortingHelp SortingMadeHelper { get; set; }
@@ -36,8 +36,8 @@ namespace ZaPrav.NetCore.Pages
             IVehicleServiceModel _vehicleServiceModel
             )
         {
-            PSFmodels = Kernel.Inject<PSFmodel>();
-            PSFmakes = Kernel.Inject<PSFmake>();
+            PSFmodels = Kernel.Inject<PSFmodel<VehicleModel>>();
+            //PSFmakes = Kernel.Inject<PSFmake>();
 
             vehicleServiceMake = _vehicleServiceMake;
             vehicleServiceModel = _vehicleServiceModel;
@@ -71,17 +71,17 @@ namespace ZaPrav.NetCore.Pages
             string SearchStringModel, string currentFilterModel, int? pageIndexModel
             )
         {
-            PaginatedVehicleMakes = await PSFmakes.VehicleMakeSFP
-                (sortOrderMades, SearchStringMade, currentFilterMade, pageIndexMade);
+            //PaginatedVehicleMakes = await PSFmakes.VehicleMakeSFP
+            //    (sortOrderMades, SearchStringMade, currentFilterMade, pageIndexMade);
 
-            PaginatedVehicleModels = await PSFmodels.VehicleModelSFP
-                (sortOrderModel, SearchStringModel, currentFilterModel, pageIndexModel);
+            //PaginatedVehicleModels = await PSFmodels.VehicleModelSortFilter
+            //    (sortOrderModel, SearchStringModel, currentFilterModel, pageIndexModel);
 
-            SortingMadeHelper = PSFmakes.sortingMake.sortingHelpMake;
+            //SortingMadeHelper = PSFmakes.sortingMake.sortingHelpMake;
             SortingModelHelper = PSFmodels.sortingModel.sortingHelpModel;
 
             CurrentSearchModel = PSFmodels.filteringModel.CurrentSearchModel;
-            CurrentSearchMake = PSFmakes.filterMake.CurrentSearchMake;
+            //CurrentSearchMake = PSFmakes.filteringMake.CurrentSearchMake;
         }
         public async Task<IActionResult> OnPostDeleteAsync(int Id, bool TrueIfModel)
         {

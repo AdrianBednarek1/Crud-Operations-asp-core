@@ -1,6 +1,6 @@
 ﻿using Project.Service.Interfaces;
 using ZaPrav.NetCore.Interfaces;
-
+using Microsoft.EntityFrameworkCore;
 namespace ZaPrav.NetCore.VehicleDB
 {
     public class VehicleMake : IVehicleMake

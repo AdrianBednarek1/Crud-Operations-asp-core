@@ -12,7 +12,7 @@ namespace Project.Service.VehicleService
         {
             vehicleDB = VehicleStaticDatabase.vehicleDB;
         }
-        public DbSet<VehicleModel> GetDBQueryModel()
+        public async Task<DbSet<VehicleModel>> GetDBQueryModel()
         {
             return vehicleDB.vehicleModels;
         }
@@ -56,7 +56,7 @@ namespace Project.Service.VehicleService
         }
         public async Task<VehicleModel> SearchVehicleModel(int id)
         {
-            var vehicleModel = await vehicleDB.vehicleModels.SingleAsync(d => d.Id == id);
+            var vehicleModel = await vehicleDB.vehicleModels.SingleOrDefaultAsync(d => d.Id == id);
             return vehicleModel;
         }
         public async Task<bool> VehicleModelsIsNull()

@@ -7,6 +7,6 @@ namespace ZaPrav.NetCore.Interfaces
         int Id { get; }
         string Name { get; }
         string Abrv { get; }
-        List<VehicleModel>? Models { get; }
+        //List<VehicleModel>? Models { get; }
     }
 }

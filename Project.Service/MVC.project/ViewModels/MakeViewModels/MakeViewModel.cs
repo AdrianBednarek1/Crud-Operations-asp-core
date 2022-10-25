@@ -1,6 +1,9 @@
-﻿namespace MVC.project.ViewModels.MakeViewModels
+﻿using ZaPrav.NetCore.Interfaces;
+using Microsoft.EntityFrameworkCore;
+
+namespace MVC.project.ViewModels.MakeViewModels
 {
-    public class MakeViewModel
+    public class MakeViewModel : IVehicleMake
     {
         public int Id { get; set; }
         public string Name { get; set; }

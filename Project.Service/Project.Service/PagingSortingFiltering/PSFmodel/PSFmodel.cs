@@ -4,7 +4,7 @@ using ZaPrav.NetCore.VehicleDB;
 
 namespace Project.Service.PagingSortingFiltering.PSFmodel
 {
-    public class PSFmodel
+    public class PSFmodel<T> : List<T>
     {
         private readonly IConfiguration Configuration;
         private IVehicleServiceModel vehicleServiceModel;
@@ -15,23 +15,27 @@ namespace Project.Service.PagingSortingFiltering.PSFmodel
             filteringModel = new FilteringModel();
             sortingModel = new SortingModel();
         }
-        public Paging<VehicleModel>? PaginatedVehicleModel { get; set; }
+        public Paging<T>? PagingModel { get; set; }
         public SortingModel sortingModel { get; set; }
         public FilteringModel filteringModel { get; set; }
-        public async Task<Paging<VehicleModel>> VehicleModelSFP
+        public async Task<IQueryable<VehicleModel>> VehicleModelSortFilter
             (string sortOrderModel, string SearchStringModel, string currentSearchModel, int? pageIndexModel)
         {
-            IQueryable<VehicleModel> VehicleModelQuery = from b in vehicleServiceModel.GetQueryDBmodel() select b;
+            IQueryable<VehicleModel> VehicleModelQuery = await vehicleServiceModel.GetQueryDBmodel();
 
-            VehicleModelQuery = filteringModel.SearchFilterModel
+            var Filtered = filteringModel.SearchFilterModel
                 (SearchStringModel, currentSearchModel,VehicleModelQuery,pageIndexModel);
 
-            VehicleModelQuery = sortingModel.SortModel(sortOrderModel, VehicleModelQuery);
+            var SortedFiltered = sortingModel.SortModel(sortOrderModel, Filtered);
 
+            return SortedFiltered;
+        }
+        public async Task<Paging<T>> PaginetedModel(IQueryable<T> ModelQuery ,int? pageIndexModel)
+        {
             var pageSize = Configuration.GetValue("PageSize", 4);
 
-            return PaginatedVehicleModel = await Paging<VehicleModel>.CreateAsync(
-                VehicleModelQuery, pageIndexModel ?? 1, pageSize);
+            return PagingModel = await Paging<T>.CreateAsync
+                (ModelQuery, pageIndexModel ?? 1, pageSize);
         }
     }
 }

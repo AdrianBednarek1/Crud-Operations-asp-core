@@ -6,12 +6,12 @@
 *@
 @{
 }
-@model Paging<VehicleModel>;
+@model Paging<ModelViewModel>;
 <h1>Vehicle Model table</h1>
 <form asp-action="VehicleModel" method="get">
     <div class="form-actions no-color">
         <p>
-            Find by name or abrv:
+            Find by name, abrv or Make ID:
             <input type="text" name="SearchStringModel" value="@ViewBag.CurrentSearchModel" />
             <input type= "hidden" name="sortOrderModel" value="@ViewBag.SortingModelHelper.CurrentSort" /> 
             <input type="submit" value="Search" class="btn btn-primary" /> |

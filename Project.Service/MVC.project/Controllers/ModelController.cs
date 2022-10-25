@@ -18,8 +18,8 @@ namespace MVC.project.Controllers
 
         public string? CurrentSearchModel { get; set; }
         public string? CurrentSearchMake { get; set; }
-        public PSFmodel PSFmodels { get; set; }
-        public Paging<VehicleModel>? PaginatedVehicleModels { get; set; }
+        public PSFmodel<ModelViewModel> PSFmodels { get; set; }
+        public Paging<ModelViewModel>? PaginatedModels { get; set; }
         public SortingHelp SortingModelHelper { get; set; }
         public ModelController
             (
@@ -30,7 +30,7 @@ namespace MVC.project.Controllers
             vehicleServiceModel = _vehicleServiceModel;
             vehicleServiceMake = _vehicleServiceMake;
 
-            PSFmodels = Kernel.Inject<PSFmodel>();
+            PSFmodels = Kernel.Inject<PSFmodel<ModelViewModel>>();
             SortingModelHelper = new SortingHelp();
         }
         public async Task<IActionResult> VehicleModel
@@ -39,23 +39,33 @@ namespace MVC.project.Controllers
             string SearchStringModel, string currentFilterModel, int? pageIndexModel
             )
         {
-            await GetUpdateSFPdata
+            await UpdatePSFdata
                 (
                 sortOrderModel, SearchStringModel, currentFilterModel, pageIndexModel
                 );
             ViewBag.SortingModelHelper = SortingModelHelper;
             ViewBag.CurrentSearchModel = CurrentSearchModel;
             ViewBag.VehicleMakeIsNull = vehicleServiceMake.VehicleMakeIsNull();                      
-            return View(PaginatedVehicleModels);
+            return View(PaginatedModels);
         }
 
-        private async Task GetUpdateSFPdata(string sortOrderModel, string searchStringModel, string currentFilterModel, int? pageIndexModel)
+        private async Task UpdatePSFdata
+            (string sortOrderModel, string searchStringModel, string currentFilterModel, int? pageIndexModel)
         {
-            PaginatedVehicleModels = await PSFmodels.VehicleModelSFP
+            IQueryable<VehicleModel> SortedFiltered = await PSFmodels.VehicleModelSortFilter
                 (sortOrderModel, searchStringModel, currentFilterModel, pageIndexModel);
 
-            SortingModelHelper = PSFmodels.sortingModel.sortingHelpModel;
+            IQueryable<ModelViewModel> modelView = SortedFiltered.Select(p=> new ModelViewModel()
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Abrv = p.Abrv,
+                MakeId = p.MakeId
+            });
 
+            PaginatedModels = await PSFmodels.PaginetedModel(modelView, pageIndexModel);
+            
+            SortingModelHelper = PSFmodels.sortingModel.sortingHelpModel;
             CurrentSearchModel = PSFmodels.filteringModel.CurrentSearchModel;
         }
 
@@ -102,7 +112,10 @@ namespace MVC.project.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             VehicleModel vehicleModel = await vehicleServiceModel.SearchVehicleModel(id);
-            await vehicleServiceModel.Delete(vehicleModel);
+            if (vehicleModel !=null)
+            {
+                await vehicleServiceModel.Delete(vehicleModel);
+            }
             return RedirectToAction("VehicleModel");
         }
         [HttpGet]

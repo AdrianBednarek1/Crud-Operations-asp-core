@@ -5,7 +5,7 @@ namespace Project.Service.Interfaces.IVehicleRepository
 {
     public interface IVehicleRepositoryModel
     {
-        DbSet<VehicleModel> GetDBQueryModel();
+        Task<DbSet<VehicleModel>> GetDBQueryModel();
         Task<List<VehicleModel>> GetVehicleModels();
         Task CreateVehicleModel(VehicleModel? model);
         Task DeleteVehicleModel(VehicleModel? model);

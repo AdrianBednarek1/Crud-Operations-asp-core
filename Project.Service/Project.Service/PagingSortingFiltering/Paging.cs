@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using ZaPrav.NetCore.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace ZaPrav.NetCore
 {

@@ -12,9 +12,9 @@ namespace Project.Service.VehicleService
         {
             vehicleRepositoryModel = _vehicleRepositoryModel;
         }
-        public DbSet<VehicleModel> GetQueryDBmodel()
+        public async Task<DbSet<VehicleModel>> GetQueryDBmodel()
         {
-            return vehicleRepositoryModel.GetDBQueryModel();
+            return await vehicleRepositoryModel.GetDBQueryModel();
         }
         public async Task<VehicleModel> SearchVehicleModel(int id)
         {

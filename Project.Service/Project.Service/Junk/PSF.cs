@@ -41,7 +41,7 @@ namespace Project.Service
             }
             //SortingMakeHelper.CurrentFilter = SearchStringMade;
 
-            IQueryable<VehicleMake> vehicleMadesSorting = from b in vehicleServiceMake.GetQueryDBmake() select b;
+            IQueryable<VehicleMake> vehicleMadesSorting = await vehicleServiceMake.GetQueryDBmake();
 
             if (!String.IsNullOrEmpty(SearchStringMade))
             {
@@ -91,7 +91,7 @@ namespace Project.Service
             }
             //SortingModelHelper.CurrentFilter = SearchStringModel;
 
-            IQueryable<VehicleModel> vehicleModelSorting = from b in vehicleServiceModel.GetQueryDBmodel() select b;
+            IQueryable<VehicleModel> vehicleModelSorting = await vehicleServiceModel.GetQueryDBmodel();
 
             if (!String.IsNullOrEmpty(SearchStringModel))
             {

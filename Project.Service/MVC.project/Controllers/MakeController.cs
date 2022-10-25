@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using ZaPrav.NetCore;
 using Project.Service.PagingSortingFiltering.PSFmake;
 using Project.Service;
+using ZaPrav.NetCore.Interfaces;
+using System.Linq;
 
 namespace MVC.project.Controllers
 {
@@ -13,12 +15,12 @@ namespace MVC.project.Controllers
     {
         private IVehicleServiceMake vehicleServiceMake;
         public string? CurrentSearchMake { get; set; }
-        public PSFmake PSFmakes { get; set; }
-        public Paging<VehicleMake>? PaginatedVehicleMakes { get; set; }
+        public PSFmake<MakeViewModel> PSFmakes { get; set; }
+        public Paging<MakeViewModel>? PaginatedMakes{ get; set; }
         public SortingHelp SortingMadeHelper { get; set; }
         public MakeController(IVehicleServiceMake _vehicleServiceMake)
         {
-            PSFmakes = Kernel.Inject<PSFmake>();
+            PSFmakes = Kernel.Inject<PSFmake<MakeViewModel>>();
             vehicleServiceMake = _vehicleServiceMake;
 
             vehicleServiceMake = _vehicleServiceMake;
@@ -30,8 +32,7 @@ namespace MVC.project.Controllers
             string SearchStringMade, string currentFilterMade, int? pageIndexMade
             )
         {
-
-            await UpdatePSF
+            await UpdatePSFdata
                 (
                 sortOrderMades, SearchStringMade, currentFilterMade, pageIndexMade
                 );
@@ -39,19 +40,26 @@ namespace MVC.project.Controllers
             ViewBag.SortingMadeHelper = SortingMadeHelper;
             ViewBag.CurrentSearchMake = CurrentSearchMake;
 
-            return View(PaginatedVehicleMakes);
+            return View(PaginatedMakes);
         }
 
-        private async Task UpdatePSF
-            (
-            string sortOrderMades, string searchStringMade, string currentFilterMade, int? pageIndexMade
-            )
+        private async Task UpdatePSFdata
+            (string sortOrderMades, string searchStringMade, string currentFilterMade, int? pageIndexMade)
         {
-            PaginatedVehicleMakes = await PSFmakes.VehicleMakeSFP
+            IQueryable<VehicleMake> SortedFiltered = await PSFmakes.VehicleMakeSortFilter
                 (sortOrderMades, searchStringMade, currentFilterMade, pageIndexMade);
+            
+            IQueryable<MakeViewModel> makeViewModels = SortedFiltered.Select(p=>new MakeViewModel()
+            {
+                Abrv = p.Abrv,
+                Id = p.Id,
+                Name = p.Name
+            });
+
+            PaginatedMakes = await PSFmakes.PaginetedList(makeViewModels, pageIndexMade);
 
             SortingMadeHelper = PSFmakes.sortingMake.sortingHelpMake;
-            CurrentSearchMake = PSFmakes.filterMake.CurrentSearchMake;
+            CurrentSearchMake = PSFmakes.filteringMake.CurrentSearchMake;
         }
 
         [HttpPost]

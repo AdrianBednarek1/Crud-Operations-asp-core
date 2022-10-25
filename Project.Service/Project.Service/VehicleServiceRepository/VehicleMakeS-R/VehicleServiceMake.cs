@@ -12,9 +12,9 @@ namespace ZaPrav.NetCore.VehicleDB
         {
             vehicleRepository = _vehicleRepository;
         }
-        public DbSet<VehicleMake> GetQueryDBmake()
+        public async Task<DbSet<VehicleMake>> GetQueryDBmake()
         {
-            return vehicleRepository.GetDBQueryMake();
+            return await vehicleRepository.GetDBQueryMake();
         }
         public async Task<List<VehicleMake>> GetVehicleMakes()
         {

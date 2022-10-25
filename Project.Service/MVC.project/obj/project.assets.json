@@ -10502,6 +10502,7 @@
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 6.0.10",
       "Project.Service >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.3.0",
+      "System.Data.Common >= 4.3.0",
       "System.Data.SqlClient >= 4.8.4",
       "System.Linq >= 4.3.0"
     ]
@@ -10579,6 +10580,10 @@
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[6.3.0, )"
+          },
+          "System.Data.Common": {
+            "target": "Package",
+            "version": "[4.3.0, )"
           },
           "System.Data.SqlClient": {
             "target": "Package",

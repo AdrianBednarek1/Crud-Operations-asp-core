@@ -2,7 +2,7 @@
 
 namespace Project.Service.PagingSortingFiltering
 {
-    public class FilterMake
+    public class FilteringMake
     {
         public string? CurrentSearchMake { get; private set; }
         public IQueryable<VehicleMake> SearchFilterMake

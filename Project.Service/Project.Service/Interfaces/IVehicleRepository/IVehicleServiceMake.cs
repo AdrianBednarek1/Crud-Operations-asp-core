@@ -5,7 +5,7 @@ namespace Project.Service.Interfaces.IVehicleRepository
 {
     public interface IVehicleServiceMake
     {
-        DbSet<VehicleMake> GetQueryDBmake();
+        Task<DbSet<VehicleMake>> GetQueryDBmake();
         Task<List<VehicleMake>> GetVehicleMakes();
         Task<VehicleMake> SearchVehicleMake(int id);
         Task Create(VehicleMake data);
