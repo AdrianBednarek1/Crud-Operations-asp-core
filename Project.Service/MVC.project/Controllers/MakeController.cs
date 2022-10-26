@@ -62,9 +62,16 @@ namespace MVC.project.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            VehicleMake vehicleMake = await vehicleServiceMake.SearchVehicleMake(id);
-            await vehicleServiceMake.Delete(vehicleMake);
-
+            try
+            {
+                VehicleMake vehicleMake = await vehicleServiceMake.SearchVehicleMake(id);
+                await vehicleServiceMake.Delete(vehicleMake);
+            }
+            catch (NotSupportedException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
             Response.StatusCode = StatusCodes.Status200OK;
             return RedirectToAction("VehicleMake");
         }
