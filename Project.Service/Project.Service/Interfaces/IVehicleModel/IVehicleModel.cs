@@ -10,6 +10,5 @@ namespace ZaPrav.NetCore.Interfaces
          string Abrv { get; }
 
          int MakeId { get; set; }
-         VehicleMake Make { get; }
     }
 }
