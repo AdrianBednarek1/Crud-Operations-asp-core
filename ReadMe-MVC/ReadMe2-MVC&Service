@@ -1,0 +1,14 @@
+Promjene napravljene u Project.Service:
+
+1.  Klasa PSF je rascjepana na zasebne klase Paging, Sorting, Filtering. 
+    Te iste klase su spojene u zajedničku PSF klasu. 
+    Klasa je također podijeljena zasebno na Model i Make (PSFmake i PSFmodel).
+    
+2.  Nakon filtriranja/pretraživanja, podaci će ostati i dalje sortirani. 
+    Pretraživanje/filtriranje nije ograničeno na 1 page već se može searchati preko cijele baze zasebnog entiteta. 
+    
+3.  Izmjenjen je naziv atributa u entitetu VehicleMake, ModelsID -> Models.
+
+4.  Repository i Service klase su podijeljene zasebno na entitete Make i Model.
+    Također sam kreirao zajedničku klasu sa statičkom bazom koju repository Make i Model koriste (StaticDatabase).
+    Na taj način su dva zasebna entiteta zajedno sa klasama povezana istom bazom.
