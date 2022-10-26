@@ -42,5 +42,7 @@ U Program klasi su definirani pocetni parametri za Page klase:
 
 IVehicleService
 IVehicleRepository
+
 -----------------------------------------------
-# Info za drugi dio projekta-> ReadMe-MVCandService.file
+
+#4 Info za drugi dio projekta-> ReadMe-MVCandService.file
