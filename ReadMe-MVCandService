@@ -11,7 +11,7 @@ Promjene napravljene u Project.Service:
 
 4.  Repository i Service klase su podijeljene zasebno na entitete Make i Model.
     Također sam kreirao zajedničku klasu sa statičkom bazom koju repository Make i Model koriste (StaticDatabase).
-    Na taj način su dva zasebna entiteta zajedno sa klasama povezana istom bazom.
+    Na taj način su dva zasebna entiteta zajedno sa klasama (Service, Repository) povezane istom bazom.
     
 5.  Također PSF klasa prvo vraća u prvoj metodi Filtrirane/Sortirane podatke. 
     Tek u drugoj metodi vraća pagane podatke u svrhu konverzije u drugi tip podataka (ViewModel).
