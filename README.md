@@ -44,5 +44,4 @@ IVehicleService
 IVehicleRepository
 
 -----------------------------------------------
-
-#4 Info za drugi dio projekta-> ReadMe-MVCandService.file
+Info za drugi dio projekta-> ReadMe-MVCandService.file
