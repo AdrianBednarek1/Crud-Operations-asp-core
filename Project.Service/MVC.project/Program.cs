@@ -1,3 +1,6 @@
+using AutoMapper;
+using AutoMapper.EquivalencyExpression;
+using MVC.project.AutoMapper;
 using Project.Service.Interfaces.IVehicleRepository;
 using Project.Service.Interfaces.IVehicleService;
 using Project.Service.VehicleService;
@@ -11,6 +14,13 @@ builder.Services.AddTransient<IVehicleServiceModel, VehicleServiceModel>();
 builder.Services.AddTransient<IVehicleRepositoryModel, VehicleRepositoryModel>();
 builder.Services.AddTransient<IVehicleServiceMake, VehicleServiceMake>();
 builder.Services.AddTransient<IVehicleRepositoryMake, VehicleRepositoryMake>();
+builder.Services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.AddCollectionMappers();
+});
+builder.Services.AddTransient<IMapper, Mapper>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

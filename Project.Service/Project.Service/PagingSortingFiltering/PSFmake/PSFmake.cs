@@ -5,24 +5,28 @@ using ZaPrav.NetCore;
 using ZaPrav.NetCore.Interfaces;
 using ZaPrav.NetCore.VehicleDB;
 using Microsoft.EntityFrameworkCore;
+using Project.Service.Interfaces.ISortingFilteringPaging.IPSFmake;
 
 namespace Project.Service.PagingSortingFiltering.PSFmake
 {
-    public class PSFmake<T> : List<T>
+    public class PSFmake<T> : List<T>, IPSFmake<T>
     {
         private readonly IConfiguration Configuration;
         private IVehicleServiceMake vehicleServiceMake;
-        public PSFmake(IConfiguration configuration, IVehicleServiceMake _vehicleServiceMake)
+        public PSFmake
+            (
+            IConfiguration configuration, IVehicleServiceMake _vehicleServiceMake, 
+            IFilteringMake _filteringMake, ISortingMake _sortingMake
+            )
         {
             vehicleServiceMake = _vehicleServiceMake;
             Configuration = configuration;
-            filteringMake = new FilteringMake();
-            sortingMake = new SortingMake();
+            filteringMake = _filteringMake;
+            sortingMake = _sortingMake;
         }
-        public Paging<IVehicleMake>? PaginatedVehicleMake { get; set; }
         public Paging<T>? PaginatedMake { get; set; }
-        public SortingMake sortingMake { get; set; }
-        public FilteringMake filteringMake { get; set; }
+        public ISortingMake sortingMake { get; set; }
+        public IFilteringMake filteringMake { get; set; }
         public async Task<IQueryable<VehicleMake>> VehicleMakeSortFilter
             (string sortOrderMake, string SearchStringMake, string currentSearchMake, int? pageIndexMake) 
         {

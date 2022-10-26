@@ -1,9 +1,10 @@
-﻿    using ZaPrav.NetCore;
+﻿using Project.Service.Interfaces.ISortingFilteringPaging.IPSFmodel;
+using ZaPrav.NetCore;
 using ZaPrav.NetCore.VehicleDB;
 
 namespace Project.Service.PagingSortingFiltering.PSFmodel
 {
-    public class SortingModel
+    public class SortingModel : ISortingModel
     {
         public SortingHelp sortingHelpModel { get; set; }
 

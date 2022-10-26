@@ -1,8 +1,9 @@
-﻿using ZaPrav.NetCore.VehicleDB;
+﻿using Project.Service.Interfaces.ISortingFilteringPaging.IPSFmake;
+using ZaPrav.NetCore.VehicleDB;
 
 namespace Project.Service.PagingSortingFiltering
 {
-    public class FilteringMake
+    public class FilteringMake : IFilteringMake
     {
         public string? CurrentSearchMake { get; private set; }
         public IQueryable<VehicleMake> SearchFilterMake

@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using ZaPrav.NetCore;
 using Project.Service.PagingSortingFiltering.PSFmodel;
 using Project.Service;
+using AutoMapper;
 
 namespace MVC.project.Controllers
 {
@@ -15,24 +16,26 @@ namespace MVC.project.Controllers
         private IVehicleServiceModel vehicleServiceModel;
         private IVehicleServiceMake vehicleServiceMake;
         private List<SelectListItem> VehicleMakeInList;
-
+        private IMapper mapper;
         public string? CurrentSearchModel { get; set; }
-        public string? CurrentSearchMake { get; set; }
         public PSFmodel<ModelViewModel> PSFmodels { get; set; }
         public Paging<ModelViewModel>? PaginatedModels { get; set; }
         public SortingHelp SortingModelHelper { get; set; }
         public ModelController
             (
             IVehicleServiceModel _vehicleServiceModel,
-            IVehicleServiceMake _vehicleServiceMake
+            IVehicleServiceMake _vehicleServiceMake,
+            IMapper _mapper
             )
         {
+            mapper = _mapper;
             vehicleServiceModel = _vehicleServiceModel;
             vehicleServiceMake = _vehicleServiceMake;
 
             PSFmodels = Kernel.Inject<PSFmodel<ModelViewModel>>();
             SortingModelHelper = new SortingHelp();
         }
+        [HttpGet]
         public async Task<IActionResult> VehicleModel
             (
             string sortOrderModel,
@@ -43,9 +46,12 @@ namespace MVC.project.Controllers
                 (
                 sortOrderModel, SearchStringModel, currentFilterModel, pageIndexModel
                 );
+
             ViewBag.SortingModelHelper = SortingModelHelper;
             ViewBag.CurrentSearchModel = CurrentSearchModel;
-            ViewBag.VehicleMakeIsNull = vehicleServiceMake.VehicleMakeIsNull();                      
+            ViewBag.VehicleMakeIsNull = vehicleServiceMake.VehicleMakeIsNull();  
+            
+            Response.StatusCode= StatusCodes.Status200OK;
             return View(PaginatedModels);
         }
 
@@ -55,24 +61,18 @@ namespace MVC.project.Controllers
             IQueryable<VehicleModel> SortedFiltered = await PSFmodels.VehicleModelSortFilter
                 (sortOrderModel, searchStringModel, currentFilterModel, pageIndexModel);
 
-            IQueryable<ModelViewModel> modelView = SortedFiltered.Select(p=> new ModelViewModel()
-            {
-                Id = p.Id,
-                Name = p.Name,
-                Abrv = p.Abrv,
-                MakeId = p.MakeId
-            });
+            IQueryable<ModelViewModel> modelView = mapper.ProjectTo<ModelViewModel>(SortedFiltered);
 
             PaginatedModels = await PSFmodels.PaginetedModel(modelView, pageIndexModel);
             
             SortingModelHelper = PSFmodels.sortingModel.sortingHelpModel;
             CurrentSearchModel = PSFmodels.filteringModel.CurrentSearchModel;
         }
-
         [HttpGet]
         public async Task<IActionResult> CreateModel()
         {
             await RefreshDropDown();
+            Response.StatusCode= StatusCodes.Status200OK;
             return View();
         }   
         [HttpPost]
@@ -81,33 +81,31 @@ namespace MVC.project.Controllers
             await RefreshDropDown();
             if (!ModelState.IsValid)
             {
+                Response.StatusCode= StatusCodes.Status422UnprocessableEntity;
                 return View();
             }
-            VehicleModel vehicleModel = new VehicleModel()
-            {
-                Name = modelViewModel.Name,
-                Abrv = modelViewModel.Abrv,
-                MakeId = modelViewModel.MakeId
-            };
+            VehicleModel vehicleModel = mapper.Map<VehicleModel>(modelViewModel);
             await vehicleServiceModel.Create(vehicleModel);
+
+            Response.StatusCode= StatusCodes.Status201Created;
             return RedirectToAction("VehicleModel");
         }
-
         private async Task RefreshDropDown()
         {
             List<VehicleMake> listMake = new List<VehicleMake>();
             listMake = await vehicleServiceMake.GetVehicleMakes();
-            VehicleMakeInList = listMake.ConvertAll(a =>
-            {
-                return new SelectListItem
+            VehicleMakeInList = listMake.ConvertAll
+            (a =>
                 {
-                    Text = a.Name,
-                    Value = a.Id.ToString()
-                };
-            });
+                    return new SelectListItem
+                    {
+                        Text = a.Name,
+                        Value = a.Id.ToString()
+                    };
+                }
+            );
             ViewBag.VehicleMakeInList = VehicleMakeInList;
         }
-
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
@@ -116,6 +114,7 @@ namespace MVC.project.Controllers
             {
                 await vehicleServiceModel.Delete(vehicleModel);
             }
+            Response.StatusCode = StatusCodes.Status200OK;
             return RedirectToAction("VehicleModel");
         }
         [HttpGet]
@@ -123,17 +122,24 @@ namespace MVC.project.Controllers
         {
             VehicleModel vehicleModel = await vehicleServiceModel.SearchVehicleModel(id);
             await RefreshDropDown();
-            return View(vehicleModel);
+            ModelViewModel modelViewModel = mapper.Map<ModelViewModel>(vehicleModel);
+            
+            Response.StatusCode= StatusCodes.Status302Found;
+            return View(modelViewModel);
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateModel(VehicleModel vehicleModel)
+        public async Task<IActionResult> UpdateModel(ModelViewModel vehicleModel)
         {
             await RefreshDropDown();
-            if (ModelState.ErrorCount!=1)
+            if (!ModelState.IsValid)
             {
+                Response.StatusCode= StatusCodes.Status422UnprocessableEntity;
                 return View(vehicleModel);
             }
-            await vehicleServiceModel.Update(vehicleModel);
+            VehicleModel model = mapper.Map<VehicleModel>(vehicleModel);
+            await vehicleServiceModel.Update(model);
+            
+            Response.StatusCode= StatusCodes.Status200OK;
             return RedirectToAction("VehicleModel");
         }
     }

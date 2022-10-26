@@ -3,7 +3,7 @@ using ZaPrav.NetCore.VehicleDB;
 
 namespace Project.Service.PagingSortingFiltering
 {
-    public class SortingMake
+    public class SortingMake : ISortingMake
     {
         public SortingHelp sortingHelpMake { get; set; }
         public SortingMake()

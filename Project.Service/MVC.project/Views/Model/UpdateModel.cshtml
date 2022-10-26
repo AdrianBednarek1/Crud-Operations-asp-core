@@ -5,15 +5,14 @@
 *@
 @{
 }
-@model VehicleModel;
+@model ModelViewModel;
 
 <form method = "post" action = "UpdateModel">
 	<input value ="@Model.Id" asp-for="Id" type = "hidden" />
-	<div >Name: <input value="@Model.Name" class="form-control" asp-for = "Name"/>
-		<span asp-validation-for = "Name"></span></div>
-	<div >Abrv: <input value="@Model.Abrv" class="form-control" asp-for = "Abrv"/>
-		<span asp-validation-for = "Abrv"></span></div>
+    <div asp-validation-summary="All"></div>
+	<div >Name: <input value="@Model.Name" class="form-control" asp-for = "Name"/></div>
+	<div >Abrv: <input value="@Model.Abrv" class="form-control" asp-for = "Abrv"/></div>
 	<div >Vehicle Make: <select asp-for="MakeId" asp-items="ViewBag.VehicleMakeInList"></select></div>       
 	<input type="submit"/>
-	<button type = "submit" asp-action="VehicleModel">Back</button>
+	<button formmethod="get" type = "submit" asp-action="VehicleModel">Back</button>
 </form>

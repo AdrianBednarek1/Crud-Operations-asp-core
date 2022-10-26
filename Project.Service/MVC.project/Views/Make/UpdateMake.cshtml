@@ -5,7 +5,7 @@
 *@
 @{
 }
-@model VehicleMake;
+@model MakeViewModel;
 <h2>Update Vehicle Make</h2>
 <form method = "post" action = "UpdateMake">
     <div asp-validation-summary="All"></div>
@@ -13,5 +13,5 @@
 	<div>Name: <input value="@Model.Name" class="form-control" asp-for = "Name"/></div>
 	<div>Abrv: <input value="@Model.Abrv" class="form-control" asp-for = "Abrv"/></div>
 	<input type="submit"/>
-	<button type = "submit" asp-action="VehicleMake">Back</button>
+	<button formmethod = "get" type = "submit" asp-action="VehicleMake">Back</button>
 </form>

@@ -2,12 +2,11 @@
 using MVC.project.ViewModels.MakeViewModels;
 using Project.Service.Interfaces.IVehicleRepository;
 using ZaPrav.NetCore.VehicleDB;
-using Microsoft.EntityFrameworkCore;
 using ZaPrav.NetCore;
 using Project.Service.PagingSortingFiltering.PSFmake;
 using Project.Service;
-using ZaPrav.NetCore.Interfaces;
-using System.Linq;
+using AutoMapper;
+
 
 namespace MVC.project.Controllers
 {
@@ -18,14 +17,15 @@ namespace MVC.project.Controllers
         public PSFmake<MakeViewModel> PSFmakes { get; set; }
         public Paging<MakeViewModel>? PaginatedMakes{ get; set; }
         public SortingHelp SortingMadeHelper { get; set; }
-        public MakeController(IVehicleServiceMake _vehicleServiceMake)
+        public IMapper mapper { get; set; }
+        public MakeController(IVehicleServiceMake _vehicleServiceMake, IMapper _mappe)
         {
             PSFmakes = Kernel.Inject<PSFmake<MakeViewModel>>();
             vehicleServiceMake = _vehicleServiceMake;
-
-            vehicleServiceMake = _vehicleServiceMake;
+            mapper = _mappe;
             SortingMadeHelper = new SortingHelp();
         }
+        [HttpGet]
         public async Task<IActionResult> VehicleMake
             (
             string sortOrderMades,
@@ -40,6 +40,7 @@ namespace MVC.project.Controllers
             ViewBag.SortingMadeHelper = SortingMadeHelper;
             ViewBag.CurrentSearchMake = CurrentSearchMake;
 
+            Response.StatusCode= StatusCodes.Status200OK;
             return View(PaginatedMakes);
         }
 
@@ -48,17 +49,13 @@ namespace MVC.project.Controllers
         {
             IQueryable<VehicleMake> SortedFiltered = await PSFmakes.VehicleMakeSortFilter
                 (sortOrderMades, searchStringMade, currentFilterMade, pageIndexMade);
-            
-            IQueryable<MakeViewModel> makeViewModels = SortedFiltered.Select(p=>new MakeViewModel()
-            {
-                Abrv = p.Abrv,
-                Id = p.Id,
-                Name = p.Name
-            });
+
+            IQueryable<MakeViewModel> makeViewModels = mapper.ProjectTo<MakeViewModel>(SortedFiltered);
 
             PaginatedMakes = await PSFmakes.PaginetedList(makeViewModels, pageIndexMade);
 
             SortingMadeHelper = PSFmakes.sortingMake.sortingHelpMake;
+
             CurrentSearchMake = PSFmakes.filteringMake.CurrentSearchMake;
         }
 
@@ -67,43 +64,51 @@ namespace MVC.project.Controllers
         {
             VehicleMake vehicleMake = await vehicleServiceMake.SearchVehicleMake(id);
             await vehicleServiceMake.Delete(vehicleMake);
+
+            Response.StatusCode = StatusCodes.Status200OK;
             return RedirectToAction("VehicleMake");
         }
         [HttpGet]
         public IActionResult CreateMake()
-        {
+        {        
+            Response.StatusCode= StatusCodes.Status200OK;
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> CreateMake(CreateMakeViewModel makeViewModel)
+        public async Task<IActionResult> CreateMake(MakeViewModel makeViewModel)
         {
             if (!ModelState.IsValid)
-            {
+            {          
+                Response.StatusCode= StatusCodes.Status422UnprocessableEntity;
                 return View();
             }
-            VehicleMake vehicleMake = new VehicleMake()
-            {
-                Name = makeViewModel.Name,
-                Abrv = makeViewModel.Abrv
-            };
+            VehicleMake vehicleMake = mapper.Map<VehicleMake>(makeViewModel);
             await vehicleServiceMake.Create(vehicleMake);
+            
+            Response.StatusCode= StatusCodes.Status201Created;
             return RedirectToAction("VehicleMake");
         }
         [HttpGet]
         public async Task<IActionResult> UpdateMake(int id)
         {
-            VehicleMake vehicleMake = await vehicleServiceMake.SearchVehicleMake(id);           
+            VehicleMake vehicleMake = await vehicleServiceMake.SearchVehicleMake(id);
+            MakeViewModel makeViewModel = mapper.Map<MakeViewModel>(vehicleMake);
 
-            return View(vehicleMake);
+            Response.StatusCode= StatusCodes.Status302Found;
+            return View(makeViewModel);
         }
         [HttpPost]
-        public async Task<IActionResult>UpdateMake(VehicleMake vehicleMake)
+        public async Task<IActionResult>UpdateMake(MakeViewModel UpdatedViewModel)
         {
             if (!ModelState.IsValid)
             {
-                return View(vehicleMake);
+                Response.StatusCode= StatusCodes.Status422UnprocessableEntity;
+                return View(UpdatedViewModel);
             }
-            await vehicleServiceMake.Update(vehicleMake);
+            VehicleMake UpdatedVehicleMake=mapper.Map<VehicleMake>(UpdatedViewModel);
+            await vehicleServiceMake.Update(UpdatedVehicleMake);
+
+            Response.StatusCode= StatusCodes.Status200OK;
             return RedirectToAction("VehicleMake");
         }
     }

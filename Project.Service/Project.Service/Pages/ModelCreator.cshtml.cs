@@ -20,10 +20,9 @@ namespace ZaPrav.NetCore.Pages
         [BindProperty]
         public List<VehicleMake> db { get; set; }
         public IMapper mapper;
-        public ModelCreatorModel(IMapper _mapper)
+        public ModelCreatorModel()
         {
             db = new List<VehicleMake>();
-            mapper = _mapper;
         }
         public async Task<IActionResult> OnPostAsync()
         {

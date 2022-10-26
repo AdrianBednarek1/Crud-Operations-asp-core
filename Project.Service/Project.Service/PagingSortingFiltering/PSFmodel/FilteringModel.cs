@@ -1,8 +1,9 @@
-﻿using ZaPrav.NetCore.VehicleDB;
+﻿using Project.Service.Interfaces.ISortingFilteringPaging.IPSFmodel;
+using ZaPrav.NetCore.VehicleDB;
 
 namespace Project.Service.PagingSortingFiltering
 {
-    public class FilteringModel
+    public class FilteringModel : IFilteringModel
     {
         public string? CurrentSearchModel { get; private set; }
 
@@ -21,7 +22,8 @@ namespace Project.Service.PagingSortingFiltering
 
             if (!String.IsNullOrEmpty(SearchString))
             {
-                vehicleModelSorting = vehicleModelSorting.Where(s => s.Name.Contains(SearchString) || s.Abrv.Contains(SearchString));
+                vehicleModelSorting = vehicleModelSorting.Where
+                    (s => s.Name.Contains(SearchString) || s.Abrv.Contains(SearchString) || s.MakeId.ToString().Contains(SearchString));
             }
 
             return vehicleModelSorting;
