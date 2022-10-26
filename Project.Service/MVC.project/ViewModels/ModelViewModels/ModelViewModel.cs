@@ -1,6 +1,8 @@
-﻿namespace MVC.project.ViewModels.ModelViewModels
+﻿using ZaPrav.NetCore.Interfaces;
+
+namespace MVC.project.ViewModels.ModelViewModels
 {
-    public class ModelViewModel
+    public class ModelViewModel : IVehicleModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
