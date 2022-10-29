@@ -34,7 +34,7 @@ namespace ZaPrav.NetCore.VehicleDB
             {
                 foreach (var item in vehicleDB.vehicleModels)
                 {
-                    if(item.MakeId == made.Id)
+                    if(item.MakeId == made.Id && item!=null)
                     {
                         vehicleDB.vehicleModels.Remove(item);
                     }

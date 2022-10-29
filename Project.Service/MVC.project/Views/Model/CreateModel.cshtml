@@ -6,11 +6,11 @@
 }
 @model ModelViewModel;
 <h2>Create Vehicle Model</h2>
-<form method = "post" action = "CreateModel">
+<form method = "post" action = "CreateModel" onsubmit="myButton.disabled = true; return true;">
     <div asp-validation-summary="All"></div>
 	<div>Name: <input class="form-control" asp-for = "Name"/></div>
 	<div>Abrv: <input class="form-control" asp-for = "Abrv"/></div>
 	<div>Vehicle Make: <select asp-for="MakeId" asp-items="ViewBag.VehicleMakeInList"></select></div>       
-	<input type="submit"/>
+	<input name="myButton" type="submit"/>
 	<button formmethod ="get" type = "submit" asp-action="VehicleModel">Back</button>
 </form>

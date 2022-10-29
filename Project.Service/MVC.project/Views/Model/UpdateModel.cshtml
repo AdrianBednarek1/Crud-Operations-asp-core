@@ -7,12 +7,12 @@
 }
 @model ModelViewModel;
 
-<form method = "post" action = "UpdateModel">
-	<input value ="@Model.Id" asp-for="Id" type = "hidden" />
+<form method = "post" action = "UpdateModel" onsubmit="myButton.disabled = true; return true;">
+	<input value ="@Model.Id" asp-for="Id" type = "hidden"/>
     <div asp-validation-summary="All"></div>
 	<div >Name: <input value="@Model.Name" class="form-control" asp-for = "Name"/></div>
 	<div >Abrv: <input value="@Model.Abrv" class="form-control" asp-for = "Abrv"/></div>
 	<div >Vehicle Make: <select asp-for="MakeId" asp-items="ViewBag.VehicleMakeInList"></select></div>       
-	<input type="submit"/>
+	<input name="myButton" type="submit"/>
 	<button formmethod="get" type = "submit" asp-action="VehicleModel">Back</button>
 </form>

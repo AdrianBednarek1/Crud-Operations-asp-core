@@ -17,10 +17,8 @@ namespace MVC.project.Controllers
         private IVehicleServiceMake vehicleServiceMake;
         private List<SelectListItem> VehicleMakeInList;
         private IMapper mapper;
-        public string? CurrentSearchModel { get; set; }
         public PSFmodel<ModelViewModel> PSFmodels { get; set; }
         public Paging<ModelViewModel>? PaginatedModels { get; set; }
-        public SortingHelp SortingModelHelper { get; set; }
         public ModelController
             (
             IVehicleServiceModel _vehicleServiceModel,
@@ -33,7 +31,6 @@ namespace MVC.project.Controllers
             vehicleServiceMake = _vehicleServiceMake;
 
             PSFmodels = Kernel.Inject<PSFmodel<ModelViewModel>>();
-            SortingModelHelper = new SortingHelp();
         }
         [HttpGet]
         public async Task<IActionResult> VehicleModel
@@ -46,12 +43,8 @@ namespace MVC.project.Controllers
                 (
                 sortOrderModel, SearchStringModel, currentFilterModel, pageIndexModel
                 );
-
-            ViewBag.SortingModelHelper = SortingModelHelper;
-            ViewBag.CurrentSearchModel = CurrentSearchModel;
-            ViewBag.VehicleMakeIsNull = vehicleServiceMake.VehicleMakeIsNull();  
-            
-            Response.StatusCode= StatusCodes.Status200OK;
+          
+            Response.StatusCode = StatusCodes.Status200OK;
             return View(PaginatedModels);
         }
 
@@ -63,10 +56,11 @@ namespace MVC.project.Controllers
 
             IQueryable<ModelViewModel> modelView = mapper.ProjectTo<ModelViewModel>(SortedFiltered);
 
-            PaginatedModels = await PSFmodels.PaginetedModel(modelView, pageIndexModel);
-            
-            SortingModelHelper = PSFmodels.sortingModel.sortingHelpModel;
-            CurrentSearchModel = PSFmodels.filteringModel.CurrentSearchModel;
+            PaginatedModels = await PSFmodels.PaginetedModel(modelView, pageIndexModel);      
+
+            ViewBag.SortingModelHelper = PSFmodels.sortingModel.sortingHelpModel;
+            ViewBag.CurrentSearchModel = PSFmodels.filteringModel.CurrentSearchModel;
+            ViewBag.VehicleMakeIsNull = vehicleServiceMake.VehicleMakeIsNull();
         }
         [HttpGet]
         public async Task<IActionResult> CreateModel()

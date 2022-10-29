@@ -69,11 +69,13 @@
                     <button 
                         type ="submit" 
                         formmethod="get" 
+                        onclick="hide(this)"
                         asp-action="UpdateModel" 
                         asp-route-id = "@item.Id">Update
                     </button>         
                     
                     <button 
+                        onclick="hide(this)"
                         type ="submit" 
                         asp-action="Delete" 
                         asp-route-id = "@item.Id" >Delete
@@ -124,3 +126,8 @@
     </button>
 
 </form>
+<script>
+    function hide(x){
+        x.hidden="hidden";
+    }
+</script>
