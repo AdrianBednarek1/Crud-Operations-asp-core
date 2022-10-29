@@ -1,0 +1,30 @@
+Promjene napravljene u Project.Service:
+
+1.  Klasa PSF je rascjepana na zasebne klase Paging, Sorting, Filtering. 
+    Te iste klase su spojene u zajedničku PSF klasu. 
+    Klasa je također podijeljena zasebno na Model i Make (PSFmake i PSFmodel).
+    
+2.  Nakon filtriranja/pretraživanja, podaci će ostati i dalje sortirani. 
+    Pretraživanje/filtriranje nije ograničeno na 1 page već se može searchati preko cijele baze zasebnog entiteta. 
+    
+3.  Izmjenjen je naziv atributa u entitetu VehicleMake, ModelsID -> Models.
+
+4.  Repository i Service klase su podijeljene zasebno na entitete Make i Model.
+    Također sam kreirao zajedničku klasu sa statičkom bazom koju repository Make i Model koriste (StaticDatabase).
+    Na taj način su dva zasebna entiteta zajedno sa klasama (Service, Repository) povezane istom bazom.
+    
+5.  Također PSF klasa prvo vraća u prvoj metodi Filtrirane/Sortirane podatke. 
+    Tek u drugoj metodi vraća pagane podatke u svrhu konverzije u drugi tip podataka (ViewModel).
+
+6.  Junk mapa se sastoji od recikliranih klasa/interface-a te nije dio rješenja. 
+
+MVC projekt:
+
+1. Sastoji se od 3 kontrolera -> Home, Model, Make.
+2. Mapa ViewModels pohranjuje modele klasa koji se prikazuju na Views. 
+3. Views mapa je kategorizirana na 3 djela -> Home, Model, Make.
+4. Make i Model se sastoje od 3 Views-a : Update, Create, VehicleMake(Model)
+5. View VehicleModel(Make) predstavlja glavni View za uvid u podatke.
+6. Atributi vezani za sortiranje i filtriranje se pohranjuju u ViewBags radi njihove primjene u Views.
+7. Modeli koje VehicleMake(Model) View prikazuje su tipa Paging<T>. T-> ModelViewModels or MakeViewModel.
+   Ostali Views (Update/Create) koriste samo ModelViewModels or MakeViewModel.
