@@ -3,121 +3,118 @@
 @using ZaPrav.NetCore
 @using ZaPrav.NetCore.VehicleDB
 @*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+	For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 }
 @model List<MakeViewModel>;
 <h1>Vehicle Make table</h1>
-<form asp-action="VehicleMake" method="get" >
-    <div class="form-actions no-color">
-        <p>
-            Find by name or abrv:
-            <input type="text" name="searchStringMade" value="@ViewBag.CurrentSearchMake" />
-            <input type= "hidden" name="sortOrderMades" value="@ViewBag.SortingMadeHelper.CurrentSort" /> 
-            <input type= "hidden" name="pageIndexMade" value="@ViewBag.PagingMake.pageIndex" /> 
-            <input type="submit" value="Search" class="btn btn-primary" /> |
-        </p>
-    </div>
-</form> 
-<form method = "post">
-    <table class = "table">
-        <thead>
-            <tr>
-                <th>
-                    <a 
-                        asp-action="VehicleMake" 
-                        asp-route-sortOrderMades="@ViewBag.SortingMadeHelper.IdSort"
-                        asp-route-pageIndexMade="@(ViewBag.PagingMake.pageIndex)"
-                        asp-route-currentFilterMade="@ViewBag.CurrentSearchMake">
-                        @Html.DisplayNameFor(model => model[0].Id)
-                    </a>
-                </th>
-                <th>
-                    <a 
-                        asp-action="VehicleMake" 
-                        asp-route-sortOrderMades="@ViewBag.SortingMadeHelper.NameSort"
-                        asp-route-pageIndexMade="@(ViewBag.PagingMake.pageIndex)"
-                        asp-route-currentFilterMade="@ViewBag.CurrentSearchMake">
-                        @Html.DisplayNameFor(model => model[0].Name)
-                    </a>
-                </th>
-                <th>
-                    <a 
-                        asp-action="VehicleMake" 
-                        asp-route-sortOrderMades="@ViewBag.SortingMadeHelper.AbrvSort"
-                        asp-route-pageIndexMade="@(ViewBag.PagingMake.pageIndex)"
-                        asp-route-currentFilterMade="@ViewBag.CurrentSearchMake">
-                        @Html.DisplayNameFor(model => model[0].Abrv)
-                    </a>
-                </th>
-            </tr>
-        </thead>
-        <tbody>          
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.Name</td>
-                <td>@item.Abrv</td>
-                <td>
-                <button                      
-                    type ="submit" 
-                    formmethod="get"
-                    onclick="hide(this)"
-                    asp-action="UpdateMake" 
-                    asp-route-id = "@item.Id">Update
-                </button>  
-                
-                <button        
-                    onclick="hide(this)"
-                    type ="submit"
-                    asp-action="Delete" 
-                    asp-route-id = "@item.Id">Delete            
-                </button>                         
-                </td>
-            </tr>
-        }
-        </tbody>
-    </table>
-    
-    @{
-    var prevDisabled = !ViewBag.pagingMake.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !ViewBag.pagingMake.HasNextPage ? "disabled" : "";
-}
-    <a asp-action="VehicleMake"
-       asp-route-sortOrderMades="@ViewBag.SortingMadeHelper.CurrentSort"
-       asp-route-pageIndexMade="@(ViewBag.PagingMake.pageIndex - 1)"
-       asp-route-currentFilterMade="@ViewBag.CurrentSearchMake"
-       class="btn btn-primary @prevDisabled">
-        Previous
-    </a>
-    <a asp-action="VehicleMake"
-       asp-route-sortOrderMades="@ViewBag.SortingMadeHelper.CurrentSort"
-       asp-route-pageIndexMade="@(ViewBag.PagingMake.pageIndex + 1)"
-       asp-route-currentFilterMade="@ViewBag.CurrentSearchMake"
-       class="btn btn-primary @nextDisabled">
-        Next
-    </a>
+<form asp-action="VehicleMake" method="get">
+	<div class="form-actions no-color">
+		<p>
+			Find by name or abrv:
+			<input type="text" name="searchStringMade" value="@ViewBag.CurrentSearchMake" />
+			<input type="hidden" name="sortOrderMades" value="@ViewBag.SortingMadeHelper.CurrentSort" />
+			<input type="hidden" name="pageIndexMade" value="@ViewBag.PagingMake.pageIndex" />
+			<input type="submit" value="Search" class="btn btn-primary" /> |
+		</p>
+	</div>
+</form>
+<form method="post">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>
+					<a asp-action="VehicleMake"
+					   asp-route-sortOrderMades="@ViewBag.SortingMadeHelper.IdSort"
+					   asp-route-pageIndexMade="@(ViewBag.PagingMake.pageIndex)"
+					   asp-route-currentFilterMade="@ViewBag.CurrentSearchMake">
+						@Html.DisplayNameFor(model => model[0].Id)
+					</a>
+				</th>
+				<th>
+					<a asp-action="VehicleMake"
+					   asp-route-sortOrderMades="@ViewBag.SortingMadeHelper.NameSort"
+					   asp-route-pageIndexMade="@(ViewBag.PagingMake.pageIndex)"
+					   asp-route-currentFilterMade="@ViewBag.CurrentSearchMake">
+						@Html.DisplayNameFor(model => model[0].Name)
+					</a>
+				</th>
+				<th>
+					<a asp-action="VehicleMake"
+					   asp-route-sortOrderMades="@ViewBag.SortingMadeHelper.AbrvSort"
+					   asp-route-pageIndexMade="@(ViewBag.PagingMake.pageIndex)"
+					   asp-route-currentFilterMade="@ViewBag.CurrentSearchMake">
+						@Html.DisplayNameFor(model => model[0].Abrv)
+					</a>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>@item.Id</td>
+					<td>@item.Name</td>
+					<td>@item.Abrv</td>
+					<td>
+						<button type="submit"
+							formmethod="get"
+							onclick="hide(this)"
+							asp-action="UpdateMake"
+							asp-route-id="@item.Id">
+							Update
+						</button>
+
+						<button onclick="hide(this)"
+							type="submit"
+							asp-action="Delete"
+							asp-route-id="@item.Id">
+							Delete
+						</button>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+
+	@{
+		var prevDisabled = !ViewBag.pagingMake.HasPreviousPage ? "disabled" : "";
+		var nextDisabled = !ViewBag.pagingMake.HasNextPage ? "disabled" : "";
+	}
+	<a asp-action="VehicleMake"
+	   asp-route-sortOrderMades="@ViewBag.SortingMadeHelper.CurrentSort"
+	   asp-route-pageIndexMade="@(ViewBag.PagingMake.pageIndex - 1)"
+	   asp-route-currentFilterMade="@ViewBag.CurrentSearchMake"
+	   class="btn btn-primary @prevDisabled">
+		Previous
+	</a>
+	<a asp-action="VehicleMake"
+	   asp-route-sortOrderMades="@ViewBag.SortingMadeHelper.CurrentSort"
+	   asp-route-pageIndexMade="@(ViewBag.PagingMake.pageIndex + 1)"
+	   asp-route-currentFilterMade="@ViewBag.CurrentSearchMake"
+	   class="btn btn-primary @nextDisabled">
+		Next
+	</a>
 </form>
 
-<form method = "get">
+<form method="get">
 
-    <button 
-        style="margin-top: 10px" 
-        asp-action="CreateMake">Create
-    </button>
+	<button style="margin-top: 10px"
+			asp-action="CreateMake">
+		Create
+	</button>
 
-    <button 
-        style="margin-top: 10px" 
-        asp-controller="Model" 
-        asp-action="VehicleModel">View Vehicle Models
-    </button>
+	<button style="margin-top: 10px"
+			asp-controller="Model"
+			asp-action="VehicleModel">
+		View Vehicle Models
+	</button>
 
 </form>
 
 <script>
-    function hide(x){
-        x.hidden="hidden";
-    }
+	function hide(x){
+		x.hidden="hidden";
+	}
 </script>

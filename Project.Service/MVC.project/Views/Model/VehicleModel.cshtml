@@ -1,132 +1,126 @@
 ﻿@using MVC.project.ViewModels.ModelViewModels
 @using ZaPrav.NetCore
 @using ZaPrav.NetCore.VehicleDB
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+
 @model List<ModelViewModel>;
 <h1>Vehicle Model table</h1>
 <form asp-action="VehicleModel" method="get">
-    <div class="form-actions no-color">
-        <p>
-            Find by name, abrv or Make ID:
-            <input type="text" name="SearchStringModel" value="@ViewBag.CurrentSearchModel" />
-            <input type= "hidden" name="sortOrderModel" value="@ViewBag.SortingModelHelper.CurrentSort" /> 
-            <input type="submit" value="Search" class="btn btn-primary" /> |
-        </p>
-    </div>
+	<div class="form-actions no-color">
+		<p>
+			Find by name, abrv or Make ID:
+			<input type="text" name="SearchStringModel" value="@ViewBag.CurrentSearchModel" />
+			<input type="hidden" name="pageIndexModel" value="@(ViewBag.pagingModel.pageIndex)" />
+			<input type="hidden" name="sortOrderModel" value="@ViewBag.SortingModelHelper.CurrentSort" />
+			<input type="submit" value="Search" class="btn btn-primary" /> |
+		</p>
+	</div>
 </form>
-<form method = "post">
-    <table class = "table">
-        <thead>
-            <tr>
-                <th>
-                    <a 
-                        asp-action="VehicleModel" 
-                        asp-route-sortOrderModel="@ViewBag.SortingModelHelper.IdSort"
-                        asp-route-currentFilterModel="@ViewBag.CurrentSearchModel">
-                        @Html.DisplayNameFor(model => model[0].Id)
-                    </a>
-                </th>
-                <th>
-                    <a 
-                        asp-action="VehicleModel" 
-                        asp-route-sortOrderModel="@ViewBag.SortingModelHelper.NameSort"
-                        asp-route-currentFilterModel="@ViewBag.CurrentSearchModel">
-                        @Html.DisplayNameFor(model => model[0].Name)
-                    </a>
-                </th>
-                <th>
-                    <a 
-                        asp-action="VehicleModel" 
-                        asp-route-sortOrderModel="@ViewBag.SortingModelHelper.AbrvSort"
-                        asp-route-currentFilterModel="@ViewBag.CurrentSearchModel">
-                        @Html.DisplayNameFor(model => model[0].Abrv)
-                    </a>
-                </th>
-                <th>
-                    <a 
-                        asp-action="VehicleModel"
-                        asp-route-sortOrderModel="@ViewBag.SortingModelHelper.ForeignIdSort"
-                        asp-route-currentFilterModel="@ViewBag.CurrentSearchModel">
-                        @Html.DisplayNameFor(model => model[0].MakeId)
-                    </a>
-                </th>
-            </tr>
-        </thead>
-        <tbody>          
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.Name</td>
-                <td>@item.Abrv</td>
-                <td>@item.MakeId</td>
-                <td>
-                    <button 
-                        type ="submit" 
-                        formmethod="get" 
-                        onclick="hide(this)"
-                        asp-action="UpdateModel" 
-                        asp-route-id = "@item.Id">Update
-                    </button>         
-                    
-                    <button 
-                        onclick="hide(this)"
-                        type ="submit" 
-                        asp-action="Delete" 
-                        asp-route-id = "@item.Id" >Delete
-                    </button>
-                </td>
-            </tr>
-        }
-        </tbody>
-    </table>
-    @{
-    var prevDisabledModel = !ViewBag.pagingModel.hasPreviousPage ? "disabled" : "";
-    var nextDisabledModel = !ViewBag.pagingModel.hasNextPage ? "disabled" : "";
-    }
-    <a 
-       asp-action="VehicleModel"
-       asp-route-sortOrderModel="@ViewBag.SortingModelHelper.CurrentSort"
-       asp-route-pageIndexModel="@(ViewBag.pagingModel.PageIndex - 1)"
-       asp-route-currentFilterModel="@ViewBag.CurrentSearchModel"
-       class="btn btn-primary @prevDisabledModel">
-       Previous
-    </a>
-    <a 
-       asp-action="VehicleModel"
-       asp-route-sortOrderModel="@ViewBag.SortingModelHelper.CurrentSort"
-       asp-route-pageIndexModel="@(ViewBag.pagingModel.PageIndex + 1)"
-       asp-route-currentFilterModel="@ViewBag.CurrentSearchModel"
-       class="btn btn-primary @nextDisabledModel">
-       Next
-    </a>
+<form method="post">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>
+					<a asp-action="VehicleModel"
+					   asp-route-sortOrderModel="@ViewBag.SortingModelHelper.IdSort"
+					   asp-route-pageIndexModel="@(ViewBag.pagingModel.pageIndex)"
+					   asp-route-currentFilterModel="@ViewBag.CurrentSearchModel">
+						@Html.DisplayNameFor(model => model[0].Id)
+					</a>
+				</th>
+				<th>
+					<a asp-action="VehicleModel"
+					   asp-route-sortOrderModel="@ViewBag.SortingModelHelper.NameSort"
+					   asp-route-pageIndexModel="@(ViewBag.pagingModel.pageIndex)"
+					   asp-route-currentFilterModel="@ViewBag.CurrentSearchModel">
+						@Html.DisplayNameFor(model => model[0].Name)
+					</a>
+				</th>
+				<th>
+					<a asp-action="VehicleModel"
+					   asp-route-sortOrderModel="@ViewBag.SortingModelHelper.AbrvSort"
+					   asp-route-pageIndexModel="@(ViewBag.pagingModel.pageIndex)"
+					   asp-route-currentFilterModel="@ViewBag.CurrentSearchModel">
+						@Html.DisplayNameFor(model => model[0].Abrv)
+					</a>
+				</th>
+				<th>
+					<a asp-action="VehicleModel"
+					   asp-route-sortOrderModel="@ViewBag.SortingModelHelper.ForeignIdSort"
+					   asp-route-currentFilterModel="@ViewBag.CurrentSearchModel">
+						@Html.DisplayNameFor(model => model[0].MakeId)
+					</a>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>@item.Id</td>
+					<td>@item.Name</td>
+					<td>@item.Abrv</td>
+					<td>@item.MakeId</td>
+					<td>
+						<button type="submit"
+							formmethod="get"
+							onclick="hide(this)"
+							asp-action="UpdateModel"
+							asp-route-id="@item.Id">
+							Update
+						</button>
+
+						<button onclick="hide(this)"
+							type="submit"
+							asp-action="Delete"
+							asp-route-id="@item.Id">
+							Delete
+						</button>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+	@{
+		var prevDisabledModel = !ViewBag.pagingModel.hasPreviousPage ? "disabled" : "";
+		var nextDisabledModel = !ViewBag.pagingModel.hasNextPage ? "disabled" : "";
+	}
+	<a asp-action="VehicleModel"
+	   asp-route-sortOrderModel="@ViewBag.SortingModelHelper.CurrentSort"
+	   asp-route-pageIndexModel="@(ViewBag.pagingModel.pageIndex - 1)"
+	   asp-route-currentFilterModel="@ViewBag.CurrentSearchModel"
+	   class="btn btn-primary @prevDisabledModel">
+		Previous
+	</a>
+	<a asp-action="VehicleModel"
+	   asp-route-sortOrderModel="@ViewBag.SortingModelHelper.CurrentSort"
+	   asp-route-pageIndexModel="@(ViewBag.pagingModel.pageIndex + 1)"
+	   asp-route-currentFilterModel="@ViewBag.CurrentSearchModel"
+	   class="btn btn-primary @nextDisabledModel">
+		Next
+	</a>
 </form>
 
-<form method = "get">
-    @if (ViewBag.VehicleMakeIsNull)
-    {
-        <p>Create Vehicle Make first!</p>
-    }
-    else
-    {
-        <button 
-            style="margin-top: 10px" 
-            asp-action="CreateModel">Create
-        </button>     
-    }
-    <button 
-        style="margin-top: 10px" 
-        asp-controller="Make" 
-        asp-action="VehicleMake">View Vehicle Makes
-    </button>
+<form method="get">
+	@if (ViewBag.VehicleMakeIsNull)
+	{
+		<p>Create Vehicle Make first!</p>
+	}
+	else
+	{
+		<button style="margin-top: 10px"
+			asp-action="CreateModel">
+			Create
+		</button>
+	}
+	<button style="margin-top: 10px"
+			asp-controller="Make"
+			asp-action="VehicleMake">
+		View Vehicle Makes
+	</button>
 
 </form>
 <script>
-    function hide(x){
-        x.hidden="hidden";
-    }
+	function hide(x){
+		x.hidden="hidden";
+	}
 </script>

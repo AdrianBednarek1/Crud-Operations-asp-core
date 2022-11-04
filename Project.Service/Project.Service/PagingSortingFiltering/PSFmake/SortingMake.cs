@@ -18,7 +18,7 @@ namespace Project.Service.PagingSortingFiltering
             sortingHelpMake.NameSort = String.IsNullOrEmpty(sortOrderMake) ? "NameDesc" : "";
             sortingHelpMake.AbrvSort = sortOrderMake == "Abrv" ? "AbrvDesc" : "Abrv";
             sortingHelpMake.IdSort = sortOrderMake == "Id" ? "IdDesc" : "Id";
-            
+
             switch (sortOrderMake)
             {
                 case "IdDesc":
@@ -46,6 +46,6 @@ namespace Project.Service.PagingSortingFiltering
                     descending = false;
                     break;
             }
-        }      
+        }
     }
 }

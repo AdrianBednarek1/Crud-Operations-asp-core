@@ -15,10 +15,7 @@ namespace MVC.project.Controllers
     {
         private List<SelectListItem> VehicleMakeInList;
         private IMapper mapper;
-        public ModelController
-            (
-            IMapper _mapper
-            )
+        public ModelController(IMapper _mapper)
         {
             mapper = _mapper;
         }

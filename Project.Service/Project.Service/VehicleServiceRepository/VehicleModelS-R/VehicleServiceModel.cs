@@ -7,7 +7,7 @@ using ZaPrav.NetCore.VehicleDB;
 
 namespace Project.Service.VehicleService
 {
-    public class VehicleServiceModel //: IVehicleServiceModel
+    public class VehicleServiceModel
     {
         private static VehicleRepositoryModel vehicleRepositoryModel = new VehicleRepositoryModel();
         public static async Task<IQueryable<VehicleModel>> GetQueryDBmodel()
@@ -49,12 +49,12 @@ namespace Project.Service.VehicleService
         public static async Task Create(VehicleModel data)
         {
             VehicleModel? model = data;
-            await vehicleRepositoryModel.CreateVehicleModel(model);         
+            await vehicleRepositoryModel.CreateVehicleModel(model);
         }
         public static async Task Update(VehicleModel data)
         {
             VehicleModel? model = data;
-            await vehicleRepositoryModel.UpdateVehicleModel(model);           
+            await vehicleRepositoryModel.UpdateVehicleModel(model);
         }
         public static async Task Delete(VehicleModel data)
         {

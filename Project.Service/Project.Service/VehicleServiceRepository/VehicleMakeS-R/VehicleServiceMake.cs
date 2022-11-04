@@ -40,7 +40,7 @@ namespace ZaPrav.NetCore.VehicleDB
         }
         public static async Task PagingVehicleMake(int pageIndex, int pageSize)
         {
-           await vehicleRepositoryMake.PagingVehicleMake(pageIndex, pageSize);
+            await vehicleRepositoryMake.PagingVehicleMake(pageIndex, pageSize);
         }
         public static async Task<VehicleMake> SearchVehicleMake(int id)
         {
@@ -51,9 +51,9 @@ namespace ZaPrav.NetCore.VehicleDB
             return await vehicleRepositoryMake.ReturnMakeList();
         }
         public static async Task Create(VehicleMake data)
-        {           
+        {
             VehicleMake? made = data;
-            await vehicleRepositoryMake.CreateVehicleMake(made);           
+            await vehicleRepositoryMake.CreateVehicleMake(made);
         }
         public static async Task Update(VehicleMake data)
         {
@@ -63,7 +63,7 @@ namespace ZaPrav.NetCore.VehicleDB
         public static async Task Delete(int id)
         {
             VehicleMake? make = await SearchVehicleMake(id);
-            await vehicleRepositoryMake.DeleteVehicleMake(make);            
+            await vehicleRepositoryMake.DeleteVehicleMake(make);
         }
     }
 }
