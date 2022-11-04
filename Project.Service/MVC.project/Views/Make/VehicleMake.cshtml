@@ -1,4 +1,5 @@
 ﻿@using MVC.project.ViewModels.MakeViewModels
+@using Project.Service.PagingSortingFiltering.PSFmake
 @using ZaPrav.NetCore
 @using ZaPrav.NetCore.VehicleDB
 @*
@@ -6,16 +7,16 @@
 *@
 @{
 }
-@model Paging<MakeViewModel>;
+@model List<MakeViewModel>;
 <h1>Vehicle Make table</h1>
 <form asp-action="VehicleMake" method="get" >
     <div class="form-actions no-color">
         <p>
             Find by name or abrv:
-            <input type="text" name="SearchStringMade" value="@ViewBag.CurrentSearchMake" />
+            <input type="text" name="searchStringMade" value="@ViewBag.CurrentSearchMake" />
             <input type= "hidden" name="sortOrderMades" value="@ViewBag.SortingMadeHelper.CurrentSort" /> 
+            <input type= "hidden" name="pageIndexMade" value="@ViewBag.PagingMake.pageIndex" /> 
             <input type="submit" value="Search" class="btn btn-primary" /> |
-            @*<a asp-page="./Index">Back to full List</a>*@
         </p>
     </div>
 </form> 
@@ -27,6 +28,7 @@
                     <a 
                         asp-action="VehicleMake" 
                         asp-route-sortOrderMades="@ViewBag.SortingMadeHelper.IdSort"
+                        asp-route-pageIndexMade="@(ViewBag.PagingMake.pageIndex)"
                         asp-route-currentFilterMade="@ViewBag.CurrentSearchMake">
                         @Html.DisplayNameFor(model => model[0].Id)
                     </a>
@@ -35,6 +37,7 @@
                     <a 
                         asp-action="VehicleMake" 
                         asp-route-sortOrderMades="@ViewBag.SortingMadeHelper.NameSort"
+                        asp-route-pageIndexMade="@(ViewBag.PagingMake.pageIndex)"
                         asp-route-currentFilterMade="@ViewBag.CurrentSearchMake">
                         @Html.DisplayNameFor(model => model[0].Name)
                     </a>
@@ -43,6 +46,7 @@
                     <a 
                         asp-action="VehicleMake" 
                         asp-route-sortOrderMades="@ViewBag.SortingMadeHelper.AbrvSort"
+                        asp-route-pageIndexMade="@(ViewBag.PagingMake.pageIndex)"
                         asp-route-currentFilterMade="@ViewBag.CurrentSearchMake">
                         @Html.DisplayNameFor(model => model[0].Abrv)
                     </a>
@@ -78,19 +82,19 @@
     </table>
     
     @{
-    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    var prevDisabled = !ViewBag.pagingMake.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !ViewBag.pagingMake.HasNextPage ? "disabled" : "";
 }
     <a asp-action="VehicleMake"
        asp-route-sortOrderMades="@ViewBag.SortingMadeHelper.CurrentSort"
-       asp-route-pageIndexMade="@(Model.PageIndex - 1)"
+       asp-route-pageIndexMade="@(ViewBag.PagingMake.pageIndex - 1)"
        asp-route-currentFilterMade="@ViewBag.CurrentSearchMake"
        class="btn btn-primary @prevDisabled">
         Previous
     </a>
     <a asp-action="VehicleMake"
        asp-route-sortOrderMades="@ViewBag.SortingMadeHelper.CurrentSort"
-       asp-route-pageIndexMade="@(Model.PageIndex + 1)"
+       asp-route-pageIndexMade="@(ViewBag.PagingMake.pageIndex + 1)"
        asp-route-currentFilterMade="@ViewBag.CurrentSearchMake"
        class="btn btn-primary @nextDisabled">
         Next

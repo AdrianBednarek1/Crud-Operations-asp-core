@@ -6,7 +6,7 @@
 *@
 @{
 }
-@model Paging<ModelViewModel>;
+@model List<ModelViewModel>;
 <h1>Vehicle Model table</h1>
 <form asp-action="VehicleModel" method="get">
     <div class="form-actions no-color">
@@ -15,7 +15,6 @@
             <input type="text" name="SearchStringModel" value="@ViewBag.CurrentSearchModel" />
             <input type= "hidden" name="sortOrderModel" value="@ViewBag.SortingModelHelper.CurrentSort" /> 
             <input type="submit" value="Search" class="btn btn-primary" /> |
-            @*<a asp-page="./Index">Back to full List</a>*@
         </p>
     </div>
 </form>
@@ -86,13 +85,13 @@
         </tbody>
     </table>
     @{
-    var prevDisabledModel = !Model.HasPreviousPage ? "disabled" : "";
-    var nextDisabledModel = !Model.HasNextPage ? "disabled" : "";
+    var prevDisabledModel = !ViewBag.pagingModel.hasPreviousPage ? "disabled" : "";
+    var nextDisabledModel = !ViewBag.pagingModel.hasNextPage ? "disabled" : "";
     }
     <a 
        asp-action="VehicleModel"
        asp-route-sortOrderModel="@ViewBag.SortingModelHelper.CurrentSort"
-       asp-route-pageIndexModel="@(Model.PageIndex - 1)"
+       asp-route-pageIndexModel="@(ViewBag.pagingModel.PageIndex - 1)"
        asp-route-currentFilterModel="@ViewBag.CurrentSearchModel"
        class="btn btn-primary @prevDisabledModel">
        Previous
@@ -100,7 +99,7 @@
     <a 
        asp-action="VehicleModel"
        asp-route-sortOrderModel="@ViewBag.SortingModelHelper.CurrentSort"
-       asp-route-pageIndexModel="@(Model.PageIndex + 1)"
+       asp-route-pageIndexModel="@(ViewBag.pagingModel.PageIndex + 1)"
        asp-route-currentFilterModel="@ViewBag.CurrentSearchModel"
        class="btn btn-primary @nextDisabledModel">
        Next
@@ -108,7 +107,7 @@
 </form>
 
 <form method = "get">
-    @if (await ViewBag.VehicleMakeIsNull)
+    @if (ViewBag.VehicleMakeIsNull)
     {
         <p>Create Vehicle Make first!</p>
     }

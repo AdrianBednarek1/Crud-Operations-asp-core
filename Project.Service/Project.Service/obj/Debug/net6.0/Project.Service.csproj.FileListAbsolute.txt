@@ -96,13 +96,9 @@ F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\
 F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\obj\Debug\net6.0\Project.Service.AssemblyInfo.cs
 F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\obj\Debug\net6.0\Project.Service.csproj.CoreCompileInputs.cache
 F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\obj\Debug\net6.0\Project.Service.MvcApplicationPartsAssemblyInfo.cache
-F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\obj\Debug\net6.0\Project.Service.RazorAssemblyInfo.cache
-F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\obj\Debug\net6.0\Project.Service.RazorAssemblyInfo.cs
 F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\obj\Debug\net6.0\staticwebassets.build.json
 F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\obj\Debug\net6.0\staticwebassets.development.json
-F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\obj\Debug\net6.0\scopedcss\Pages\Shared\_Layout.cshtml.rz.scp.css
 F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\obj\Debug\net6.0\scopedcss\bundle\Project.Service.styles.css
-F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\obj\Debug\net6.0\scopedcss\projectbundle\Project.Service.bundle.scp.css
 F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\obj\Debug\net6.0\Project.Service.csproj.CopyComplete
 F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\obj\Debug\net6.0\Project.Service.dll
 F:\VisualStudioProjekti\L2 Back-end-zadatak\L2-Back-end-zadatak\Project.Service\Project.Service\obj\Debug\net6.0\refint\Project.Service.dll

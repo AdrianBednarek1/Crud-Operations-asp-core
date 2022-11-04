@@ -10,7 +10,7 @@ namespace Project.Service.Interfaces.IVehicleRepository
         Task<VehicleMake> SearchVehicleMake(int id);
         Task Create(VehicleMake data);
         Task Update(VehicleMake data);
-        Task Delete(VehicleMake data);
+        Task Delete(int id);
         Task<bool> VehicleMakeIsNull();
     }
 }

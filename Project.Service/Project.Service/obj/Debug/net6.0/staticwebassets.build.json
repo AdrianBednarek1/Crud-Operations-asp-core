@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "kPLKTaoQsfkzHq2+MlPTh5P0XwelQXlBj27XGejJowQ=",
+  "Hash": "v59/7F3YYnpoFkV7n5QkElMgCOUm8oFjlFXCpGPq2Fg=",
   "Source": "Project.Service",
   "BasePath": "_content/Project.Service",
   "Mode": "Default",
@@ -16,40 +16,6 @@
     }
   ],
   "Assets": [
-    {
-      "Identity": "F:\\VisualStudioProjekti\\L2 Back-end-zadatak\\L2-Back-end-zadatak\\Project.Service\\Project.Service\\obj\\Debug\\net6.0\\scopedcss\\bundle\\Project.Service.styles.css",
-      "SourceId": "Project.Service",
-      "SourceType": "Computed",
-      "ContentRoot": "F:\\VisualStudioProjekti\\L2 Back-end-zadatak\\L2-Back-end-zadatak\\Project.Service\\Project.Service\\obj\\Debug\\net6.0\\scopedcss\\bundle\\",
-      "BasePath": "_content/Project.Service",
-      "RelativePath": "Project.Service.styles.css",
-      "AssetKind": "All",
-      "AssetMode": "CurrentProject",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "ScopedCss",
-      "AssetTraitValue": "ApplicationBundle",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "F:\\VisualStudioProjekti\\L2 Back-end-zadatak\\L2-Back-end-zadatak\\Project.Service\\Project.Service\\obj\\Debug\\net6.0\\scopedcss\\bundle\\Project.Service.styles.css"
-    },
-    {
-      "Identity": "F:\\VisualStudioProjekti\\L2 Back-end-zadatak\\L2-Back-end-zadatak\\Project.Service\\Project.Service\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Project.Service.bundle.scp.css",
-      "SourceId": "Project.Service",
-      "SourceType": "Computed",
-      "ContentRoot": "F:\\VisualStudioProjekti\\L2 Back-end-zadatak\\L2-Back-end-zadatak\\Project.Service\\Project.Service\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\",
-      "BasePath": "_content/Project.Service",
-      "RelativePath": "Project.Service.bundle.scp.css",
-      "AssetKind": "All",
-      "AssetMode": "Reference",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "ScopedCss",
-      "AssetTraitValue": "ProjectBundle",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "F:\\VisualStudioProjekti\\L2 Back-end-zadatak\\L2-Back-end-zadatak\\Project.Service\\Project.Service\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Project.Service.bundle.scp.css"
-    },
     {
       "Identity": "F:\\VisualStudioProjekti\\L2 Back-end-zadatak\\L2-Back-end-zadatak\\Project.Service\\Project.Service\\wwwroot\\css\\site.css",
       "SourceId": "Project.Service",

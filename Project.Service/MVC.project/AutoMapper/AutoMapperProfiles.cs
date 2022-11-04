@@ -17,10 +17,6 @@ namespace MVC.project.AutoMapper
             CreateMap<VehicleMake, MakeViewModel>();
             CreateMap<VehicleMake, MakeViewModel>().
                 ReverseMap().ForMember(d=>d.Models, r=>r.Ignore()).ForAllMembers(opt=> opt.Condition(r=> r!=null));
-
-            //CreateMap<VehicleMake, SelectListItem>().
-            //    ForMember(d=> d.Value, r=> r.MapFrom(a=>a.Id)).ForMember(d=>d.Text,r=>r.MapFrom(a=>a.Name));
-
         }
     }
 }

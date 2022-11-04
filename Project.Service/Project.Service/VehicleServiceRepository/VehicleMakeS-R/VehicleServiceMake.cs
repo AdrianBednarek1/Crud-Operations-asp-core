@@ -1,47 +1,69 @@
 ﻿using Project.Service;
 using Project.Service.Interfaces.IVehicleRepository;
 using Project.Service.Interfaces.IVehicleService;
+using Project.Service.PagingSortingFiltering.PSFmake;
 using System.Data.Entity;
+using System.Linq;
 
 namespace ZaPrav.NetCore.VehicleDB
 {
-    public class VehicleServiceMake : IVehicleServiceMake
+    public class VehicleServiceMake //: IVehicleServiceMake
     {
-        private IVehicleRepositoryMake vehicleRepository;
-        public VehicleServiceMake(IVehicleRepositoryMake _vehicleRepository)
+        private static VehicleRepositoryMake vehicleRepositoryMake = new VehicleRepositoryMake();
+        public static async Task<List<VehicleMake>> GetFullListMake()
         {
-            vehicleRepository = _vehicleRepository;
+            return await vehicleRepositoryMake.GetFullListMake();
         }
-        public async Task<DbSet<VehicleMake>> GetQueryDBmake()
+        public static async Task<IQueryable<VehicleMake>> GetQueryMake()
         {
-            return await vehicleRepository.GetDBQueryMake();
+            return await vehicleRepositoryMake.GetDBQueryMake();
         }
-        public async Task<List<VehicleMake>> GetVehicleMakes()
+        public static async Task SortVehicleMake(string sortOrderMake)
         {
-            return await vehicleRepository.GetVehicleMakes();
+            await vehicleRepositoryMake.SortVehicleMake(sortOrderMake);
         }
-        public async Task<VehicleMake> SearchVehicleMake(int id)
+        public static async Task FilterVehicleMake(string searchStringMake, string currentSearchMake, int? pageIndexMake)
         {
-            return await vehicleRepository.SearchVehicleMake(id);
+            await vehicleRepositoryMake.FilterVehicleMake(searchStringMake, currentSearchMake, pageIndexMake);
         }
-        public async Task Create(VehicleMake data)
+        public static async Task<SortingHelp> ReturnSortingHelp()
+        {
+            return vehicleRepositoryMake.sortingMake.sortingHelpMake;
+        }
+        public static async Task<string> ReturnCurrentSearch()
+        {
+            return vehicleRepositoryMake.filteringMake.currentSearchMake;
+        }
+        public static async Task<PagingMake> GetPreviousNextPageMake()
+        {
+            return vehicleRepositoryMake.pagingMake;
+        }
+        public static async Task PagingVehicleMake(int pageIndex, int pageSize)
+        {
+           await vehicleRepositoryMake.PagingVehicleMake(pageIndex, pageSize);
+        }
+        public static async Task<VehicleMake> SearchVehicleMake(int id)
+        {
+            return await vehicleRepositoryMake.SearchVehicleMake(id);
+        }
+        public static async Task<List<VehicleMake>> ReturnMakeList()
+        {
+            return await vehicleRepositoryMake.ReturnMakeList();
+        }
+        public static async Task Create(VehicleMake data)
         {           
             VehicleMake? made = data;
-            await vehicleRepository.CreateVehicleMake(made);           
+            await vehicleRepositoryMake.CreateVehicleMake(made);           
         }
-        public async Task Update(VehicleMake data)
+        public static async Task Update(VehicleMake data)
         {
             VehicleMake? made = data;
-            await vehicleRepository.UpdateVehicleMake(made);
+            await vehicleRepositoryMake.UpdateVehicleMake(made);
         }
-        public async Task Delete(VehicleMake data)
+        public static async Task Delete(int id)
         {
-            VehicleMake? made = data;
-            await vehicleRepository.DeleteVehicleMake(made);            
-        }
-        public async Task<bool> VehicleMakeIsNull()
-        {
-            return await vehicleRepository.VehicleMakesIsNull();
+            VehicleMake? make = await SearchVehicleMake(id);
+            await vehicleRepositoryMake.DeleteVehicleMake(make);            
         }
     }
 }

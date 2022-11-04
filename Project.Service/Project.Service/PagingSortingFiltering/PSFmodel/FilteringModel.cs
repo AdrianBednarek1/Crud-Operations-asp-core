@@ -1,33 +1,35 @@
 ﻿using Project.Service.Interfaces.ISortingFilteringPaging.IPSFmodel;
+using Project.Service.VehicleService;
 using ZaPrav.NetCore.VehicleDB;
 
 namespace Project.Service.PagingSortingFiltering
 {
-    public class FilteringModel : IFilteringModel
+    public class FilteringModel //: IFilteringModel
     {
-        public string? CurrentSearchModel { get; private set; }
-
-        public IQueryable<VehicleModel> SearchFilterModel
-            (string SearchString, string CurrentSearch, IQueryable<VehicleModel> vehicleModelSorting, int? pageIndexMade)
+        public string? currentSearchModel { get; private set; }
+        public IQueryable<VehicleModel> filteredModelQuery { get; set; }
+        public async Task FilterModel
+            (string searchString, string currentSearch, int? pageIndexMade)
         {
-            if (SearchString != null)
+            if (searchString != null)
             {
                 pageIndexMade = 1;
             }
             else
             {
-                SearchString = CurrentSearch;
+                searchString = currentSearch;
             }
-            CurrentSearchModel = SearchString;
+            currentSearchModel = searchString;
 
-            if (!String.IsNullOrEmpty(SearchString))
+            IQueryable<VehicleModel> modelQuery = await VehicleServiceModel.GetQueryDBmodel();
+
+            if (!String.IsNullOrEmpty(searchString))
             {
-                vehicleModelSorting = vehicleModelSorting.Where
-                    (s => s.Name.Contains(SearchString) || s.Abrv.Contains(SearchString) || s.MakeId.ToString().Contains(SearchString));
+                modelQuery = modelQuery.Where
+                    (s => s.Name.Contains(searchString) || s.Abrv.Contains(searchString) || s.MakeId.ToString().Contains(searchString));
             }
 
-            return vehicleModelSorting;
-
+            filteredModelQuery = modelQuery;
         }
     }
 }

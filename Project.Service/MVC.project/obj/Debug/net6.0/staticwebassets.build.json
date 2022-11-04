@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "vv3HnrHGuNwPvQkwPkkiox8Bf0l/4IrwcsZIocUE7jQ=",
+  "Hash": "dHoEREnNYGYd1RIXYciEeW4oJB8/zlugb2DmnUKx52c=",
   "Source": "MVC.project",
   "BasePath": "_content/MVC.project",
   "Mode": "Default",
@@ -1088,23 +1088,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
-    },
-    {
-      "Identity": "F:\\VisualStudioProjekti\\L2 Back-end-zadatak\\L2-Back-end-zadatak\\Project.Service\\Project.Service\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Project.Service.bundle.scp.css",
-      "SourceId": "Project.Service",
-      "SourceType": "Project",
-      "ContentRoot": "F:\\VisualStudioProjekti\\L2 Back-end-zadatak\\L2-Back-end-zadatak\\Project.Service\\Project.Service\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\",
-      "BasePath": "_content/Project.Service",
-      "RelativePath": "Project.Service.bundle.scp.css",
-      "AssetKind": "All",
-      "AssetMode": "Reference",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "ScopedCss",
-      "AssetTraitValue": "ProjectBundle",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "F:\\VisualStudioProjekti\\L2 Back-end-zadatak\\L2-Back-end-zadatak\\Project.Service\\Project.Service\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Project.Service.bundle.scp.css"
     },
     {
       "Identity": "F:\\VisualStudioProjekti\\L2 Back-end-zadatak\\L2-Back-end-zadatak\\Project.Service\\Project.Service\\wwwroot\\css\\site.css",

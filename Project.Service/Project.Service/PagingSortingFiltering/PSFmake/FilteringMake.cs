@@ -3,28 +3,31 @@ using ZaPrav.NetCore.VehicleDB;
 
 namespace Project.Service.PagingSortingFiltering
 {
-    public class FilteringMake : IFilteringMake
+    public class FilteringMake //: IFilteringMake
     {
-        public string? CurrentSearchMake { get; private set; }
-        public IQueryable<VehicleMake> SearchFilterMake
-            (string SearchString, string CurrentSearch, IQueryable<VehicleMake> vehicleMakes, int? pageIndexMade)
+        public string? currentSearchMake { get; private set; }
+        public IQueryable<VehicleMake> filteredMakeQuery { get; set; }
+        public async Task FilterMake
+            (string searchString, string _currentSearch, int? pageIndexMake)
         {
-            if (SearchString != null)
+            if (searchString != null)
             {
-                pageIndexMade = 1;
+                pageIndexMake = 1;
             }
             else
             {
-                SearchString = CurrentSearch;
+                searchString = _currentSearch;
             }
-            CurrentSearchMake = SearchString;
+            currentSearchMake = searchString;
 
-            if (!String.IsNullOrEmpty(SearchString))
+            IQueryable<VehicleMake> makeQuery = await VehicleServiceMake.GetQueryMake();
+
+            if (!String.IsNullOrEmpty(searchString))
             {
-                vehicleMakes = vehicleMakes.Where(s => s.Name.Contains(SearchString) || s.Abrv.Contains(SearchString));
+                makeQuery = makeQuery.Where(s => s.Name.Contains(searchString) || s.Abrv.Contains(searchString));
             }
 
-            return vehicleMakes;
+            filteredMakeQuery = makeQuery;
             
         }     
     }

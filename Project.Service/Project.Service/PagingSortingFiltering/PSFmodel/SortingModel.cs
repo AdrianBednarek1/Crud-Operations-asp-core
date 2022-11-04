@@ -4,15 +4,16 @@ using ZaPrav.NetCore.VehicleDB;
 
 namespace Project.Service.PagingSortingFiltering.PSFmodel
 {
-    public class SortingModel : ISortingModel
+    public class SortingModel //: ISortingModel
     {
         public SortingHelp sortingHelpModel { get; set; }
-
+        public bool descending = false;
+        public string nameOfProperty = "Id";
         public SortingModel()
         {
             sortingHelpModel = new SortingHelp();
         }
-        public IQueryable<VehicleModel> SortModel(string sortOrderModel, IQueryable<VehicleModel> VehicleModel)
+        public async Task SortModel(string sortOrderModel)
         {
             sortingHelpModel.CurrentSort = sortOrderModel;
             sortingHelpModel.NameSort = String.IsNullOrEmpty(sortOrderModel) ? "NameDesc" : "";
@@ -23,31 +24,38 @@ namespace Project.Service.PagingSortingFiltering.PSFmodel
             switch (sortOrderModel)
             {
                 case "IdDesc":
-                    VehicleModel = VehicleModel.OrderByDescending(s => s.Id);
+                    descending = true;
+                    nameOfProperty = nameof(VehicleModel.Id);
                     break;
                 case "Id":
-                    VehicleModel = VehicleModel.OrderBy(s => s.Id);
+                    descending = false;
+                    nameOfProperty = nameof(VehicleModel.Id);
                     break;
                 case "Abrv":
-                    VehicleModel = VehicleModel.OrderBy(s => s.Abrv);
+                    descending = false;
+                    nameOfProperty = nameof(VehicleModel.Abrv);
                     break;
                 case "NameDesc":
-                    VehicleModel = VehicleModel.OrderByDescending(s => s.Name);
+                    descending = true;
+                    nameOfProperty = nameof(VehicleModel.Name);
                     break;
                 case "AbrvDesc":
-                    VehicleModel = VehicleModel.OrderByDescending(s => s.Abrv);
+                    descending = true;
+                    nameOfProperty = nameof(VehicleModel.Abrv);
                     break;
                 case "MadeId":
-                    VehicleModel = VehicleModel.OrderBy(s => s.MakeId);
+                    descending = false;
+                    nameOfProperty = nameof(VehicleModel.MakeId);
                     break;
                 case "MadeIdDesc":
-                    VehicleModel = VehicleModel.OrderByDescending(s => s.MakeId);
+                    descending = true;
+                    nameOfProperty = nameof(VehicleModel.MakeId);
                     break;
                 default:
-                    VehicleModel = VehicleModel.OrderBy(s => s.Name);
+                    nameOfProperty = nameof(VehicleModel.Name);
+                    descending = false;
                     break;
             }
-            return VehicleModel;
         }
     }
 }

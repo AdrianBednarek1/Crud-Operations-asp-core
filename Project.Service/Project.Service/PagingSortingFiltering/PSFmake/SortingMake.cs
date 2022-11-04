@@ -3,42 +3,49 @@ using ZaPrav.NetCore.VehicleDB;
 
 namespace Project.Service.PagingSortingFiltering
 {
-    public class SortingMake : ISortingMake
+    public class SortingMake //: ISortingMake
     {
         public SortingHelp sortingHelpMake { get; set; }
+        public bool descending = false;
+        public string nameOfProperty = "Id";
         public SortingMake()
         {
             sortingHelpMake = new SortingHelp();
         }
-        public IQueryable<VehicleMake> SortMake(string sortOrderMake, IQueryable<VehicleMake> VehicleMake)
+        public async Task SortMake(string sortOrderMake)
         {
             sortingHelpMake.CurrentSort = sortOrderMake;
             sortingHelpMake.NameSort = String.IsNullOrEmpty(sortOrderMake) ? "NameDesc" : "";
             sortingHelpMake.AbrvSort = sortOrderMake == "Abrv" ? "AbrvDesc" : "Abrv";
             sortingHelpMake.IdSort = sortOrderMake == "Id" ? "IdDesc" : "Id";
-
+            
             switch (sortOrderMake)
             {
                 case "IdDesc":
-                    VehicleMake = VehicleMake.OrderByDescending(s => s.Id);
+                    descending = true;
+                    nameOfProperty = nameof(VehicleMake.Id);
                     break;
                 case "Id":
-                    VehicleMake = VehicleMake.OrderBy(s => s.Id);
+                    descending = false;
+                    nameOfProperty = nameof(VehicleMake.Id);
                     break;
                 case "Abrv":
-                    VehicleMake = VehicleMake.OrderBy(s => s.Abrv);
+                    descending = false;
+                    nameOfProperty = nameof(VehicleMake.Abrv);
                     break;
                 case "NameDesc":
-                    VehicleMake = VehicleMake.OrderByDescending(s => s.Name);
+                    descending = true;
+                    nameOfProperty = nameof(VehicleMake.Name);
                     break;
                 case "AbrvDesc":
-                    VehicleMake = VehicleMake.OrderByDescending(s => s.Abrv);
+                    descending = true;
+                    nameOfProperty = nameof(VehicleMake.Abrv);
                     break;
                 default:
-                    VehicleMake = VehicleMake.OrderBy(s => s.Name);
+                    nameOfProperty = nameof(VehicleMake.Name);
+                    descending = false;
                     break;
             }
-            return VehicleMake;
         }      
     }
 }
