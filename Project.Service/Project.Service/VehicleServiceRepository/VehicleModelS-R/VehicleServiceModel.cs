@@ -10,17 +10,17 @@ namespace Project.Service.VehicleService
     public class VehicleServiceModel
     {
         private static VehicleRepositoryModel vehicleRepositoryModel = new VehicleRepositoryModel();
-        public static async Task<IQueryable<VehicleModel>> GetQueryDBmodel()
+        public static async Task<DbSet<VehicleModel>> GetVehicleModel()
         {
-            return await vehicleRepositoryModel.GetDBQueryModel();
+            return await vehicleRepositoryModel.GetVehicleModel();
         }
         public static async Task SortVehicleModel(string sortOrderModel)
         {
             await vehicleRepositoryModel.SortVehicleModel(sortOrderModel);
         }
-        public static async Task FilterVehicleModel(string searchStringModel, string currentSearchModel, int? pageIndexModel)
+        public static async Task FilterVehicleModel(string searchStringModel, string currentSearchModel)
         {
-            await vehicleRepositoryModel.FilterVehicleModel(searchStringModel, currentSearchModel, pageIndexModel);
+            await vehicleRepositoryModel.FilterVehicleModel(searchStringModel, currentSearchModel);
         }
         public static async Task<SortingHelp> ReturnSortingHelp()
         {
@@ -38,32 +38,25 @@ namespace Project.Service.VehicleService
         {
             return vehicleRepositoryModel.filteringModel.currentSearchModel;
         }
-        public static async Task<List<VehicleModel>> ReturnMakeList()
+        public static async Task<List<VehicleModel>> PaginatedFilteredSortedModelList()
         {
-            return await vehicleRepositoryModel.ReturnModelList();
+            return await vehicleRepositoryModel.PaginatedFilteredSortedModelList();
         }
-        public static async Task<VehicleModel> SearchVehicleModel(int id)
+        public static async Task<VehicleModel> GetModelById(int id)
         {
-            return await vehicleRepositoryModel.SearchVehicleModel(id);
+            return await vehicleRepositoryModel.GetModelById(id);
         }
         public static async Task Create(VehicleModel data)
         {
-            VehicleModel? model = data;
-            await vehicleRepositoryModel.CreateVehicleModel(model);
+            await vehicleRepositoryModel.CreateVehicleModel(data);
         }
         public static async Task Update(VehicleModel data)
         {
-            VehicleModel? model = data;
-            await vehicleRepositoryModel.UpdateVehicleModel(model);
+            await vehicleRepositoryModel.UpdateVehicleModel(data);
         }
         public static async Task Delete(VehicleModel data)
         {
-            VehicleModel? model = data;
-            await vehicleRepositoryModel.DeleteVehicleModel(model);
-        }
-        public static async Task<bool> VehicleModelIsNull()
-        {
-            return await vehicleRepositoryModel.VehicleModelsIsNull();
+            await vehicleRepositoryModel.DeleteVehicleModel(data);
         }
         public static async Task<bool> VehicleMakeIsNull()
         {

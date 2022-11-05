@@ -26,11 +26,11 @@ namespace MVC.project.Controllers
             string SearchStringModel, string currentFilterModel, int? pageIndexModel
             )
         {
-            await UpdatePSFdata
+            await PagingSortingFilteringData
                 (
                 sortOrderModel, SearchStringModel, currentFilterModel, pageIndexModel
                 );
-            List<VehicleModel> vehicleModelList = await VehicleServiceModel.ReturnMakeList();
+            List<VehicleModel> vehicleModelList = await VehicleServiceModel.PaginatedFilteredSortedModelList();
 
             List<ModelViewModel> pagedVehicleModel;
             pagedVehicleModel = mapper.Map<List<ModelViewModel>>(vehicleModelList);
@@ -39,10 +39,10 @@ namespace MVC.project.Controllers
             return View(pagedVehicleModel);
         }
 
-        private async Task UpdatePSFdata
+        private async Task PagingSortingFilteringData
             (string sortOrderModel, string searchStringModel, string currentFilterModel, int? pageIndexModel)
         {
-            await VehicleServiceModel.FilterVehicleModel(searchStringModel, currentFilterModel, pageIndexModel);
+            await VehicleServiceModel.FilterVehicleModel(searchStringModel, currentFilterModel);
 
             await VehicleServiceModel.PagingVehicleModel(pageIndexModel ?? 1, 4);
 
@@ -77,8 +77,9 @@ namespace MVC.project.Controllers
         }
         private async Task RefreshDropDown()
         {
-            List<VehicleMake> listMake = new List<VehicleMake>();
-            listMake = await VehicleServiceMake.GetFullListMake();
+            var vehicleMake = await VehicleServiceMake.GetVehicleMake();
+            List<VehicleMake> listMake = vehicleMake.ToList();
+
             VehicleMakeInList = listMake.ConvertAll
             (a =>
                 {
@@ -91,12 +92,13 @@ namespace MVC.project.Controllers
             );
             ViewBag.VehicleMakeInList = VehicleMakeInList;
         }
+
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                VehicleModel vehicleModel = await VehicleServiceModel.SearchVehicleModel(id);
+                VehicleModel vehicleModel = await VehicleServiceModel.GetModelById(id);
                 await VehicleServiceModel.Delete(vehicleModel);
             }
             catch (NotSupportedException ex)
@@ -110,7 +112,7 @@ namespace MVC.project.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateModel(int id)
         {
-            VehicleModel vehicleModel = await VehicleServiceModel.SearchVehicleModel(id);
+            VehicleModel vehicleModel = await VehicleServiceModel.GetModelById(id);
             await RefreshDropDown();
             ModelViewModel modelViewModel = mapper.Map<ModelViewModel>(vehicleModel);
 

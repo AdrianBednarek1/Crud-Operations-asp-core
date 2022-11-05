@@ -79,8 +79,8 @@
 	</table>
 
 	@{
-		var prevDisabled = !ViewBag.pagingMake.HasPreviousPage ? "disabled" : "";
-		var nextDisabled = !ViewBag.pagingMake.HasNextPage ? "disabled" : "";
+		var prevDisabled = !ViewBag.pagingMake.hasPreviousPage ? "disabled" : "";
+		var nextDisabled = !ViewBag.pagingMake.hasNextPage ? "disabled" : "";
 	}
 	<a asp-action="VehicleMake"
 	   asp-route-sortOrderMades="@ViewBag.SortingMadeHelper.CurrentSort"

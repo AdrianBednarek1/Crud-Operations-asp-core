@@ -18,21 +18,17 @@ namespace ZaPrav.NetCore.VehicleDB
             pagingMake = new PagingMake();
             sortingMake = new SortingMake();
         }
-        public async Task<IQueryable<VehicleMake>> GetDBQueryMake()
+        public async Task<DbSet<VehicleMake>> GetVehicleMakes()
         {
-            return vehicleDB.vehicleMakes.AsQueryable();
+            return vehicleDB.vehicleMakes;
         }
-        public async Task<List<VehicleMake>> GetFullListMake()
-        {
-            return await vehicleDB.vehicleMakes.ToListAsync();
-        }
-        public async Task<List<VehicleMake>> ReturnMakeList()
+        public async Task<List<VehicleMake>> SortedFilteredPaginetedListMake()
         {
             IQueryable<VehicleMake> paginetedQuery;
             paginetedQuery = pagingMake.paginetedMakeQuery ?? vehicleDB.vehicleMakes.AsQueryable();
 
             IQueryable<VehicleMake> filteredQuery;
-            filteredQuery = filteringMake.filteredMakeQuery ?? vehicleDB.vehicleMakes.AsQueryable();
+            filteredQuery = filteringMake.filterQueryMake ?? vehicleDB.vehicleMakes.AsQueryable();
 
             IQueryable<VehicleMake> filteredPaginetedQuery;
             filteredPaginetedQuery = paginetedQuery.Intersect(filteredQuery);
@@ -48,64 +44,55 @@ namespace ZaPrav.NetCore.VehicleDB
         }
         public async Task PagingVehicleMake(int pageIndex, int pageSize)
         {
-            await pagingMake.CreateAsync(pageIndex, pageSize);
+            await pagingMake.CreatePagingMake(pageIndex, pageSize);
         }
-        public async Task FilterVehicleMake(string searchStringMake, string currentSearchMake, int? pageIndexMake)
+        public async Task FilterVehicleMake(string searchStringMake, string currentSearchMake)
         {
-            await filteringMake.FilterMake(searchStringMake, currentSearchMake, pageIndexMake);
+            await filteringMake.FilterMake(searchStringMake, currentSearchMake);
         }
         public async Task SortVehicleMake(string sortOrderMake)
         {
             await sortingMake.SortMake(sortOrderMake);
         }
-        public async Task<VehicleModel> SearchVehicleModel(int id)
+        public async Task Create(VehicleMake? make)
         {
-            var vehicleModel = await vehicleDB.vehicleModels.SingleOrDefaultAsync(d => d.Id == id);
-            return vehicleModel;
-        }
-        public async Task<List<VehicleMake>> GetVehicleMakes()
-        {
-            return await vehicleDB.vehicleMakes.ToListAsync();
-        }
-        public async Task CreateVehicleMake(VehicleMake? made)
-        {
-            if (made != null)
+            if (make != null)
             {
-                vehicleDB.vehicleMakes.Add(made);
+                vehicleDB.vehicleMakes.Add(make);
             }
             await vehicleDB.SaveChangesAsync();
         }
-        public async Task DeleteVehicleMake(VehicleMake? made)
+        public async Task Delete(VehicleMake? make)
         {
-            if (made != null)
+            if (make != null)
             {
                 foreach (var item in vehicleDB.vehicleModels)
                 {
-                    if (item.MakeId == made.Id && item != null)
+                    if (item.MakeId == make.Id && item != null)
                     {
                         vehicleDB.vehicleModels.Remove(item);
                     }
                 }
-                vehicleDB.vehicleMakes.Remove(made);
+                vehicleDB.vehicleMakes.Remove(make);
             }
             await vehicleDB.SaveChangesAsync();
         }
-        public async Task UpdateVehicleMake(VehicleMake? made)
+        public async Task Update(VehicleMake? make)
         {
-            if (made != null)
+            if (make != null)
             {
-                vehicleDB.vehicleMakes.Single(d => d.Id == made.Id).Id = made.Id;
-                vehicleDB.vehicleMakes.Single(d => d.Id == made.Id).Abrv = made.Abrv;
-                vehicleDB.vehicleMakes.Single(d => d.Id == made.Id).Name = made.Name;
+                vehicleDB.vehicleMakes.Single(d => d.Id == make.Id).Id = make.Id;
+                vehicleDB.vehicleMakes.Single(d => d.Id == make.Id).Abrv = make.Abrv;
+                vehicleDB.vehicleMakes.Single(d => d.Id == make.Id).Name = make.Name;
             }
             await vehicleDB.SaveChangesAsync();
         }
-        public async Task<VehicleMake> SearchVehicleMake(int id)
+        public async Task<VehicleMake> GetMakeById(int id)
         {
-            var vehicleMade = await vehicleDB.vehicleMakes.SingleOrDefaultAsync(d => d.Id == id);
-            return vehicleMade;
+            var vehicleMake = await vehicleDB.vehicleMakes.SingleOrDefaultAsync(d => d.Id == id);
+            return vehicleMake;
         }
-        public async Task<bool> VehicleMakesIsNull()
+        public async Task<bool> VehicleMakeIsNull()
         {
             if (!await vehicleDB.vehicleMakes.AnyAsync() || vehicleDB.vehicleMakes == null)
             {

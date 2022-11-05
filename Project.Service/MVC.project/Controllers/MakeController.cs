@@ -20,12 +20,12 @@ namespace MVC.project.Controllers
             string searchStringMade, string currentFilterMade, int? pageIndexMade
             )
         {
-            await UpdateSortingFilteringPagingData
+            await SortFilterPaginateData
                 (
                 sortOrderMades, searchStringMade, currentFilterMade, pageIndexMade
                 );
 
-            List<VehicleMake> vehicleMakesList = await VehicleServiceMake.ReturnMakeList();
+            List<VehicleMake> vehicleMakesList = await VehicleServiceMake.SortedFilteredPaginetedListMake();
 
             List<MakeViewModel> pagedVehicleMakes;
             pagedVehicleMakes = mapper.Map<List<MakeViewModel>>(vehicleMakesList);
@@ -34,10 +34,10 @@ namespace MVC.project.Controllers
             return View(pagedVehicleMakes);
         }
 
-        private async Task UpdateSortingFilteringPagingData
+        private async Task SortFilterPaginateData
             (string sortOrderMades, string searchStringMade, string currentFilterMade, int? pageIndexMade)
         {
-            await VehicleServiceMake.FilterVehicleMake(searchStringMade, currentFilterMade, pageIndexMade);
+            await VehicleServiceMake.FilterVehicleMake(searchStringMade, currentFilterMade);
 
             await VehicleServiceMake.PagingVehicleMake(pageIndexMade ?? 1, 4);
 
@@ -86,7 +86,7 @@ namespace MVC.project.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateMake(int id)
         {
-            VehicleMake vehicleMake = await VehicleServiceMake.SearchVehicleMake(id);
+            VehicleMake vehicleMake = await VehicleServiceMake.GetByIdMake(id);
             MakeViewModel makeViewModel = mapper.Map<MakeViewModel>(vehicleMake);
 
             Response.StatusCode = StatusCodes.Status302Found;

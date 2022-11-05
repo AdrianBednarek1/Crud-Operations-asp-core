@@ -9,19 +9,16 @@ namespace Project.Service.PagingSortingFiltering
         public string? currentSearchModel { get; private set; }
         public IQueryable<VehicleModel> filteredModelQuery { get; set; }
         public async Task FilterModel
-            (string searchString, string currentSearch, int? pageIndexMade)
+            (string searchString, string currentSearch)
         {
-            if (searchString != null)
-            {
-                pageIndexMade = 1;
-            }
-            else
+            if (searchString == null)
             {
                 searchString = currentSearch;
             }
+    
             currentSearchModel = searchString;
 
-            IQueryable<VehicleModel> modelQuery = await VehicleServiceModel.GetQueryDBmodel();
+            IQueryable<VehicleModel> modelQuery = await VehicleServiceModel.GetVehicleModel();
 
             if (!String.IsNullOrEmpty(searchString))
             {

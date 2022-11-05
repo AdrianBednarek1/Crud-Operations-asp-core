@@ -4,13 +4,15 @@ using ZaPrav.NetCore.VehicleDB;
 
 namespace Project.Service.PagingSortingFiltering.PSFmodel
 {
-    public class SortingModel //: ISortingModel
+    public class SortingModel : ISortingModel
     {
         public SortingHelp sortingHelpModel { get; set; }
-        public bool descending = false;
-        public string nameOfProperty = "Id";
+        public bool descending { get; set; }
+        public string nameOfProperty { get; set; }
         public SortingModel()
         {
+            descending = false;
+            nameOfProperty = "Id";
             sortingHelpModel = new SortingHelp();
         }
         public async Task SortModel(string sortOrderModel)

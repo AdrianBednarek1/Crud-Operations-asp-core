@@ -20,11 +20,11 @@ namespace Project.Service.VehicleService
             sortingModel = new SortingModel();
             pagingModel = new PagingModel();
         }
-        public async Task<IQueryable<VehicleModel>> GetDBQueryModel()
+        public async Task<DbSet<VehicleModel>> GetVehicleModel()
         {
-            return vehicleDB.vehicleModels.AsQueryable();
+            return vehicleDB.vehicleModels;
         }
-        public async Task<List<VehicleModel>> ReturnModelList()
+        public async Task<List<VehicleModel>> PaginatedFilteredSortedModelList()
         {
             IQueryable<VehicleModel> paginetedQuery;
             paginetedQuery = pagingModel.paginetedModelQuery ?? vehicleDB.vehicleModels.AsQueryable();
@@ -68,13 +68,6 @@ namespace Project.Service.VehicleService
             }
             return false;
         }
-        public void DeleteVehicleModelWithoutSaving(VehicleModel? model)
-        {
-            if (model != null)
-            {
-                vehicleDB.vehicleModels.Remove(model);
-            }
-        }
         public async Task UpdateVehicleModel(VehicleModel? model)
         {
             if (model != null)
@@ -90,11 +83,11 @@ namespace Project.Service.VehicleService
         {
             await pagingModel.CreateAsync(pageIndex, pageSize);
         }
-        public async Task FilterVehicleModel(string searchStringModel, string currentSearchModel, int? pageIndexMake)
+        public async Task FilterVehicleModel(string searchStringModel, string currentSearchModel)
         {
-            await filteringModel.FilterModel(searchStringModel, currentSearchModel, pageIndexMake);
+            await filteringModel.FilterModel(searchStringModel, currentSearchModel);
         }
-        public async Task<VehicleModel> SearchVehicleModel(int id)
+        public async Task<VehicleModel> GetModelById(int id)
         {
             var vehicleModel = await vehicleDB.vehicleModels.SingleOrDefaultAsync(d => d.Id == id);
             return vehicleModel;
@@ -102,14 +95,6 @@ namespace Project.Service.VehicleService
         public async Task SortVehicleModel(string sortOrderModel)
         {
             await sortingModel.SortModel(sortOrderModel);
-        }
-        public async Task<bool> VehicleModelsIsNull()
-        {
-            if (!await vehicleDB.vehicleModels.AnyAsync() || vehicleDB.vehicleModels == null)
-            {
-                return true;
-            }
-            return false;
         }
     }
 }
