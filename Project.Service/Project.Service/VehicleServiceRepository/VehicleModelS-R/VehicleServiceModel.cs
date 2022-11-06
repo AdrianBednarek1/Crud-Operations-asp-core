@@ -1,8 +1,6 @@
 ﻿using Project.Service.Interfaces.IVehicleRepository;
-using Project.Service.Interfaces.IVehicleService;
 using Project.Service.PagingSortingFiltering.Parameters;
 using Project.Service.PagingSortingFiltering.PSFmodel;
-using System.Data.Entity;
 using ZaPrav.NetCore;
 using ZaPrav.NetCore.VehicleDB;
 
@@ -10,7 +8,11 @@ namespace Project.Service.VehicleService
 {
     public class VehicleServiceModel
     {
-        private static VehicleRepositoryModel vehicleRepositoryModel = new VehicleRepositoryModel();
+        private static IVehicleRepositoryModel vehicleRepositoryModel;
+        public VehicleServiceModel(IVehicleRepositoryModel _vehicleRepositoryModel)
+        {
+            vehicleRepositoryModel = _vehicleRepositoryModel;
+        }
         public static async Task<List<VehicleModel>> GetVehicleModel()
         {
             return await vehicleRepositoryModel.GetVehicleModel();
@@ -19,7 +21,7 @@ namespace Project.Service.VehicleService
         {
             return vehicleRepositoryModel.sortingModel.sortAttributes;
         }
-        public static async Task<PagingModel> GetPreviousNextPageModel()
+        public static async Task<IPagingModel> GetPreviousNextPageModel()
         {
             return vehicleRepositoryModel.pagingModel;
         }

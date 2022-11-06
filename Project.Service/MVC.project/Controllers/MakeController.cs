@@ -3,22 +3,24 @@ using MVC.project.ViewModels.MakeViewModels;
 using ZaPrav.NetCore.VehicleDB;
 using AutoMapper;
 using Project.Service.PagingSortingFiltering.Parameters;
+using Project.Service;
 
 namespace MVC.project.Controllers
 {
     public class MakeController : Controller
     {
         private IMapper mapper;
-        public MakeController(IMapper _mappe)
+        public MakeController(IMapper _mapper)
         {
-            mapper = _mappe;
+            mapper = _mapper;
+            Kernel.Inject<VehicleServiceMake>();
         }
         [HttpGet]
         public async Task<IActionResult> VehicleMake
             (string sortOrderMades, string searchStringMade, string currentFilterMade, int? pageIndexMade)
         {
-            List<VehicleMake> makeList = await GetMakeList(sortOrderMades, searchStringMade, currentFilterMade, pageIndexMade);
-            List<MakeViewModel> makeViewModels = mapper.Map<List<MakeViewModel>>(makeList);
+            List<VehicleMake> vehicleMake = await GetMakeList(sortOrderMades, searchStringMade, currentFilterMade, pageIndexMade);
+            List<MakeViewModel> makeViewModels = mapper.Map<List<MakeViewModel>>(vehicleMake);
 
             Response.StatusCode = StatusCodes.Status200OK;
             return View(makeViewModels);

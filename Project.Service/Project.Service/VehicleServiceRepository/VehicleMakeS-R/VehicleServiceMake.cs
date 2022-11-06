@@ -1,11 +1,16 @@
-﻿using Project.Service.PagingSortingFiltering.Parameters;
+﻿using Project.Service.Interfaces.IVehicleService;
+using Project.Service.PagingSortingFiltering.Parameters;
 using Project.Service.PagingSortingFiltering.PSFmake;
 
 namespace ZaPrav.NetCore.VehicleDB
 {
     public class VehicleServiceMake
     {
-        private static VehicleRepositoryMake vehicleRepositoryMake = new VehicleRepositoryMake();
+        private static IVehicleRepositoryMake vehicleRepositoryMake;
+        public VehicleServiceMake(IVehicleRepositoryMake _vehicleRepositoryMake)
+		{
+            vehicleRepositoryMake = _vehicleRepositoryMake;
+        }
         public static async Task<List<VehicleMake>> GetVehicleMake()
         {
             return await vehicleRepositoryMake.GetVehicleMake();
@@ -23,7 +28,7 @@ namespace ZaPrav.NetCore.VehicleDB
         {
             return vehicleRepositoryMake.filteringMake.currentSearchMake;
         }
-        public static async Task<PagingMake> GetPreviousNextPageMake()
+        public static async Task<IPagingMake> GetPreviousNextPageMake()
         {
             return vehicleRepositoryMake.pagingMake;
         }

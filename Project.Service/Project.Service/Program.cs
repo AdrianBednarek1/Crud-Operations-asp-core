@@ -2,10 +2,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-//builder.Services.AddTransient<IVehicleServiceMake, VehicleServiceMake>();
-//builder.Services.AddTransient<IVehicleServiceModel, VehicleServiceModel>();
-//builder.Services.AddTransient<IVehicleRepositoryMake, VehicleRepositoryMake>();
-//builder.Services.AddTransient<IVehicleRepositoryModel, VehicleRepositoryModel>();
 
 var app = builder.Build();
 

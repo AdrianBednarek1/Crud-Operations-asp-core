@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Project.Service.Interfaces.ISortingFilteringPaging.IPSFmodel;
 using Project.Service.Interfaces.IVehicleRepository;
 using Project.Service.PagingSortingFiltering;
 using Project.Service.PagingSortingFiltering.Parameters;
@@ -11,15 +12,15 @@ namespace Project.Service.VehicleService
     public class VehicleRepositoryModel : IVehicleRepositoryModel
     {
         private VehicleDB vehicleDB;
-        public FilteringModel filteringModel { get; set; }
-        public SortingModel sortingModel { get; set; }
-        public PagingModel pagingModel { get; set; }
-        public VehicleRepositoryModel()
+        public IFilteringModel filteringModel { get; set; }
+        public ISortingModel sortingModel { get; set; }
+        public IPagingModel pagingModel { get; set; }
+        public VehicleRepositoryModel(IFilteringModel _filteringModel, ISortingModel _sortingModel, IPagingModel _pagingModel)
         {
             vehicleDB = VehicleStaticDatabase.vehicleDB;
-            filteringModel = new FilteringModel();
-            sortingModel = new SortingModel();
-            pagingModel = new PagingModel();
+            filteringModel = _filteringModel;
+            sortingModel = _sortingModel;
+            pagingModel = _pagingModel;
         }
         public async Task<List<VehicleModel>> GetVehicleModel()
         {
@@ -66,14 +67,14 @@ namespace Project.Service.VehicleService
         {
             if (updateModel != null)
             {
-                var itemForUpdate = vehicleDB.vehicleModels.Single(d => d.Id == updateModel.Id);
+                VehicleModel itemForUpdate = vehicleDB.vehicleModels.Single(d => d.Id == updateModel.Id);
                 vehicleDB.Entry(itemForUpdate).CurrentValues.SetValues(updateModel);
                 await vehicleDB.SaveChangesAsync();
             }
         }
         public async Task<VehicleModel> GetModelById(int id)
         {
-            var vehicleModel = await vehicleDB.vehicleModels.SingleOrDefaultAsync(d => d.Id == id);
+            VehicleModel vehicleModel = await vehicleDB.vehicleModels.SingleOrDefaultAsync(d => d.Id == id);
             return vehicleModel;
         }
     }

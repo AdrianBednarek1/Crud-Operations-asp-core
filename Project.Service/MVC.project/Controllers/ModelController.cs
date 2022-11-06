@@ -5,6 +5,7 @@ using ZaPrav.NetCore.VehicleDB;
 using AutoMapper;
 using Project.Service.VehicleService;
 using Project.Service.PagingSortingFiltering.Parameters;
+using Project.Service;
 
 namespace MVC.project.Controllers
 {
@@ -14,6 +15,7 @@ namespace MVC.project.Controllers
         public ModelController(IMapper _mapper)
         {
             mapper = _mapper;
+            Kernel.Inject<VehicleServiceModel>();
         }
         [HttpGet]
         public async Task<IActionResult> VehicleModel

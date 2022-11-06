@@ -1,4 +1,5 @@
-﻿using Project.Service.Interfaces.IVehicleService;
+﻿using Project.Service.Interfaces.ISortingFilteringPaging.IPSFmake;
+using Project.Service.Interfaces.IVehicleService;
 using Project.Service.PagingSortingFiltering;
 using Project.Service.PagingSortingFiltering.Parameters;
 using Project.Service.PagingSortingFiltering.PSFmake;
@@ -10,16 +11,15 @@ namespace ZaPrav.NetCore.VehicleDB
     public class VehicleRepositoryMake : IVehicleRepositoryMake
     {
         private VehicleDB vehicleDB;
-        public FilteringMake filteringMake { get; set; }
-        public PagingMake pagingMake { get; set; }
-        public SortingMake sortingMake { get; set; }
-
-        public VehicleRepositoryMake()
+        public IFilteringMake filteringMake { get; set; }
+        public IPagingMake pagingMake { get; set; }
+        public ISortingMake sortingMake { get; set; }
+        public VehicleRepositoryMake(ISortingMake _sortingMake, IPagingMake _pagingMake, IFilteringMake _filteringMake)
         {
             vehicleDB = VehicleStaticDatabase.vehicleDB;
-            filteringMake = new FilteringMake();
-            pagingMake = new PagingMake();
-            sortingMake = new SortingMake();
+            filteringMake = _filteringMake;
+            pagingMake = _pagingMake;
+            sortingMake = _sortingMake;
         }
         public async Task<List<VehicleMake>> GetVehicleMake()
         {
