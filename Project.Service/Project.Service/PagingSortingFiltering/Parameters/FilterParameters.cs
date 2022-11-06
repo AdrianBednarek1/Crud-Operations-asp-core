@@ -11,11 +11,7 @@
         }
         public string GetCurrentSearch()
         {
-            if (searchString == null)
-            {
-                searchString = currentFilter;
-            }
-            return searchString;
+            return searchString ?? currentFilter;
         }
     }
 }

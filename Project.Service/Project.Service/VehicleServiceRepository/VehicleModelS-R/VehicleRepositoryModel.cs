@@ -28,23 +28,19 @@ namespace Project.Service.VehicleService
         public async Task<List<VehicleModel>> GetVehicleModel
             (SortParameters sortParameters, FilterParameters filterParameters, PageParameters pageParameters)
         {
-            IQueryable<VehicleModel> pageQuery;
-            pageQuery = await pagingModel.GetPageModel(pageParameters);
+            IQueryable<VehicleModel> pageQuery = await pagingModel.GetPageModel(pageParameters);
 
-            IQueryable<VehicleModel> filterQuery;
-            filterQuery = await filteringModel.GetFilterModel(filterParameters);
+            IQueryable<VehicleModel> filterQuery = await filteringModel.GetFilterModel(filterParameters);
 
             string propertyNameSort = await sortingModel.SortModel(sortParameters);
 
-            List<VehicleModel> intersectFilterPage;
-            intersectFilterPage = pageQuery.Intersect(filterQuery).ToList();
+            List<VehicleModel> intersectFilterPage = pageQuery.Intersect(filterQuery).ToList();
 
-            List<VehicleModel> filterPageSort;
-            filterPageSort = SetOrderBy(intersectFilterPage, propertyNameSort);
+            List<VehicleModel> filterPageSort = GetSortedList(intersectFilterPage, propertyNameSort);
 
             return filterPageSort;
         }
-        private List<VehicleModel> SetOrderBy(List<VehicleModel> filterPage, string propertyNameSort)
+        private List<VehicleModel> GetSortedList(List<VehicleModel> filterPage, string propertyNameSort)
         {
             if (sortingModel.isDescending)
             {
@@ -72,12 +68,10 @@ namespace Project.Service.VehicleService
         {
             if (model != null)
             {
-                vehicleDB.vehicleModels.Single(d => d.Id == model.Id).Id = model.Id;
-                vehicleDB.vehicleModels.Single(d => d.Id == model.Id).MakeId = model.MakeId;
-                vehicleDB.vehicleModels.Single(d => d.Id == model.Id).Abrv = model.Abrv;
-                vehicleDB.vehicleModels.Single(d => d.Id == model.Id).Name = model.Name;
+                var itemForUpdate = vehicleDB.vehicleModels.Single(d => d.Id == model.Id);
+                vehicleDB.Entry(itemForUpdate).CurrentValues.SetValues(model);
+                await vehicleDB.SaveChangesAsync();
             }
-            await vehicleDB.SaveChangesAsync();
         }
         public async Task<VehicleModel> GetModelById(int id)
         {

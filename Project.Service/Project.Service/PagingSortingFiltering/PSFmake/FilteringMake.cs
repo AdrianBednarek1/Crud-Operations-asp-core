@@ -1,5 +1,4 @@
-﻿using Project.Service.Interfaces.ISortingFilteringPaging.IPSFmake;
-using Project.Service.PagingSortingFiltering.Parameters;
+﻿using Project.Service.PagingSortingFiltering.Parameters;
 using ZaPrav.NetCore.VehicleDB;
 
 namespace Project.Service.PagingSortingFiltering

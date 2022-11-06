@@ -12,6 +12,7 @@ namespace ZaPrav.NetCore.VehicleDB
         public FilteringMake filteringMake { get; set; }
         public PagingMake pagingMake { get; set; }
         public SortingMake sortingMake { get; set; }
+        
         public VehicleRepositoryMake()
         {
             vehicleDB = VehicleStaticDatabase.vehicleDB;
@@ -55,14 +56,8 @@ namespace ZaPrav.NetCore.VehicleDB
         public async Task Delete(VehicleMake? make)
         {
             if (make != null)
-            {
-                foreach (var item in vehicleDB.vehicleModels)
-                {
-                    if (item.MakeId == make.Id && item != null)
-                    {
-                        vehicleDB.vehicleModels.Remove(item);
-                    }
-                }
+            {            
+                vehicleDB.vehicleModels.RemoveRange(vehicleDB.vehicleModels.Where(model=>model.MakeId==make.Id));
                 vehicleDB.vehicleMakes.Remove(make);
             }
             await vehicleDB.SaveChangesAsync();
@@ -71,9 +66,8 @@ namespace ZaPrav.NetCore.VehicleDB
         {
             if (make != null)
             {
-                vehicleDB.vehicleMakes.Single(d => d.Id == make.Id).Id = make.Id;
-                vehicleDB.vehicleMakes.Single(d => d.Id == make.Id).Abrv = make.Abrv;
-                vehicleDB.vehicleMakes.Single(d => d.Id == make.Id).Name = make.Name;
+                var itemForUpdate = vehicleDB.vehicleMakes.Single(d => d.Id == make.Id);
+                vehicleDB.Entry(itemForUpdate).CurrentValues.SetValues(make);
             }
             await vehicleDB.SaveChangesAsync();
         }

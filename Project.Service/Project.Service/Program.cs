@@ -1,11 +1,3 @@
-using AutoMapper;
-using AutoMapper.EquivalencyExpression;
-using Project.Service.Interfaces.IVehicleRepository;
-using Project.Service.Interfaces.IVehicleService;
-using Project.Service.VehicleService;
-using ZaPrav.NetCore.VehicleDB;
-
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -14,7 +6,6 @@ builder.Services.AddRazorPages();
 //builder.Services.AddTransient<IVehicleServiceModel, VehicleServiceModel>();
 //builder.Services.AddTransient<IVehicleRepositoryMake, VehicleRepositoryMake>();
 //builder.Services.AddTransient<IVehicleRepositoryModel, VehicleRepositoryModel>();
-
 
 var app = builder.Build();
 

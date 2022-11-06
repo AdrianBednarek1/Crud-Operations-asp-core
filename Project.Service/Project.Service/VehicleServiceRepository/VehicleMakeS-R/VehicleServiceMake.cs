@@ -1,4 +1,5 @@
-﻿using Project.Service.PagingSortingFiltering.Parameters;
+﻿using AutoMapper;
+using Project.Service.PagingSortingFiltering.Parameters;
 using Project.Service.PagingSortingFiltering.PSFmake;
 
 namespace ZaPrav.NetCore.VehicleDB
