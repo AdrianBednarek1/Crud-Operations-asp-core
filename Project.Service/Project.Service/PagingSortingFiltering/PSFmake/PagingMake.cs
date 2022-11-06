@@ -1,4 +1,5 @@
-﻿using ZaPrav.NetCore.VehicleDB;
+﻿using Project.Service.PagingSortingFiltering.Parameters;
+using ZaPrav.NetCore.VehicleDB;
 
 namespace Project.Service.PagingSortingFiltering.PSFmake
 {
@@ -6,25 +7,30 @@ namespace Project.Service.PagingSortingFiltering.PSFmake
     {
         public int pageIndex { get; private set; } 
         public int totalPages { get; private set; } 
+        public int pageSize { get; private set; }
         public bool hasPreviousPage => pageIndex > 1;
         public bool hasNextPage => pageIndex < totalPages;
-        public IQueryable<VehicleMake>? paginetedMakeQuery;
+        public IQueryable<VehicleMake>? paginetedMakeQuery { get; set; }
         public PagingMake()
         {
             pageIndex = 0;
             totalPages = 0;
         }
-        public async Task CreatePagingMake(int _pageIndex, int _pageSize)
+        public async Task<IQueryable<VehicleMake>> GetPageMake(PageParameters pageParameters)
         {
-            var vehicleMake = await VehicleServiceMake.GetVehicleMake();
+            List<VehicleMake> vehicleMake = await VehicleServiceMake.GetVehicleMake();
             IQueryable<VehicleMake> vehicleMakeQuery = vehicleMake.AsQueryable();
 
-            var count = vehicleMakeQuery.Count();
+            int pageCount = vehicleMakeQuery.Count();
 
-            paginetedMakeQuery = vehicleMakeQuery.OrderByDescending(d=>d.Id).Skip((_pageIndex - 1) * _pageSize).Take(_pageSize);
+            pageIndex = pageParameters.pageIndex;
+            pageSize = pageParameters.pageSize;
 
-            pageIndex = _pageIndex;
-            totalPages = (int)Math.Ceiling(count / (double)_pageSize);
+            totalPages = (int)Math.Ceiling(pageCount / (double)pageSize);
+
+            paginetedMakeQuery = vehicleMakeQuery.OrderByDescending(d=>d.Id).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+
+            return paginetedMakeQuery;
         }            
     }
 }

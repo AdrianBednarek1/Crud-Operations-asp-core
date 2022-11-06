@@ -1,5 +1,6 @@
 ﻿using Project.Service.Interfaces.IVehicleRepository;
 using Project.Service.Interfaces.IVehicleService;
+using Project.Service.PagingSortingFiltering.Parameters;
 using Project.Service.PagingSortingFiltering.PSFmodel;
 using System.Data.Entity;
 using ZaPrav.NetCore;
@@ -10,37 +11,26 @@ namespace Project.Service.VehicleService
     public class VehicleServiceModel
     {
         private static VehicleRepositoryModel vehicleRepositoryModel = new VehicleRepositoryModel();
-        public static async Task<DbSet<VehicleModel>> GetVehicleModel()
+        public static async Task<List<VehicleModel>> GetVehicleModel()
         {
             return await vehicleRepositoryModel.GetVehicleModel();
         }
-        public static async Task SortVehicleModel(string sortOrderModel)
+        public static async Task<SortAttributes> ReturnSortingHelp()
         {
-            await vehicleRepositoryModel.SortVehicleModel(sortOrderModel);
-        }
-        public static async Task FilterVehicleModel(string searchStringModel, string currentSearchModel)
-        {
-            await vehicleRepositoryModel.FilterVehicleModel(searchStringModel, currentSearchModel);
-        }
-        public static async Task<SortingHelp> ReturnSortingHelp()
-        {
-            return vehicleRepositoryModel.sortingModel.sortingHelpModel;
+            return vehicleRepositoryModel.sortingModel.sortAttributes;
         }
         public static async Task<PagingModel> GetPreviousNextPageModel()
         {
             return vehicleRepositoryModel.pagingModel;
         }
-        public static async Task PagingVehicleModel(int pageIndex, int pageSize)
+        public static async Task<List<VehicleModel>> GetVehicleModel
+            (SortParameters sortParameters, FilterParameters filterParameters, PageParameters pageParameters)
         {
-            await vehicleRepositoryModel.PagingVehicleModel(pageIndex, pageSize);
+            return await vehicleRepositoryModel.GetVehicleModel(sortParameters, filterParameters, pageParameters);
         }
         public static async Task<string> ReturnCurrentSearch()
         {
-            return vehicleRepositoryModel.filteringModel.currentSearchModel;
-        }
-        public static async Task<List<VehicleModel>> PaginatedFilteredSortedModelList()
-        {
-            return await vehicleRepositoryModel.PaginatedFilteredSortedModelList();
+            return vehicleRepositoryModel.filteringModel.currentSearch;
         }
         public static async Task<VehicleModel> GetModelById(int id)
         {
@@ -48,19 +38,15 @@ namespace Project.Service.VehicleService
         }
         public static async Task Create(VehicleModel data)
         {
-            await vehicleRepositoryModel.CreateVehicleModel(data);
+            await vehicleRepositoryModel.Create(data);
         }
         public static async Task Update(VehicleModel data)
         {
-            await vehicleRepositoryModel.UpdateVehicleModel(data);
+            await vehicleRepositoryModel.Update(data);
         }
         public static async Task Delete(VehicleModel data)
         {
-            await vehicleRepositoryModel.DeleteVehicleModel(data);
-        }
-        public static async Task<bool> VehicleMakeIsNull()
-        {
-            return await vehicleRepositoryModel.VehicleMakeIsNull();
+            await vehicleRepositoryModel.Delete(data);
         }
     }
 }

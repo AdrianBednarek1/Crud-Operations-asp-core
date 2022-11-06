@@ -2,7 +2,7 @@
 
 namespace ZaPrav.NetCore
 {
-    public class SortingHelp : ISortingHelp
+    public class SortAttributes : ISortAttributes
     {
         public string? NameSort { get; set; } 
         public string? AbrvSort { get; set; } 

@@ -1,4 +1,5 @@
 ﻿using Project.Service.PagingSortingFiltering;
+using Project.Service.PagingSortingFiltering.Parameters;
 using Project.Service.PagingSortingFiltering.PSFmake;
 using Project.Service.VehicleService;
 using System.Data.Entity;
@@ -18,41 +19,30 @@ namespace ZaPrav.NetCore.VehicleDB
             pagingMake = new PagingMake();
             sortingMake = new SortingMake();
         }
-        public async Task<DbSet<VehicleMake>> GetVehicleMakes()
+        public async Task<List<VehicleMake>> GetVehicleMake()
         {
-            return vehicleDB.vehicleMakes;
+            return await vehicleDB.vehicleMakes.ToListAsync();
         }
-        public async Task<List<VehicleMake>> SortedFilteredPaginetedListMake()
+        public async Task<List<VehicleMake>> GetVehicleMake
+            (PageParameters pageParameters, FilterParameters filterParameters, SortParameters sortParameters)
         {
-            IQueryable<VehicleMake> paginetedQuery;
-            paginetedQuery = pagingMake.paginetedMakeQuery ?? vehicleDB.vehicleMakes.AsQueryable();
+            IQueryable<VehicleMake> pageQuery = await pagingMake.GetPageMake(pageParameters);
+            IQueryable<VehicleMake> filterQuery = await filteringMake.GetFilterMake(filterParameters);
 
-            IQueryable<VehicleMake> filteredQuery;
-            filteredQuery = filteringMake.filterQueryMake ?? vehicleDB.vehicleMakes.AsQueryable();
+            string orderByProperty = await sortingMake.GetPropertyNameSort(sortParameters);
 
-            IQueryable<VehicleMake> filteredPaginetedQuery;
-            filteredPaginetedQuery = paginetedQuery.Intersect(filteredQuery);
+            List<VehicleMake> intersectFilterPage = pageQuery.Intersect(filterQuery).ToList();
+            List<VehicleMake> filterPageSort = SetOrderBy(intersectFilterPage, orderByProperty);
 
-            List<VehicleMake> paginetedFilteredSortedList;
-            paginetedFilteredSortedList = await filteredPaginetedQuery.ToListAsync();
-
-            if (sortingMake.descending)
+            return filterPageSort;
+        }
+        private List<VehicleMake> SetOrderBy(List<VehicleMake> filterPage, string propertyNameSort)
+        {
+            if (sortingMake.isDescending)
             {
-                return paginetedFilteredSortedList.OrderByDescending(p => p.GetType().GetProperty(sortingMake.nameOfProperty).GetValue(p)).ToList();
+                return filterPage.OrderByDescending(p => p.GetType().GetProperty(propertyNameSort).GetValue(p)).ToList();
             }
-            return paginetedFilteredSortedList.OrderBy(p => p.GetType().GetProperty(sortingMake.nameOfProperty).GetValue(p)).ToList();
-        }
-        public async Task PagingVehicleMake(int pageIndex, int pageSize)
-        {
-            await pagingMake.CreatePagingMake(pageIndex, pageSize);
-        }
-        public async Task FilterVehicleMake(string searchStringMake, string currentSearchMake)
-        {
-            await filteringMake.FilterMake(searchStringMake, currentSearchMake);
-        }
-        public async Task SortVehicleMake(string sortOrderMake)
-        {
-            await sortingMake.SortMake(sortOrderMake);
+            return filterPage.OrderBy(p => p.GetType().GetProperty(propertyNameSort).GetValue(p)).ToList();
         }
         public async Task Create(VehicleMake? make)
         {
@@ -91,14 +81,6 @@ namespace ZaPrav.NetCore.VehicleDB
         {
             var vehicleMake = await vehicleDB.vehicleMakes.SingleOrDefaultAsync(d => d.Id == id);
             return vehicleMake;
-        }
-        public async Task<bool> VehicleMakeIsNull()
-        {
-            if (!await vehicleDB.vehicleMakes.AnyAsync() || vehicleDB.vehicleMakes == null)
-            {
-                return true;
-            }
-            return false;
         }
     }
 }

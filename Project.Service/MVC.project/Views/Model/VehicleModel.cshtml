@@ -8,7 +8,7 @@
 	<div class="form-actions no-color">
 		<p>
 			Find by name, abrv or Make ID:
-			<input type="text" name="SearchStringModel" value="@ViewBag.CurrentSearchModel" />
+			<input type="text" name="searchStringModel" value="@ViewBag.CurrentSearchModel" />
 			<input type="hidden" name="pageIndexModel" value="@(ViewBag.pagingModel.pageIndex)" />
 			<input type="hidden" name="sortOrderModel" value="@ViewBag.SortingModelHelper.CurrentSort" />
 			<input type="submit" value="Search" class="btn btn-primary" /> |
@@ -46,6 +46,7 @@
 				<th>
 					<a asp-action="VehicleModel"
 					   asp-route-sortOrderModel="@ViewBag.SortingModelHelper.ForeignIdSort"
+					   asp-route-pageIndexModel="@(ViewBag.pagingModel.pageIndex)"
 					   asp-route-currentFilterModel="@ViewBag.CurrentSearchModel">
 						@Html.DisplayNameFor(model => model[0].MakeId)
 					</a>

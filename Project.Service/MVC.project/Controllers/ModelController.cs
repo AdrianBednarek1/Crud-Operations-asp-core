@@ -1,19 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MVC.project.ViewModels.ModelViewModels;
-using Project.Service.Interfaces.IVehicleRepository;
 using ZaPrav.NetCore.VehicleDB;
-using ZaPrav.NetCore;
-using Project.Service.PagingSortingFiltering.PSFmodel;
-using Project.Service;
 using AutoMapper;
 using Project.Service.VehicleService;
+using Project.Service.PagingSortingFiltering.Parameters;
 
 namespace MVC.project.Controllers
 {
     public class ModelController : Controller
     {
-        private List<SelectListItem> VehicleMakeInList;
+        private List<SelectListItem> VehicleMakeList;
         private IMapper mapper;
         public ModelController(IMapper _mapper)
         {
@@ -23,35 +20,38 @@ namespace MVC.project.Controllers
         public async Task<IActionResult> VehicleModel
             (
             string sortOrderModel,
-            string SearchStringModel, string currentFilterModel, int? pageIndexModel
+            string searchStringModel, string currentFilterModel, int? pageIndexModel
             )
         {
-            await PagingSortingFilteringData
+            List<VehicleModel> vehicleModels = await GetSortFilterPaginateData
                 (
-                sortOrderModel, SearchStringModel, currentFilterModel, pageIndexModel
+                sortOrderModel, searchStringModel, currentFilterModel, pageIndexModel
                 );
-            List<VehicleModel> vehicleModelList = await VehicleServiceModel.PaginatedFilteredSortedModelList();
 
             List<ModelViewModel> pagedVehicleModel;
-            pagedVehicleModel = mapper.Map<List<ModelViewModel>>(vehicleModelList);
+            pagedVehicleModel = mapper.Map<List<ModelViewModel>>(vehicleModels);
 
             Response.StatusCode = StatusCodes.Status200OK;
             return View(pagedVehicleModel);
         }
 
-        private async Task PagingSortingFilteringData
+        private async Task<List<VehicleModel>> GetSortFilterPaginateData
             (string sortOrderModel, string searchStringModel, string currentFilterModel, int? pageIndexModel)
         {
-            await VehicleServiceModel.FilterVehicleModel(searchStringModel, currentFilterModel);
+            SortParameters sortParameters = new SortParameters(sortOrderModel);
+            FilterParameters filterParameters = new FilterParameters(searchStringModel, currentFilterModel);
+            PageParameters pageParameters = new PageParameters(pageIndexModel ?? 1, 4);
 
-            await VehicleServiceModel.PagingVehicleModel(pageIndexModel ?? 1, 4);
-
-            await VehicleServiceModel.SortVehicleModel(sortOrderModel);
+            List<VehicleModel> vehicleModel = await VehicleServiceModel.GetVehicleModel(sortParameters, filterParameters, pageParameters);
 
             ViewBag.SortingModelHelper = await VehicleServiceModel.ReturnSortingHelp();
             ViewBag.CurrentSearchModel = await VehicleServiceModel.ReturnCurrentSearch();
             ViewBag.pagingModel = await VehicleServiceModel.GetPreviousNextPageModel();
-            ViewBag.VehicleMakeIsNull = await VehicleServiceModel.VehicleMakeIsNull();
+
+            List<VehicleMake> vehicleMakeList = await VehicleServiceMake.GetVehicleMake();
+            ViewBag.VehicleMakeIsNull = vehicleMakeList.Any() ? false : true;
+
+            return vehicleModel;
         }
         [HttpGet]
         public async Task<IActionResult> CreateModel()
@@ -69,6 +69,7 @@ namespace MVC.project.Controllers
                 Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
                 return View();
             }
+
             VehicleModel vehicleModel = mapper.Map<VehicleModel>(modelViewModel);
             await VehicleServiceModel.Create(vehicleModel);
 
@@ -77,20 +78,10 @@ namespace MVC.project.Controllers
         }
         private async Task RefreshDropDown()
         {
-            var vehicleMake = await VehicleServiceMake.GetVehicleMake();
-            List<VehicleMake> listMake = vehicleMake.ToList();
+            List<VehicleMake> listMake = await VehicleServiceMake.GetVehicleMake();
+            List<SelectListItem> dropListMake = mapper.Map<List<SelectListItem>>(listMake);
 
-            VehicleMakeInList = listMake.ConvertAll
-            (a =>
-                {
-                    return new SelectListItem
-                    {
-                        Text = a.Name,
-                        Value = a.Id.ToString()
-                    };
-                }
-            );
-            ViewBag.VehicleMakeInList = VehicleMakeInList;
+            ViewBag.VehicleMakeList = dropListMake;
         }
 
         [HttpPost]

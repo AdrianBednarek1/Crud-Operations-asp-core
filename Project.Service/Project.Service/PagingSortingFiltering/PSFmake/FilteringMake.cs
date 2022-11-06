@@ -1,4 +1,5 @@
 ﻿using Project.Service.Interfaces.ISortingFilteringPaging.IPSFmake;
+using Project.Service.PagingSortingFiltering.Parameters;
 using ZaPrav.NetCore.VehicleDB;
 
 namespace Project.Service.PagingSortingFiltering
@@ -6,23 +7,19 @@ namespace Project.Service.PagingSortingFiltering
     public class FilteringMake //: IFilteringMake
     {
         public string? currentSearchMake { get; private set; }
-        public IQueryable<VehicleMake> filterQueryMake { get; set; }
-        public async Task FilterMake(string searchString, string _currentSearch)
+        public IQueryable<VehicleMake>? filterQueryMake { get; set; }
+        public async Task<IQueryable<VehicleMake>> GetFilterMake(FilterParameters filterParameters)
         {
-            if (searchString == null)
-            {
-                searchString = _currentSearch;
-            }
+            currentSearchMake = filterParameters.GetCurrentSearch();
 
-            currentSearchMake = searchString;
-
-            var vehicleMake = await VehicleServiceMake.GetVehicleMake();
+            List<VehicleMake> vehicleMake = await VehicleServiceMake.GetVehicleMake();
             filterQueryMake = vehicleMake.AsQueryable();
 
-            if (!String.IsNullOrEmpty(searchString))
+            if (!String.IsNullOrEmpty(currentSearchMake))
             {
-                filterQueryMake = filterQueryMake.Where(s => s.Name.Contains(searchString) || s.Abrv.Contains(searchString));
-            }              
+                filterQueryMake = filterQueryMake.Where(s => s.Name.Contains(currentSearchMake) || s.Abrv.Contains(currentSearchMake));
+            }
+            return filterQueryMake;
         }     
     }
 }

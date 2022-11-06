@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Project.Service.Interfaces.IVehicleRepository;
 using Project.Service.PagingSortingFiltering;
+using Project.Service.PagingSortingFiltering.Parameters;
 using Project.Service.PagingSortingFiltering.PSFmodel;
 using System.Data.Entity;
 using ZaPrav.NetCore.VehicleDB;
@@ -20,31 +21,38 @@ namespace Project.Service.VehicleService
             sortingModel = new SortingModel();
             pagingModel = new PagingModel();
         }
-        public async Task<DbSet<VehicleModel>> GetVehicleModel()
+        public async Task<List<VehicleModel>> GetVehicleModel()
         {
-            return vehicleDB.vehicleModels;
+            return await vehicleDB.vehicleModels.ToListAsync();
         }
-        public async Task<List<VehicleModel>> PaginatedFilteredSortedModelList()
+        public async Task<List<VehicleModel>> GetVehicleModel
+            (SortParameters sortParameters, FilterParameters filterParameters, PageParameters pageParameters)
         {
-            IQueryable<VehicleModel> paginetedQuery;
-            paginetedQuery = pagingModel.paginetedModelQuery ?? vehicleDB.vehicleModels.AsQueryable();
+            IQueryable<VehicleModel> pageQuery;
+            pageQuery = await pagingModel.GetPageModel(pageParameters);
 
-            IQueryable<VehicleModel> filteredQuery;
-            filteredQuery = filteringModel.filteredModelQuery ?? vehicleDB.vehicleModels.AsQueryable();
+            IQueryable<VehicleModel> filterQuery;
+            filterQuery = await filteringModel.GetFilterModel(filterParameters);
 
-            IQueryable<VehicleModel> filteredPaginetedQuery;
-            filteredPaginetedQuery = paginetedQuery.Intersect(filteredQuery);
+            string propertyNameSort = await sortingModel.SortModel(sortParameters);
 
-            List<VehicleModel> paginetedFilteredSortedList;
-            paginetedFilteredSortedList = await filteredPaginetedQuery.ToListAsync();
+            List<VehicleModel> intersectFilterPage;
+            intersectFilterPage = pageQuery.Intersect(filterQuery).ToList();
 
-            if (sortingModel.descending)
+            List<VehicleModel> filterPageSort;
+            filterPageSort = SetOrderBy(intersectFilterPage, propertyNameSort);
+
+            return filterPageSort;
+        }
+        private List<VehicleModel> SetOrderBy(List<VehicleModel> filterPage, string propertyNameSort)
+        {
+            if (sortingModel.isDescending)
             {
-                return paginetedFilteredSortedList.OrderByDescending(p => p.GetType().GetProperty(sortingModel.nameOfProperty).GetValue(p)).ToList();
+                return filterPage.OrderByDescending(p => p.GetType().GetProperty(propertyNameSort).GetValue(p)).ToList();
             }
-            return paginetedFilteredSortedList.OrderBy(p => p.GetType().GetProperty(sortingModel.nameOfProperty).GetValue(p)).ToList();
+            return filterPage.OrderBy(p => p.GetType().GetProperty(propertyNameSort).GetValue(p)).ToList();
         }
-        public async Task CreateVehicleModel(VehicleModel? model)
+        public async Task Create(VehicleModel? model)
         {
             if (model != null)
             {
@@ -52,23 +60,15 @@ namespace Project.Service.VehicleService
                 await vehicleDB.SaveChangesAsync();
             }
         }
-        public async Task DeleteVehicleModel(VehicleModel? model)
+        public async Task Delete(VehicleModel? model)
         {
             if (model != null)
             {
                 vehicleDB.vehicleModels.Remove(model);
+                await vehicleDB.SaveChangesAsync();
             }
-            await vehicleDB.SaveChangesAsync();
         }
-        public async Task<bool> VehicleMakeIsNull()
-        {
-            if (!await vehicleDB.vehicleMakes.AnyAsync() || vehicleDB.vehicleMakes == null)
-            {
-                return true;
-            }
-            return false;
-        }
-        public async Task UpdateVehicleModel(VehicleModel? model)
+        public async Task Update(VehicleModel? model)
         {
             if (model != null)
             {
@@ -79,22 +79,10 @@ namespace Project.Service.VehicleService
             }
             await vehicleDB.SaveChangesAsync();
         }
-        public async Task PagingVehicleModel(int pageIndex, int pageSize)
-        {
-            await pagingModel.CreateAsync(pageIndex, pageSize);
-        }
-        public async Task FilterVehicleModel(string searchStringModel, string currentSearchModel)
-        {
-            await filteringModel.FilterModel(searchStringModel, currentSearchModel);
-        }
         public async Task<VehicleModel> GetModelById(int id)
         {
             var vehicleModel = await vehicleDB.vehicleModels.SingleOrDefaultAsync(d => d.Id == id);
             return vehicleModel;
-        }
-        public async Task SortVehicleModel(string sortOrderModel)
-        {
-            await sortingModel.SortModel(sortOrderModel);
         }
     }
 }

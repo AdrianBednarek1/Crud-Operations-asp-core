@@ -10,7 +10,7 @@
 	<div asp-validation-summary="All"></div>
 	<div>Name: <input class="form-control" asp-for="Name" /></div>
 	<div>Abrv: <input class="form-control" asp-for="Abrv" /></div>
-	<div>Vehicle Make: <select asp-for="MakeId" asp-items="ViewBag.VehicleMakeInList"></select></div>
+	<div>Vehicle Make: <select asp-for="MakeId" asp-items="ViewBag.VehicleMakeList"></select></div>
 	<input name="myButton" type="submit" />
 	<button formmethod="get" type="submit" asp-action="VehicleModel">Back</button>
 </form>

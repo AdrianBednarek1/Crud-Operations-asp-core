@@ -1,63 +1,71 @@
 ﻿using Project.Service.Interfaces.ISortingFilteringPaging.IPSFmodel;
+using Project.Service.PagingSortingFiltering.Parameters;
 using ZaPrav.NetCore;
 using ZaPrav.NetCore.VehicleDB;
 
 namespace Project.Service.PagingSortingFiltering.PSFmodel
 {
-    public class SortingModel : ISortingModel
+    public class SortingModel //: ISortingModel
     {
-        public SortingHelp sortingHelpModel { get; set; }
-        public bool descending { get; set; }
+        public SortAttributes sortAttributes { get; set; }
+        public bool isDescending { get; set; }
         public string nameOfProperty { get; set; }
         public SortingModel()
         {
-            descending = false;
+            isDescending = false;
             nameOfProperty = "Id";
-            sortingHelpModel = new SortingHelp();
+            sortAttributes = new SortAttributes();
         }
-        public async Task SortModel(string sortOrderModel)
+        public async Task<string> SortModel(SortParameters sortParameters)
         {
-            sortingHelpModel.CurrentSort = sortOrderModel;
-            sortingHelpModel.NameSort = String.IsNullOrEmpty(sortOrderModel) ? "NameDesc" : "";
-            sortingHelpModel.AbrvSort = sortOrderModel == "Abrv" ? "AbrvDesc" : "Abrv";
-            sortingHelpModel.IdSort = sortOrderModel == "Id" ? "IdDesc" : "Id";
-            sortingHelpModel.ForeignIdSort = sortOrderModel == "MadeId" ? "MadeIdDesc" : "MadeId";
+            string sortOrderModel = sortParameters.sortOrder;
+
+            SetSortAttributes(sortOrderModel);
 
             switch (sortOrderModel)
             {
                 case "IdDesc":
-                    descending = true;
+                    isDescending = true;
                     nameOfProperty = nameof(VehicleModel.Id);
                     break;
                 case "Id":
-                    descending = false;
+                    isDescending = false;
                     nameOfProperty = nameof(VehicleModel.Id);
                     break;
                 case "Abrv":
-                    descending = false;
+                    isDescending = false;
                     nameOfProperty = nameof(VehicleModel.Abrv);
                     break;
                 case "NameDesc":
-                    descending = true;
+                    isDescending = true;
                     nameOfProperty = nameof(VehicleModel.Name);
                     break;
                 case "AbrvDesc":
-                    descending = true;
+                    isDescending = true;
                     nameOfProperty = nameof(VehicleModel.Abrv);
                     break;
                 case "MadeId":
-                    descending = false;
+                    isDescending = false;
                     nameOfProperty = nameof(VehicleModel.MakeId);
                     break;
                 case "MadeIdDesc":
-                    descending = true;
+                    isDescending = true;
                     nameOfProperty = nameof(VehicleModel.MakeId);
                     break;
                 default:
                     nameOfProperty = nameof(VehicleModel.Name);
-                    descending = false;
+                    isDescending = false;
                     break;
             }
+            return nameOfProperty;
+        }
+        private void SetSortAttributes(string sortOrderModel)
+        {
+            sortAttributes.CurrentSort = sortOrderModel;
+            sortAttributes.NameSort = String.IsNullOrEmpty(sortOrderModel) ? "NameDesc" : "";
+            sortAttributes.AbrvSort = sortOrderModel == "Abrv" ? "AbrvDesc" : "Abrv";
+            sortAttributes.IdSort = sortOrderModel == "Id" ? "IdDesc" : "Id";
+            sortAttributes.ForeignIdSort = sortOrderModel == "MadeId" ? "MadeIdDesc" : "MadeId";
         }
     }
 }

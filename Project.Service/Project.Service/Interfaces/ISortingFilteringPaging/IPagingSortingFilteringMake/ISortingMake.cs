@@ -5,7 +5,7 @@ namespace Project.Service.PagingSortingFiltering
 {
     public interface ISortingMake
     {
-        SortingHelp sortingHelpMake { get; }
+        SortAttributes sortingHelpMake { get; }
         IQueryable<VehicleMake> SortMake(string sortOrderMake, IQueryable<VehicleMake> VehicleMake);
     }
 }

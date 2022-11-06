@@ -9,6 +9,6 @@ namespace Project.Service.PagingSortingFiltering.PSFmodel
         bool hasPreviousPage { get; }
         bool hasNextPage { get; }
         IQueryable<VehicleModel>? paginetedModelQuery { get; }
-        Task CreateAsync(int _pageIndex, int _pageSize);
+        Task GetPageModel(int _pageIndex, int _pageSize);
     }
 }

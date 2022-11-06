@@ -2,7 +2,7 @@
 using MVC.project.ViewModels.MakeViewModels;
 using ZaPrav.NetCore.VehicleDB;
 using AutoMapper;
-
+using Project.Service.PagingSortingFiltering.Parameters;
 
 namespace MVC.project.Controllers
 {
@@ -20,45 +20,33 @@ namespace MVC.project.Controllers
             string searchStringMade, string currentFilterMade, int? pageIndexMade
             )
         {
-            await SortFilterPaginateData
-                (
-                sortOrderMades, searchStringMade, currentFilterMade, pageIndexMade
-                );
-
-            List<VehicleMake> vehicleMakesList = await VehicleServiceMake.SortedFilteredPaginetedListMake();
-
-            List<MakeViewModel> pagedVehicleMakes;
-            pagedVehicleMakes = mapper.Map<List<MakeViewModel>>(vehicleMakesList);
+            List<VehicleMake> makeList = await GetSortFilterPaginateData(sortOrderMades, searchStringMade, currentFilterMade, pageIndexMade);
+            List<MakeViewModel> makeViewModels = mapper.Map<List<MakeViewModel>>(makeList);
 
             Response.StatusCode = StatusCodes.Status200OK;
-            return View(pagedVehicleMakes);
+            return View(makeViewModels);
         }
-
-        private async Task SortFilterPaginateData
-            (string sortOrderMades, string searchStringMade, string currentFilterMade, int? pageIndexMade)
+        private async Task<List<VehicleMake>> GetSortFilterPaginateData
+            (string sortOrderMake, string searchStringMake, string currentFilterMake, int? pageIndexMake)
         {
-            await VehicleServiceMake.FilterVehicleMake(searchStringMade, currentFilterMade);
+            int pageSize = 5;
+            FilterParameters filterParameters = new FilterParameters(searchStringMake, currentFilterMake);
+            PageParameters pageParameters = new PageParameters(pageIndexMake, pageSize);
+            SortParameters sortParameters = new SortParameters(sortOrderMake);
 
-            await VehicleServiceMake.PagingVehicleMake(pageIndexMade ?? 1, 4);
-
-            await VehicleServiceMake.SortVehicleMake(sortOrderMades);
+            List<VehicleMake> sortFilterPage = await VehicleServiceMake.GetVehicleMake(pageParameters, filterParameters, sortParameters);
 
             ViewBag.SortingMadeHelper = await VehicleServiceMake.ReturnSortingHelp();
             ViewBag.CurrentSearchMake = await VehicleServiceMake.ReturnCurrentSearch();
             ViewBag.PagingMake = await VehicleServiceMake.GetPreviousNextPageMake();
+
+            return sortFilterPage;
         }
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            try
-            {
-                await VehicleServiceMake.Delete(id);
-            }
-            catch (NotSupportedException ex)
-            {
-                return BadRequest(ex.Message);
-            }
-
+            await VehicleServiceMake.Delete(id);
+            
             Response.StatusCode = StatusCodes.Status200OK;
             return RedirectToAction("VehicleMake");
         }

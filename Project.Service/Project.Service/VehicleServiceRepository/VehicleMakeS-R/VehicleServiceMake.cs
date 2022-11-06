@@ -1,30 +1,23 @@
-﻿using Project.Service;
-using Project.Service.Interfaces.IVehicleRepository;
-using Project.Service.Interfaces.IVehicleService;
+﻿using Project.Service.PagingSortingFiltering.Parameters;
 using Project.Service.PagingSortingFiltering.PSFmake;
-using System.Data.Entity;
-using System.Linq;
 
 namespace ZaPrav.NetCore.VehicleDB
 {
-    public class VehicleServiceMake //: IVehicleServiceMake
+    public class VehicleServiceMake
     {
         private static VehicleRepositoryMake vehicleRepositoryMake = new VehicleRepositoryMake();
-        public static async Task<DbSet<VehicleMake>> GetVehicleMake()
+        public static async Task<List<VehicleMake>> GetVehicleMake()
         {
-            return await vehicleRepositoryMake.GetVehicleMakes();
+            return await vehicleRepositoryMake.GetVehicleMake();
         }
-        public static async Task SortVehicleMake(string sortOrderMake)
+        public static async Task<List<VehicleMake>> GetVehicleMake
+            (PageParameters pageParameters, FilterParameters filterParameters, SortParameters sortParameters)
         {
-            await vehicleRepositoryMake.SortVehicleMake(sortOrderMake);
+            return await vehicleRepositoryMake.GetVehicleMake(pageParameters, filterParameters, sortParameters);
         }
-        public static async Task FilterVehicleMake(string searchStringMake, string currentSearchMake)
+        public static async Task<SortAttributes> ReturnSortingHelp()
         {
-            await vehicleRepositoryMake.FilterVehicleMake(searchStringMake, currentSearchMake);
-        }
-        public static async Task<SortingHelp> ReturnSortingHelp()
-        {
-            return vehicleRepositoryMake.sortingMake.sortingHelpMake;
+            return vehicleRepositoryMake.sortingMake.sortingAttributes;
         }
         public static async Task<string> ReturnCurrentSearch()
         {
@@ -34,17 +27,9 @@ namespace ZaPrav.NetCore.VehicleDB
         {
             return vehicleRepositoryMake.pagingMake;
         }
-        public static async Task PagingVehicleMake(int pageIndex, int pageSize)
-        {
-            await vehicleRepositoryMake.PagingVehicleMake(pageIndex, pageSize);
-        }
         public static async Task<VehicleMake> GetByIdMake(int id)
         {
             return await vehicleRepositoryMake.GetMakeById(id);
-        }
-        public static async Task<List<VehicleMake>> SortedFilteredPaginetedListMake()
-        {
-            return await vehicleRepositoryMake.SortedFilteredPaginetedListMake();
         }
         public static async Task Create(VehicleMake make)
         {
