@@ -1,17 +1,20 @@
-﻿using System.Data.Entity;
+﻿using Project.Service.PagingSortingFiltering;
+using Project.Service.PagingSortingFiltering.Parameters;
+using Project.Service.PagingSortingFiltering.PSFmodel;
 using ZaPrav.NetCore.VehicleDB;
 
 namespace Project.Service.Interfaces.IVehicleRepository
 {
     public interface IVehicleRepositoryModel
     {
-        Task<DbSet<VehicleModel>> GetDBQueryModel();
-        Task<List<VehicleModel>> GetVehicleModels();
-        Task CreateVehicleModel(VehicleModel? model);
-        Task DeleteVehicleModel(VehicleModel? model);
-        Task UpdateVehicleModel(VehicleModel? model);
-        Task<VehicleModel> SearchVehicleModel(int id);
-        void DeleteVehicleModelWithoutSaving(VehicleModel? model);
-        Task<bool> VehicleModelsIsNull();
+        FilteringModel filteringModel { get; }
+        SortingModel sortingModel { get; }
+        PagingModel pagingModel { get; }
+        Task<List<VehicleModel>> GetVehicleModel();
+        Task<List<VehicleModel>> GetVehicleModel(SortParameters sortParameters, FilterParameters filterParameters, PageParameters pageParameters);
+        Task Create(VehicleModel? createModel);
+        Task Delete(VehicleModel? deleteModel);
+        Task Update(VehicleModel? updateModel);
+        Task<VehicleModel> GetModelById(int id);
     }
 }

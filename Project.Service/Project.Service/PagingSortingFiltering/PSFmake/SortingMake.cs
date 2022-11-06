@@ -4,7 +4,7 @@ using ZaPrav.NetCore.VehicleDB;
 
 namespace Project.Service.PagingSortingFiltering
 {
-    public class SortingMake //: ISortingMake
+    public class SortingMake : ISortingMake
     {
         public SortAttributes sortingAttributes { get; set; }
         public bool isDescending { get; set; }
@@ -17,11 +17,11 @@ namespace Project.Service.PagingSortingFiltering
         }
         public async Task<string> GetPropertyNameSort(SortParameters _sortParameters)
         {
-            string sortOrder = _sortParameters.sortOrder;       
+            string sortOrder = _sortParameters.sortOrder;
             SetSortAttributes(sortOrder);
             isDescending = sortOrder?.Contains("Desc") ?? false;
-            nameOfProperty = isDescending ? sortOrder.Remove(sortOrder.Length - 4,4) : sortOrder ?? "Name";    
-            
+            nameOfProperty = isDescending ? sortOrder.Remove(sortOrder.Length - 4, 4) : sortOrder ?? "Name";
+
             return nameOfProperty;
         }
         private void SetSortAttributes(string sortOrder)

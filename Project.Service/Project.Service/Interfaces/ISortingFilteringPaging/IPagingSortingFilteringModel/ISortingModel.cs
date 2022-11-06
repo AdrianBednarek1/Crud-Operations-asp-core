@@ -1,13 +1,14 @@
-﻿using ZaPrav.NetCore;
+﻿using Project.Service.PagingSortingFiltering.Parameters;
+using ZaPrav.NetCore;
 using ZaPrav.NetCore.VehicleDB;
 
 namespace Project.Service.Interfaces.ISortingFilteringPaging.IPSFmodel
 {
     public interface ISortingModel
     {
-        SortAttributes sortingHelpModel { get; set; }
+        SortAttributes sortAttributes { get; }
         bool isDescending { get; }
         string nameOfProperty { get; }
-        Task SortModel(string sortOrderModel);
+        Task<string> GetPropertyNameSort(SortParameters sortParameters);
     }
 }

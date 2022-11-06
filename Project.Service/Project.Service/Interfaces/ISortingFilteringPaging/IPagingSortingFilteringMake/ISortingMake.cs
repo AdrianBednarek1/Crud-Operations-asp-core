@@ -1,11 +1,14 @@
-﻿using ZaPrav.NetCore;
+﻿using Project.Service.PagingSortingFiltering.Parameters;
+using ZaPrav.NetCore;
 using ZaPrav.NetCore.VehicleDB;
 
 namespace Project.Service.PagingSortingFiltering
 {
     public interface ISortingMake
     {
-        SortAttributes sortingHelpMake { get; }
-        IQueryable<VehicleMake> SortMake(string sortOrderMake, IQueryable<VehicleMake> VehicleMake);
+        SortAttributes sortingAttributes { get; }
+        bool isDescending { get; }
+        string nameOfProperty { get; }
+        Task<string> GetPropertyNameSort(SortParameters _sortParameters);
     }
 }

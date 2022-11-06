@@ -1,4 +1,5 @@
-﻿using Project.Service.PagingSortingFiltering;
+﻿using Project.Service.Interfaces.IVehicleService;
+using Project.Service.PagingSortingFiltering;
 using Project.Service.PagingSortingFiltering.Parameters;
 using Project.Service.PagingSortingFiltering.PSFmake;
 using Project.Service.VehicleService;
@@ -6,7 +7,7 @@ using System.Data.Entity;
 
 namespace ZaPrav.NetCore.VehicleDB
 {
-    public class VehicleRepositoryMake //: IVehicleRepositoryMake
+    public class VehicleRepositoryMake : IVehicleRepositoryMake
     {
         private VehicleDB vehicleDB;
         public FilteringMake filteringMake { get; set; }
@@ -60,7 +61,7 @@ namespace ZaPrav.NetCore.VehicleDB
                 var deleteModels = vehicleDB.vehicleModels.Where(_deleteModels => _deleteModels.MakeId == make.Id);
                 vehicleDB.vehicleModels.RemoveRange(deleteModels);
                 vehicleDB.vehicleMakes.Remove(make);
-                
+
                 await vehicleDB.SaveChangesAsync();
             }
         }

@@ -1,14 +1,16 @@
-﻿using ZaPrav.NetCore.VehicleDB;
+﻿using Project.Service.PagingSortingFiltering.Parameters;
+using ZaPrav.NetCore.VehicleDB;
 
 namespace Project.Service.PagingSortingFiltering.PSFmodel
 {
     public interface IPagingModel
     {
-        int pageIndex { get; }
+        public int pageIndex { get; }
         int totalPages { get; }
-        bool hasPreviousPage { get; }
-        bool hasNextPage { get; }
+        int pageSize { get; }
+        bool hasPreviousPage => pageIndex > 1;
+        bool hasNextPage => pageIndex < totalPages;
         IQueryable<VehicleModel>? paginetedModelQuery { get; }
-        Task GetPageModel(int _pageIndex, int _pageSize);
+        Task<IQueryable<VehicleModel>> GetPageModel(PageParameters pageParameters);
     }
 }

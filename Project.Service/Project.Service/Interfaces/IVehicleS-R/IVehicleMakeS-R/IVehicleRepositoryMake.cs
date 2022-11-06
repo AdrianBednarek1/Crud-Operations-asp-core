@@ -1,16 +1,20 @@
-﻿using System.Data.Entity;
+﻿using Project.Service.PagingSortingFiltering;
+using Project.Service.PagingSortingFiltering.Parameters;
+using Project.Service.PagingSortingFiltering.PSFmake;
 using ZaPrav.NetCore.VehicleDB;
 
 namespace Project.Service.Interfaces.IVehicleService
 {
     public interface IVehicleRepositoryMake
     {
-        Task<DbSet<VehicleMake>> GetDBQueryMake();
-        Task<List<VehicleMake>> GetVehicleMakes();
-        Task CreateVehicleMake(VehicleMake make);
-        Task DeleteVehicleMake(VehicleMake make);
-        Task UpdateVehicleMake(VehicleMake make);
-        Task<VehicleMake> SearchVehicleMake(int id);
-        Task<bool> VehicleMakesIsNull();
+        FilteringMake filteringMake { get; }
+        PagingMake pagingMake { get; }
+        SortingMake sortingMake { get; }
+        Task<List<VehicleMake>> GetVehicleMake();
+        Task<List<VehicleMake>> GetVehicleMake(PageParameters pageParameters, FilterParameters filterParameters, SortParameters sortParameters);
+        Task Create(VehicleMake? make);
+        Task Delete(VehicleMake? make);
+        Task Update(VehicleMake? make);
+        Task<VehicleMake> GetMakeById(int id);
     }
 }

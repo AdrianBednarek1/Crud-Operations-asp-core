@@ -4,7 +4,7 @@ using ZaPrav.NetCore.VehicleDB;
 
 namespace Project.Service.PagingSortingFiltering.PSFmodel
 {
-    public class PagingModel // : IPagingModel
+    public class PagingModel : IPagingModel
     {
         public int pageIndex { get; private set; }
         public int totalPages { get; private set; }
@@ -27,9 +27,8 @@ namespace Project.Service.PagingSortingFiltering.PSFmodel
 
             pageSize = pageParameters.pageSize;
             pageIndex = pageParameters.pageIndex;
-
             totalPages = (int)Math.Ceiling(count / (double)pageSize);
-           
+
             paginetedModelQuery = vehicleModelQuery.OrderByDescending(d => d.Id).Skip((pageIndex - 1) * pageSize).Take(pageSize);
 
             return paginetedModelQuery;

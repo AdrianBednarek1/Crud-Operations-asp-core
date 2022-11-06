@@ -8,7 +8,7 @@ using ZaPrav.NetCore.VehicleDB;
 
 namespace Project.Service.VehicleService
 {
-    public class VehicleRepositoryModel// : IVehicleRepositoryModel
+    public class VehicleRepositoryModel : IVehicleRepositoryModel
     {
         private VehicleDB vehicleDB;
         public FilteringModel filteringModel { get; set; }

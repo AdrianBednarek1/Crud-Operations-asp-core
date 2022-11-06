@@ -1,6 +1,6 @@
 ﻿namespace Project.Service.PagingSortingFiltering.Parameters
 {
-    public class PageParameters
+    public class PageParameters : IPageParameters
     {
         public int pageIndex { get; set; }
         public int pageSize { get; set; }

@@ -3,7 +3,7 @@ using ZaPrav.NetCore.VehicleDB;
 
 namespace Project.Service.PagingSortingFiltering.PSFmake
 {
-    public class PagingMake
+    public class PagingMake : IPagingMake
     {
         public int pageIndex { get; private set; }
         public int totalPages { get; private set; }

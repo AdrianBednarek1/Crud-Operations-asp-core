@@ -1,11 +1,10 @@
 ﻿using Project.Service.Interfaces.ISortingFilteringPaging.IPSFmodel;
 using Project.Service.PagingSortingFiltering.Parameters;
 using ZaPrav.NetCore;
-using ZaPrav.NetCore.VehicleDB;
 
 namespace Project.Service.PagingSortingFiltering.PSFmodel
 {
-    public class SortingModel //: ISortingModel
+    public class SortingModel : ISortingModel
     {
         public SortAttributes sortAttributes { get; set; }
         public bool isDescending { get; set; }
@@ -22,7 +21,7 @@ namespace Project.Service.PagingSortingFiltering.PSFmodel
             SetSortAttributes(sortOrder);
             isDescending = sortOrder?.Contains("Desc") ?? false;
             nameOfProperty = isDescending ? sortOrder.Remove(sortOrder.Length - 4, 4) : sortOrder ?? "Name";
-            
+
             return nameOfProperty;
         }
         private void SetSortAttributes(string sortOrderModel)

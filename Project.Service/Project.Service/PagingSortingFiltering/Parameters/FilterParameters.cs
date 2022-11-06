@@ -1,6 +1,6 @@
 ﻿namespace Project.Service.PagingSortingFiltering.Parameters
 {
-    public class FilterParameters
+    public class FilterParameters : IFilterParameters
     {
         public string? searchString { get; set; }
         public string currentFilter { get; set; }

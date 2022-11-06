@@ -5,12 +5,12 @@ using ZaPrav.NetCore.VehicleDB;
 
 namespace Project.Service.PagingSortingFiltering
 {
-    public class FilteringModel //: IFilteringModel
+    public class FilteringModel : IFilteringModel
     {
         public string? currentSearch { get; private set; }
         public IQueryable<VehicleModel>? filterModelQuery { get; set; }
         public async Task<IQueryable<VehicleModel>> GetFilterModel(FilterParameters filterParameters)
-        {                
+        {
             currentSearch = filterParameters.GetCurrentSearch();
 
             List<VehicleModel> vehicleModel = await VehicleServiceModel.GetVehicleModel();
