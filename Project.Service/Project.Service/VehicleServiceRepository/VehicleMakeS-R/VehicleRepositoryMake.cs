@@ -12,7 +12,7 @@ namespace ZaPrav.NetCore.VehicleDB
         public FilteringMake filteringMake { get; set; }
         public PagingMake pagingMake { get; set; }
         public SortingMake sortingMake { get; set; }
-        
+
         public VehicleRepositoryMake()
         {
             vehicleDB = VehicleStaticDatabase.vehicleDB;
@@ -33,11 +33,11 @@ namespace ZaPrav.NetCore.VehicleDB
             string orderByProperty = await sortingMake.GetPropertyNameSort(sortParameters);
 
             List<VehicleMake> intersectFilterPage = pageQuery.Intersect(filterQuery).ToList();
-            List<VehicleMake> filterPageSort = SetOrderBy(intersectFilterPage, orderByProperty);
+            List<VehicleMake> filterPageSort = GetSortList(intersectFilterPage, orderByProperty);
 
             return filterPageSort;
         }
-        private List<VehicleMake> SetOrderBy(List<VehicleMake> filterPage, string propertyNameSort)
+        private List<VehicleMake> GetSortList(List<VehicleMake> filterPage, string propertyNameSort)
         {
             if (sortingMake.isDescending)
             {
@@ -50,17 +50,19 @@ namespace ZaPrav.NetCore.VehicleDB
             if (make != null)
             {
                 vehicleDB.vehicleMakes.Add(make);
+                await vehicleDB.SaveChangesAsync();
             }
-            await vehicleDB.SaveChangesAsync();
         }
         public async Task Delete(VehicleMake? make)
         {
             if (make != null)
-            {            
-                vehicleDB.vehicleModels.RemoveRange(vehicleDB.vehicleModels.Where(model=>model.MakeId==make.Id));
+            {
+                var deleteModels = vehicleDB.vehicleModels.Where(_deleteModels => _deleteModels.MakeId == make.Id);
+                vehicleDB.vehicleModels.RemoveRange(deleteModels);
                 vehicleDB.vehicleMakes.Remove(make);
+                
+                await vehicleDB.SaveChangesAsync();
             }
-            await vehicleDB.SaveChangesAsync();
         }
         public async Task Update(VehicleMake? make)
         {
@@ -68,8 +70,9 @@ namespace ZaPrav.NetCore.VehicleDB
             {
                 var itemForUpdate = vehicleDB.vehicleMakes.Single(d => d.Id == make.Id);
                 vehicleDB.Entry(itemForUpdate).CurrentValues.SetValues(make);
+
+                await vehicleDB.SaveChangesAsync();
             }
-            await vehicleDB.SaveChangesAsync();
         }
         public async Task<VehicleMake> GetMakeById(int id)
         {

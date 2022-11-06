@@ -29,18 +29,16 @@ namespace Project.Service.VehicleService
             (SortParameters sortParameters, FilterParameters filterParameters, PageParameters pageParameters)
         {
             IQueryable<VehicleModel> pageQuery = await pagingModel.GetPageModel(pageParameters);
-
             IQueryable<VehicleModel> filterQuery = await filteringModel.GetFilterModel(filterParameters);
 
-            string propertyNameSort = await sortingModel.SortModel(sortParameters);
+            string propertyNameSort = await sortingModel.GetPropertyNameSort(sortParameters);
 
             List<VehicleModel> intersectFilterPage = pageQuery.Intersect(filterQuery).ToList();
-
-            List<VehicleModel> filterPageSort = GetSortedList(intersectFilterPage, propertyNameSort);
+            List<VehicleModel> filterPageSort = GetSortList(intersectFilterPage, propertyNameSort);
 
             return filterPageSort;
         }
-        private List<VehicleModel> GetSortedList(List<VehicleModel> filterPage, string propertyNameSort)
+        private List<VehicleModel> GetSortList(List<VehicleModel> filterPage, string propertyNameSort)
         {
             if (sortingModel.isDescending)
             {
@@ -48,28 +46,28 @@ namespace Project.Service.VehicleService
             }
             return filterPage.OrderBy(p => p.GetType().GetProperty(propertyNameSort).GetValue(p)).ToList();
         }
-        public async Task Create(VehicleModel? model)
+        public async Task Create(VehicleModel? createModel)
         {
-            if (model != null)
+            if (createModel != null)
             {
-                vehicleDB.vehicleModels.Add(model);
+                vehicleDB.vehicleModels.Add(createModel);
                 await vehicleDB.SaveChangesAsync();
             }
         }
-        public async Task Delete(VehicleModel? model)
+        public async Task Delete(VehicleModel? deleteModel)
         {
-            if (model != null)
+            if (deleteModel != null)
             {
-                vehicleDB.vehicleModels.Remove(model);
+                vehicleDB.vehicleModels.Remove(deleteModel);
                 await vehicleDB.SaveChangesAsync();
             }
         }
-        public async Task Update(VehicleModel? model)
+        public async Task Update(VehicleModel? updateModel)
         {
-            if (model != null)
+            if (updateModel != null)
             {
-                var itemForUpdate = vehicleDB.vehicleModels.Single(d => d.Id == model.Id);
-                vehicleDB.Entry(itemForUpdate).CurrentValues.SetValues(model);
+                var itemForUpdate = vehicleDB.vehicleModels.Single(d => d.Id == updateModel.Id);
+                vehicleDB.Entry(itemForUpdate).CurrentValues.SetValues(updateModel);
                 await vehicleDB.SaveChangesAsync();
             }
         }

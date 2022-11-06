@@ -17,37 +17,11 @@ namespace Project.Service.PagingSortingFiltering
         }
         public async Task<string> GetPropertyNameSort(SortParameters _sortParameters)
         {
-            string sortOrder = _sortParameters.sortOrder;
-            
+            string sortOrder = _sortParameters.sortOrder;       
             SetSortAttributes(sortOrder);
-
-            switch (sortOrder)
-            {
-                case "IdDesc":
-                    isDescending = true;
-                    nameOfProperty = nameof(VehicleMake.Id);
-                    break;
-                case "Id":
-                    isDescending = false;
-                    nameOfProperty = nameof(VehicleMake.Id);
-                    break;
-                case "Abrv":
-                    isDescending = false;
-                    nameOfProperty = nameof(VehicleMake.Abrv);
-                    break;
-                case "NameDesc":
-                    isDescending = true;
-                    nameOfProperty = nameof(VehicleMake.Name);
-                    break;
-                case "AbrvDesc":
-                    isDescending = true;
-                    nameOfProperty = nameof(VehicleMake.Abrv);
-                    break;
-                default:
-                    nameOfProperty = nameof(VehicleMake.Name);
-                    isDescending = false;
-                    break;               
-            }
+            isDescending = sortOrder?.Contains("Desc") ?? false;
+            nameOfProperty = isDescending ? sortOrder.Remove(sortOrder.Length - 4,4) : sortOrder ?? "Name";    
+            
             return nameOfProperty;
         }
         private void SetSortAttributes(string sortOrder)

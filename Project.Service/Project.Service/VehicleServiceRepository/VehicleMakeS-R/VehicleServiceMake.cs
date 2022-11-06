@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Project.Service.PagingSortingFiltering.Parameters;
+﻿using Project.Service.PagingSortingFiltering.Parameters;
 using Project.Service.PagingSortingFiltering.PSFmake;
 
 namespace ZaPrav.NetCore.VehicleDB
@@ -32,18 +31,18 @@ namespace ZaPrav.NetCore.VehicleDB
         {
             return await vehicleRepositoryMake.GetMakeById(id);
         }
-        public static async Task Create(VehicleMake make)
+        public static async Task Create(VehicleMake createMake)
         {
-            await vehicleRepositoryMake.Create(make);
+            await vehicleRepositoryMake.Create(createMake);
         }
-        public static async Task Update(VehicleMake make)
+        public static async Task Update(VehicleMake updateMake)
         {
-            await vehicleRepositoryMake.Update(make);
+            await vehicleRepositoryMake.Update(updateMake);
         }
         public static async Task Delete(int id)
         {
-            VehicleMake? make = await GetByIdMake(id);
-            await vehicleRepositoryMake.Delete(make);
+            VehicleMake? deleteMake = await GetByIdMake(id);
+            await vehicleRepositoryMake.Delete(deleteMake);
         }
     }
 }

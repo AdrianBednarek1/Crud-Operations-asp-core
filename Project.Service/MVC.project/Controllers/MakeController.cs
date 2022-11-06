@@ -8,25 +8,22 @@ namespace MVC.project.Controllers
 {
     public class MakeController : Controller
     {
-        public IMapper mapper { get; set; }
+        private IMapper mapper;
         public MakeController(IMapper _mappe)
         {
             mapper = _mappe;
         }
         [HttpGet]
         public async Task<IActionResult> VehicleMake
-            (
-            string sortOrderMades,
-            string searchStringMade, string currentFilterMade, int? pageIndexMade
-            )
+            (string sortOrderMades, string searchStringMade, string currentFilterMade, int? pageIndexMade)
         {
-            List<VehicleMake> makeList = await GetSortFilterPaginateData(sortOrderMades, searchStringMade, currentFilterMade, pageIndexMade);
+            List<VehicleMake> makeList = await GetMakeList(sortOrderMades, searchStringMade, currentFilterMade, pageIndexMade);
             List<MakeViewModel> makeViewModels = mapper.Map<List<MakeViewModel>>(makeList);
 
             Response.StatusCode = StatusCodes.Status200OK;
             return View(makeViewModels);
         }
-        private async Task<List<VehicleMake>> GetSortFilterPaginateData
+        private async Task<List<VehicleMake>> GetMakeList
             (string sortOrderMake, string searchStringMake, string currentFilterMake, int? pageIndexMake)
         {
             int pageSize = 5;
@@ -46,7 +43,7 @@ namespace MVC.project.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await VehicleServiceMake.Delete(id);
-            
+
             Response.StatusCode = StatusCodes.Status200OK;
             return RedirectToAction("VehicleMake");
         }
@@ -65,8 +62,8 @@ namespace MVC.project.Controllers
                 return View();
             }
 
-            VehicleMake vehicleMake = mapper.Map<VehicleMake>(makeViewModel);
-            await VehicleServiceMake.Create(vehicleMake);
+            VehicleMake createVehicleMake = mapper.Map<VehicleMake>(makeViewModel);
+            await VehicleServiceMake.Create(createVehicleMake);
 
             Response.StatusCode = StatusCodes.Status201Created;
             return RedirectPermanent("VehicleMake");
@@ -81,15 +78,15 @@ namespace MVC.project.Controllers
             return View(makeViewModel);
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateMake(MakeViewModel UpdatedViewModel)
+        public async Task<IActionResult> UpdateMake(MakeViewModel MakeViewModel)
         {
             if (!ModelState.IsValid)
             {
                 Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
-                return View(UpdatedViewModel);
+                return View(MakeViewModel);
             }
-            VehicleMake UpdatedVehicleMake = mapper.Map<VehicleMake>(UpdatedViewModel);
-            await VehicleServiceMake.Update(UpdatedVehicleMake);
+            VehicleMake updateVehicleMake = mapper.Map<VehicleMake>(MakeViewModel);
+            await VehicleServiceMake.Update(updateVehicleMake);
 
             Response.StatusCode = StatusCodes.Status200OK;
             return RedirectToAction("VehicleMake");

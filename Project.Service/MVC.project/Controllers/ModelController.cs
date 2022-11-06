@@ -10,7 +10,6 @@ namespace MVC.project.Controllers
 {
     public class ModelController : Controller
     {
-        private List<SelectListItem> VehicleMakeList;
         private IMapper mapper;
         public ModelController(IMapper _mapper)
         {
@@ -18,29 +17,21 @@ namespace MVC.project.Controllers
         }
         [HttpGet]
         public async Task<IActionResult> VehicleModel
-            (
-            string sortOrderModel,
-            string searchStringModel, string currentFilterModel, int? pageIndexModel
-            )
-        {
-            List<VehicleModel> vehicleModels = await GetSortFilterPaginateData
-                (
-                sortOrderModel, searchStringModel, currentFilterModel, pageIndexModel
-                );
-
-            List<ModelViewModel> pagedVehicleModel;
-            pagedVehicleModel = mapper.Map<List<ModelViewModel>>(vehicleModels);
-
-            Response.StatusCode = StatusCodes.Status200OK;
-            return View(pagedVehicleModel);
-        }
-
-        private async Task<List<VehicleModel>> GetSortFilterPaginateData
             (string sortOrderModel, string searchStringModel, string currentFilterModel, int? pageIndexModel)
         {
+            List<VehicleModel> vehicleModels = await GetModelList(sortOrderModel, searchStringModel, currentFilterModel, pageIndexModel);
+            List<ModelViewModel> modelViewModel = mapper.Map<List<ModelViewModel>>(vehicleModels);
+
+            Response.StatusCode = StatusCodes.Status200OK;
+            return View(modelViewModel);
+        }
+        private async Task<List<VehicleModel>> GetModelList
+            (string sortOrderModel, string searchStringModel, string currentFilterModel, int? pageIndexModel)
+        {
+            int pageSize = 4;
             SortParameters sortParameters = new SortParameters(sortOrderModel);
             FilterParameters filterParameters = new FilterParameters(searchStringModel, currentFilterModel);
-            PageParameters pageParameters = new PageParameters(pageIndexModel ?? 1, 4);
+            PageParameters pageParameters = new PageParameters(pageIndexModel, pageSize);
 
             List<VehicleModel> vehicleModel = await VehicleServiceModel.GetVehicleModel(sortParameters, filterParameters, pageParameters);
 
@@ -69,7 +60,6 @@ namespace MVC.project.Controllers
                 Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
                 return View();
             }
-
             VehicleModel vehicleModel = mapper.Map<VehicleModel>(modelViewModel);
             await VehicleServiceModel.Create(vehicleModel);
 
@@ -78,24 +68,16 @@ namespace MVC.project.Controllers
         }
         private async Task RefreshDropDown()
         {
-            List<VehicleMake> listMake = await VehicleServiceMake.GetVehicleMake();
-            List<SelectListItem> dropListMake = mapper.Map<List<SelectListItem>>(listMake);
+            List<VehicleMake> vehicleMake = await VehicleServiceMake.GetVehicleMake();
+            List<SelectListItem> selecetListMake = mapper.Map<List<SelectListItem>>(vehicleMake);
 
-            ViewBag.VehicleMakeList = dropListMake;
+            ViewBag.VehicleMakeList = selecetListMake;
         }
-
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            try
-            {
-                VehicleModel vehicleModel = await VehicleServiceModel.GetModelById(id);
-                await VehicleServiceModel.Delete(vehicleModel);
-            }
-            catch (NotSupportedException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            VehicleModel deleteVehicleModel = await VehicleServiceModel.GetModelById(id);
+            await VehicleServiceModel.Delete(deleteVehicleModel);
 
             Response.StatusCode = StatusCodes.Status200OK;
             return RedirectToAction("VehicleModel");
@@ -103,24 +85,24 @@ namespace MVC.project.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateModel(int id)
         {
-            VehicleModel vehicleModel = await VehicleServiceModel.GetModelById(id);
             await RefreshDropDown();
+            VehicleModel vehicleModel = await VehicleServiceModel.GetModelById(id);
             ModelViewModel modelViewModel = mapper.Map<ModelViewModel>(vehicleModel);
 
             Response.StatusCode = StatusCodes.Status302Found;
             return View(modelViewModel);
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateModel(ModelViewModel vehicleModel)
+        public async Task<IActionResult> UpdateModel(ModelViewModel modelViewModel)
         {
             await RefreshDropDown();
             if (!ModelState.IsValid)
             {
                 Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
-                return View(vehicleModel);
+                return View(modelViewModel);
             }
-            VehicleModel model = mapper.Map<VehicleModel>(vehicleModel);
-            await VehicleServiceModel.Update(model);
+            VehicleModel updateModel = mapper.Map<VehicleModel>(modelViewModel);
+            await VehicleServiceModel.Update(updateModel);
 
             Response.StatusCode = StatusCodes.Status200OK;
             return RedirectToAction("VehicleModel");

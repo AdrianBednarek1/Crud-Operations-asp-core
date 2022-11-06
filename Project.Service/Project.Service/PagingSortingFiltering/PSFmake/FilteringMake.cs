@@ -19,6 +19,6 @@ namespace Project.Service.PagingSortingFiltering
                 filterQueryMake = filterQueryMake.Where(s => s.Name.Contains(currentSearchMake) || s.Abrv.Contains(currentSearchMake));
             }
             return filterQueryMake;
-        }     
+        }
     }
 }
