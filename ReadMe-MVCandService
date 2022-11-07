@@ -1,7 +1,19 @@
 1. Rješen je naming varijabli
-2. Imao sam već od prije zasebne klase filteriing/sorting/paging, ali sam ih spojio u zajedničku klasu (PSF) radi jednostavnosti. Sada sam maknuo PSF klasu te sam stavio sorting/filtering/paging klase unutar repository/service u zajedniču metodu Get.
+
+2. Imao sam već od prije zasebne klase filteriing/sorting/paging, ali sam ih spojio u zajedničku klasu (PSF) radi jednostavnosti. 
+Sada sam maknuo PSF klasu te sam stavio sorting/filtering/paging klase unutar repository/service u zajedniču metodu Get.
+
 3. Svugdje se koristi samo 1 service i repository.
+
 4. Visual Studio ima neki svoj formater te sam isti i primjenio, nadam se da će bit vidljivo.
-5. Kreirao sam zasebne klase sorting filtering paging (file:parameters) koji primaju parametre te se prosljeđuju kao parametri do repositorija i od tam se kreira PSF lista koja se vrati(nadam se da sam to dobro shvatio). 
-6. Repository mi sad ima 6 metoda, sve navedene CRUD + 1 koja vraća cijelu listu podataka (List<VehicleMake> or List<VehicleModel>). Klasa Service ima 9 metoda, ove 3 metode sam koristio u svrhu prosljeđivanja podataka na ViewBag, a to su tipa previousNextPage, currentSort, filter.
-7. Potrudio sam se čim više počistiti kod, ali na controller nisam mogao toliko utjecati budući da ima mnogo ulaznih parametara te s tim izgleda dosta neuredno. Također sam probao pojednostaviti i ostale klase tipa repository i PSF klase. Sve u svemu trebale bi se vidjeti neke promjene oko toga, da ima nešto manje linija koda i da je nešto lakše se snalaziti.   
+
+5. Kreirao sam zasebne klase sorting filtering paging (file:parameters) koji primaju parametre te se prosljeđuju
+kao parametri do repositorija i od tam se kreira PSF lista koja se vrati(nadam se da sam to dobro shvatio). 
+
+6. Repository mi sad ima 6 metoda, sve navedene CRUD + 1 koja vraća cijelu listu podataka (List<VehicleMake> or 
+List<VehicleModel>). Klasa Service ima 9 metoda, ove 3 metode sam koristio u svrhu prosljeđivanja podataka na ViewBag,
+a to su tipa previousNextPage, currentSort, filter.
+
+7. Potrudio sam se čim više počistiti kod, ali na controller nisam mogao toliko utjecati budući da ima mnogo ulaznih
+parametara te s tim izgleda dosta neuredno. Također sam probao pojednostaviti i ostale klase tipa repository i PSF klase.
+Sve u svemu trebale bi se vidjeti neke promjene oko toga, da ima nešto manje linija koda i da je nešto lakše se snalaziti.   
