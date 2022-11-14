@@ -16,11 +16,11 @@ namespace Project.Service.PagingSortingFiltering
             List<VehicleModel> vehicleModel = await VehicleServiceModel.GetVehicleModel();
             filterModelQuery = vehicleModel.AsQueryable();
 
-            if (!String.IsNullOrEmpty(currentSearch))
-            {
-                filterModelQuery = filterModelQuery.Where
-                    (s => s.Name.Contains(currentSearch) || s.Abrv.Contains(currentSearch) || s.MakeId.ToString().Contains(currentSearch));
-            }
+            if (String.IsNullOrEmpty(currentSearch)) return filterModelQuery;
+            
+            filterModelQuery = filterModelQuery.Where
+                (s => s.Name.Contains(currentSearch) || s.Abrv.Contains(currentSearch) || s.MakeId.ToString().Contains(currentSearch));
+            
             return filterModelQuery;
         }
     }

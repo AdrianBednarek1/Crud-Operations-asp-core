@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Project.Service.Interfaces.ISortingFilteringPaging.IPSFmodel;
 using Project.Service.Interfaces.IVehicleRepository;
-using Project.Service.PagingSortingFiltering;
 using Project.Service.PagingSortingFiltering.Parameters;
 using Project.Service.PagingSortingFiltering.PSFmodel;
 using System.Data.Entity;
@@ -49,28 +48,25 @@ namespace Project.Service.VehicleService
         }
         public async Task Create(VehicleModel? createModel)
         {
-            if (createModel != null)
-            {
-                vehicleDB.vehicleModels.Add(createModel);
-                await vehicleDB.SaveChangesAsync();
-            }
+            if (createModel == null) return;
+
+            vehicleDB.vehicleModels.Add(createModel);
+            await vehicleDB.SaveChangesAsync();
         }
         public async Task Delete(VehicleModel? deleteModel)
         {
-            if (deleteModel != null)
-            {
-                vehicleDB.vehicleModels.Remove(deleteModel);
-                await vehicleDB.SaveChangesAsync();
-            }
+            if (deleteModel == null) return;
+
+            vehicleDB.vehicleModels.Remove(deleteModel);
+            await vehicleDB.SaveChangesAsync();
         }
         public async Task Update(VehicleModel? updateModel)
         {
-            if (updateModel != null)
-            {
-                VehicleModel itemForUpdate = vehicleDB.vehicleModels.Single(d => d.Id == updateModel.Id);
-                vehicleDB.Entry(itemForUpdate).CurrentValues.SetValues(updateModel);
-                await vehicleDB.SaveChangesAsync();
-            }
+            if (updateModel == null) return;
+
+            VehicleModel itemForUpdate = vehicleDB.vehicleModels.Single(d => d.Id == updateModel.Id);
+            vehicleDB.Entry(itemForUpdate).CurrentValues.SetValues(updateModel);
+            await vehicleDB.SaveChangesAsync();
         }
         public async Task<VehicleModel> GetModelById(int id)
         {

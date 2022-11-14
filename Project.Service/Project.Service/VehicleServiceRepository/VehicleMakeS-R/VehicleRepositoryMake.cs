@@ -48,32 +48,27 @@ namespace ZaPrav.NetCore.VehicleDB
         }
         public async Task Create(VehicleMake? make)
         {
-            if (make != null)
-            {
-                vehicleDB.vehicleMakes.Add(make);
-                await vehicleDB.SaveChangesAsync();
-            }
+            if (make == null) return;
+
+            vehicleDB.vehicleMakes.Add(make);
+            await vehicleDB.SaveChangesAsync();
         }
         public async Task Delete(VehicleMake? make)
         {
-            if (make != null)
-            {
-                var deleteModels = vehicleDB.vehicleModels.Where(_deleteModels => _deleteModels.MakeId == make.Id);
-                vehicleDB.vehicleModels.RemoveRange(deleteModels);
-                vehicleDB.vehicleMakes.Remove(make);
+            if (make == null) return;
 
-                await vehicleDB.SaveChangesAsync();
-            }
+            var deleteModels = vehicleDB.vehicleModels.Where(_deleteModels => _deleteModels.MakeId == make.Id);
+            vehicleDB.vehicleModels.RemoveRange(deleteModels);
+            vehicleDB.vehicleMakes.Remove(make);
+            await vehicleDB.SaveChangesAsync();
         }
         public async Task Update(VehicleMake? make)
         {
-            if (make != null)
-            {
-                var itemForUpdate = vehicleDB.vehicleMakes.Single(d => d.Id == make.Id);
-                vehicleDB.Entry(itemForUpdate).CurrentValues.SetValues(make);
+            if (make == null) return;
 
-                await vehicleDB.SaveChangesAsync();
-            }
+            var itemForUpdate = vehicleDB.vehicleMakes.Single(d => d.Id == make.Id);
+            vehicleDB.Entry(itemForUpdate).CurrentValues.SetValues(make);
+            await vehicleDB.SaveChangesAsync();
         }
         public async Task<VehicleMake> GetMakeById(int id)
         {

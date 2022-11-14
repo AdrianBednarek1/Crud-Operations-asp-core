@@ -15,10 +15,10 @@ namespace Project.Service.PagingSortingFiltering
             List<VehicleMake> vehicleMake = await VehicleServiceMake.GetVehicleMake();
             filterQueryMake = vehicleMake.AsQueryable();
 
-            if (!String.IsNullOrEmpty(currentSearchMake))
-            {
-                filterQueryMake = filterQueryMake.Where(s => s.Name.Contains(currentSearchMake) || s.Abrv.Contains(currentSearchMake));
-            }
+            if (String.IsNullOrEmpty(currentSearchMake)) return filterQueryMake;
+            
+            filterQueryMake = filterQueryMake.Where(s => s.Name.Contains(currentSearchMake) || s.Abrv.Contains(currentSearchMake));
+            
             return filterQueryMake;
         }
     }
