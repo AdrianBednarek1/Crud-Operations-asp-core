@@ -10,7 +10,7 @@
 <form method="post" action="UpdateMake" onsubmit="myButton.disabled = true; return true;">
 	<div asp-validation-summary="All"></div>
 	<input type="hidden" asp-for="Id" />
-	<div>Name: <input value="@Model.Name" class="form-control" asp-for="Name" /></div>
+	<div>Name: <input value="@Model.Name" class="form-control"  asp-for="Name" /></div>
 	<div>Abrv: <input value="@Model.Abrv" class="form-control" asp-for="Abrv" /></div>
 	<input name="myButton" type="submit" />
 	<button formmethod="get" type="submit" asp-action="VehicleMake">Back</button>
