@@ -1,6 +1,6 @@
 # Vehicle make and model 
 
-Basic Crud operations between tables VehicleMake and VehicleModel tables using EF.
+Basic Crud operations between tables VehicleMake and VehicleModel tables EF.
 
 DI used by Ninject.
 
